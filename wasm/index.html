@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <link rel="stylesheet" href="lib/reveal.js/css/reveal.css">
-    <link rel="stylesheet" href="lib/reveal.js/css/theme/sky.css">
+    <link rel="stylesheet" href="lib/reveal.js/css/theme/blood.css">
     <style>
         .reveal section img {
             border: 0;
             box-shadow: 0px 0px #000;
             width: 40%;
+            background: none;
         }
 
         .reveal h1,
@@ -39,7 +40,8 @@
             vertical-align: -0.4em;
         }
         .reveal blockquote:before {
-            content: open-quote;
+            content: "\"";
+            font-family:Georgia, 'Times New Roman', Times, serif
         }
         .reveal blockquote cite {
             font-size: 0.6em;
@@ -56,6 +58,59 @@
                 <h3>Rust Dresden</h3>
                 <img src="images/rust-logo-blk.svg" alt="rust logo" class="plain" style="width:30%">
                 <h2>WebAssembly</h2>
+
+            </section>
+            <section data-markdown>
+                #### roter Faden
+                * what?
+                * why?
+                    * javascript performance -> asm.js -> wasm
+                * how does it work in the browser?
+                * how to WASM from Rust
+                * examples examples examples
+
+            </section>
+
+            <section data-transition="concave">
+                <h2> Background: <small>Javascript performance</small></h2>
+
+                <section>
+                    <span class="fragment">
+                    Why do you use Javascript?
+                    </span>
+                    <ol>
+                        <li class="fragment">because it's convenient </li>
+                        <li class="fragment">because it's async </li>
+                        <li class="fragment">because it comes with every browser </li>
+                        <li class="fragment">Not because it's fast, it's not<sup class="fragment">*</sup>
+                            <br>
+                        <small class="fragment">* native browser APIs don't count</small>
+                        </li>
+                        <li class="fragment">competing implementations</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-01-perf_graph05.png" />
+                    <br>
+                    <small>
+                    <a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">
+                        A cartoon intro to WebAssembly, by Lin Clark
+                    </a>
+                    </small>
+                </section>
+
+                <section>
+                    <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-02-perf_graph10.png" />
+                </section>
+                <section data-markdown>
+                    1. [a crash course in jit compilers ](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/ )
+                    2. [A crash course in just-in-time (JIT) compilers](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/ )
+                    3. [A crash course in assembly ](https://hacks.mozilla.org/2017/02/a-crash-course-in-assembly/ )
+                    4. [Creating and working with WebAssembly modules ](https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/ )
+                    5. [What makes WebAssembly fast? ](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/ )
+                    6. [Where is WebAssembly now and what’s next? ](https://hacks.mozilla.org/?p=30522 )
+                </section>
 
             </section>
 

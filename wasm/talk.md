@@ -1,3 +1,6 @@
+markdown
+--SECTION--
+
 ## What is WebAssembly?
 
 --SLIDE--
@@ -36,67 +39,106 @@ https://rustwasm.github.io/book/what-is-webassembly.html
 
 http://asmjs.org/faq.html
 
+
+
 --SECTION--
 
-## Don't we know that already?
 
-Is WASM the new JavaApplets
+
+## Pros
+
+* portablity (reuse your code)
+* better performance
+ * simpler language model
+ * precompiled, preoptimized
+ * fewer allocations
+* better languages
+ * strongly typed languages
+ * no GC
+ * better tooling
 
 --SLIDE--
 
-## wasm vs java applets
+## cons
 
-* https://words.steveklabnik.com/is-webassembly-the-return-of-java-applets-flash
+* [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
+* less transparency on the web
+ * possiblity for proprietary code in your browser
+* binary size
+* serialization
+
+--SLIDE--
+
+## Is WASM vs JavaApplets or Flash
+
+* it's part of the browser<sup>*</sup>
+ * not a plugin
+ * not owned by other companies like flash or java
+ * [standardized](https://webassembly.github.io/spec/)
+* runs in the javascript engine
+ * secure: sandboxed just like javascript
+ * low maintainance for browser vendors
+
+[kudos steve klabnik](https://words.steveklabnik.com/is-webassembly-the-return-of-java-applets-flash)
 
 --SECTION--
-
 
 ## what can it do?
 
+* available APIS? everything that JavaScript has to offer (including WebGL) 
+
+--SLIDE--
+
 ## what can it not do?
+* SIMD ([yet](https://github.com/WebAssembly/simd))
+* threads ([yet](https://github.com/WebAssembly/threads)[?](https://www.chromestatus.com/features/5724132452859904))
+* network udp<sup>*</sup>
+* fs access<sup>*</sup>
+* memory outside of the browser
+* more precise timers<sup>*</sup>
+* 64 bit
 
-## why do we want it?
+--SLIDE--
 
-* portablity
-* better performance
-* better languages
+## what is it good for?
 
-## Problems
+* crypto
+* audio/video/image edition
+* computer vision
+* high performance apps: CAD, Science, Games
+* low latency apps: VR
+* binary protocols, parsers
+* emulation: Gameboy to x86
+* [use cases...](https://webassembly.org/docs/use-cases/)
 
-* 0 is a valid address
-https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/
 
-* less transparency on the web
+--SLIDE--
 
+## why doesn't it have `$X`?
+https://webassembly.org/docs/faq/
+https://webassembly.org/docs/future-features/module
+https://hacks.mozilla.org/2017/02/where-is-webassembly-now-and-whats-next/
 
 --SECTION--
+
+# How does it get into the browser
+
+[Understanding the JS API](https://webassembly.org/getting-started/js-api/)
+
+* 
+
+--SECTION--
+
+## WASM in RUST
 
 <img src="./images/hello.svg" width="40%" />
 --SLIDE--
 
-
---SECTION--
-# Wer steht dahinter
-
-* foo
-
-
---SLIDE--
-## Wo funktioniert es
---SLIDE--
-
-## Einschränkungen
---SLIDE--
-
-## Downsides?
-
---SECTION--
-
-# WebAssembly and RUST
-
 ![test](images/happy.svg)
 
 --SECTION--
+
+
 
 # NOTES TODO
 https://developer.mozilla.org/en-US/docs/Mozilla/Projects/Emscripten
@@ -153,13 +195,15 @@ https://blogs.unity3d.com/2017/03/31/5-6-is-now-available-and-completes-the-unit
 
 ## References
 
+https://webassembly.org/docs/faq/
+https://webassembly.org/docs/c-and-c++/
+
 https://rustwasm.github.io/book/
 https://rustwasm.github.io/wasm-bindgen/
 https://webassembly.studio/
 https://webassembly.org/
 https://github.com/AssemblyScript/assemblyscript
-https://research.mozilla.org/webassembly/
+https://www.chromestatus.com/features#webassembly
 
-https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/
 
 []
