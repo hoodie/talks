@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta foo="bar">
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="hoodie und astro">
+  <title>Themenabend</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="reveal.js/css/reveal.css">
+  <link rel="stylesheet" href="reveal.js/css/theme/league.css" id="theme">
+  <style type="text/css"></style>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+  <script src="./highlight.pack.js"></script>
+  <link rel="stylesheet" href="slide-style.css"/>
+  <link rel="stylesheet" href="styles/tomorrow.css"/>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+  <h1 class="title">Themenabend</h1>
+  <h2 class="author">hoodie und astro</h2>
+  <h3 class="date">10. Februar 2016</h3>
+</section>
+
+<section class="slide level2">
+
+<p><img src="../rust-logo-wht.svg" width="75%" /></p>
+</section>
+<section id="part-1---die-sprache" class="title-slide slide level1"><h1>Part 1 - Die Sprache</h1></section>
+<section><section id="was-ist-rust" class="title-slide slide level1"><h1>Was ist Rust?</h1></section><section id="eine-programmiersprache" class="slide level2">
+<h2>eine Programmiersprache!</h2>
+<ul>
+<li>entwickelt von Mozilla, seit 2007</li>
+<li>stabil seit Mai 2015</li>
+</ul>
+<p><img src="../hello.svg" width="40%" /></p>
+</section><section id="was-ist-in-rust" class="slide level2">
+<h2>Was ist in Rust?</h2>
+<ul>
+<li>Servo <em>(super cool fast browser engine)</em></li>
+<li>machine learning tools (<a href="https://github.com/autumnai/leaf">leaf</a>, <a href="https://github.com/maciejkula/rustlearn">rustlearn</a>)</li>
+<li>rustc selbst</li>
+<li>safe parsers (<a href="https://github.com/Geal/nom">nom</a>)</li>
+<li><a href="https://robigalia.org/">seL4 stack</a></li>
+<li>Maidsafe</li>
+</ul>
+</section></section>
+<section><section id="vergleiche" class="title-slide slide level1"><h1>Vergleiche</h1></section><section id="rust-ist-wie" class="slide level2">
+<h2>Rust ist wie …</h2>
+<ul>
+<li>… c/c++</li>
+<li>… haskell</li>
+<li>… ruby</li>
+<li>… python</li>
+</ul>
+<div class="fragment">
+<p>und doch ganz anders</p>
+</div>
+</section><section id="wie-cc" class="slide level2">
+<h2>wie c/c++</h2>
+<ul>
+<li>statisch kompiliert <em>LLVM</em></li>
+<li>schnell</li>
+<li>kein garbage-collector</li>
+<li>Generics, besser</li>
+<li>zero cost abstractions</li>
+<li><strong>low level</strong></li>
+</ul>
+</section><section id="wie-go" class="slide level2">
+<h2>wie go</h2>
+<ul>
+<li>jung</li>
+<li>effizient</li>
+<li>googlebar</li>
+</ul>
+</section><section id="wie-haskell" class="slide level2">
+<h2>wie haskell</h2>
+<ul>
+<li>Typesystem</li>
+<li>Immutable Variablen</li>
+<li>Pattern Matching</li>
+</ul>
+</section><section id="wie-ruby-oder-python" class="slide level2">
+<h2>wie ruby oder python</h2>
+<ul>
+<li>expressive Syntax</li>
+<li>gut zu lesen</li>
+<li>Build system und Packetmanager (cargo &amp; crates.io)</li>
+<li><code>Self</code>stVerständnis</li>
+<li>lambda-Ausdrücke/Closures</li>
+</ul>
+</section><section id="wie-rust-eben" class="slide level2">
+<h2>wie rust eben!</h2>
+<ul>
+<li><strong>borrow checker</strong></li>
+<li>lifetimes Syntax</li>
+<li>sehr explizit: no overloading, no default parameters, no exceptions</li>
+</ul>
+<p><img src="../jump.svg" width="40%" /></p>
+</section><section id="einflüsse" class="slide level2">
+<h2>Einflüsse</h2>
+<ul>
+<li><strong>SML, OCaml:</strong> algebraic data types, pattern matching, type inference, semicolon statement separation</li>
+<li><strong>C++:</strong> references, RAII, smart pointers, move semantics, monomorphization, memory model</li>
+<li><strong>ML Kit, Cyclone:</strong> region based memory management</li>
+<li><strong>Haskell (GHC):</strong> typeclasses, type families</li>
+<li><strong>Newsqueak, Alef, Limbo:</strong> channels, concurrency</li>
+</ul>
+</section><section id="einflüsse-1" class="slide level2">
+<h2>Einflüsse</h2>
+<ul>
+<li><strong>Erlang:</strong> message passing, thread failure</li>
+<li><strong>Swift:</strong> optional bindings</li>
+<li><strong>Scheme:</strong> hygienic macros</li>
+<li><strong>C#:</strong> attributes</li>
+<li><strong>Unicode Annex #31:</strong> identifier and pattern syntax</li>
+</ul>
+<p>siehe: <a href="http://doc.rust-lang.org/reference.html#appendix-influences">influences</a></p>
+</section></section>
+<section><section id="features" class="title-slide slide level1"><h1>Features</h1></section><section id="achtung-werbung" class="slide level2">
+<h2>Achtung, Werbung</h2>
+<p><img src="../shy.svg" width="40%" /></p>
+</section><section id="sicherheit" class="slide level2">
+<h2>Sicherheit</h2>
+<ul>
+<li>Cuncurrency ohne Racesconditions</li>
+<li><em>move semantics</em></li>
+<li>Type inference</li>
+<li>Typsicherheit zur Compilezeit
+<ul>
+<li>kein implizites Casting</li>
+</ul></li>
+</ul>
+</section><section id="leistung" class="slide level2">
+<h2>Leistung</h2>
+<ul>
+<li>zero-cost abstractions durch <a href="http://blog.rust-lang.org/2015/05/11/traits.html">traits</a></li>
+<li>minimale Runtime</li>
+<li>effiziente C Bindings</li>
+</ul>
+</section><section id="sprache" class="slide level2">
+<h2>Sprache</h2>
+<ul>
+<li>trait-based generics</li>
+<li>pattern matching</li>
+<li>hygienische macros</li>
+<li>expressions und statements</li>
+<li>closures</li>
+<li>Beispiele folgen</li>
+</ul>
+</section><section id="ökosystem" class="slide level2">
+<h2>Ökosystem</h2>
+<ul>
+<li>Dokumentation ist TopPriority
+<ul>
+<li>cargo doc beats doxygen</li>
+<li>special comments</li>
+<li>inline examples with testing</li>
+<li>community doc is awesome</li>
+</ul></li>
+<li>in-line Tests und Benchmarks
+<ul>
+<li><code>#[test]</code></li>
+<li><code>#[bench]</code></li>
+</ul></li>
+</ul>
+</section><section id="cargo" class="slide level2">
+<h2>Cargo</h2>
+<ul>
+<li>cargo as package manager and build system</li>
+<li>crates.io as repo, extern git repositories, explizite</li>
+<li>Gleich benutzen</li>
+<li>Macht den Umgang mit external crates möglich</li>
+<li>cargo <code>build</code>, <code>run</code>, <code>doc</code>, <code>test</code>, <code>bench</code>, <code>publish</code></li>
+</ul>
+<div class="fragment">
+<pre><code>$ git clone https://github.com/astro/rust-kenburns/
+$ cd rust-kenburns
+$ cargo run</code></pre>
+</div>
+<div class="fragment">
+<pre><code>$ git clone https://github.com/hoodie/rust-chess
+$ cd rust-chess
+$ cargo run --example random_player</code></pre>
+</div>
+</section><section id="wohin-mit-dem-code" class="slide level2">
+<h2>Wohin mit dem Code?</h2>
+<ul>
+<li>Libraries: <code>src/lib.rs</code></li>
+<li>Binaries: <code>src/main.rs</code></li>
+</ul>
+<div class="fragment">
+<h3 id="oder">oder</h3>
+<ul>
+<li>Libraries: <code>src/**/lib.rs</code></li>
+<li>Binaries: <code>src/bin/*.rs</code></li>
+</ul>
+</div>
+</section><section id="wie-teste-ich-meine-lib" class="slide level2">
+<h2>Wie teste ich meine lib?</h2>
+<div class="fragment">
+<h3 id="life">LIFE</h3>
+</div>
+</section></section>
+<section><section id="beispiele" class="title-slide slide level1"><h1>Beispiele</h1></section><section id="hello-world" class="slide level2">
+<h2>Hello world</h2>
+<pre class="rust"><code>fn main(){
+  println!(&quot;hello world&quot;);
+}</code></pre>
+<p><img src="../hello.svg" width="40%" /></p>
+<div class="fragment">
+<p>Vorsicht, Macro!</p>
+</div>
+</section><section id="formatted-print" class="slide level2">
+<h2>Formatted Print</h2>
+<pre class="rust"><code>fn main() {
+
+    println!(&quot;{} entspricht {:b} &quot;, 42, 42);
+
+    println!(&quot;{0}, this is {1}. {1}, this is {0}&quot;, &quot;Alice&quot;, &quot;Bob&quot;);
+
+    // As can named arguments.
+    println!(&quot;Themenabend   \&quot;{subject}\&quot;&quot;, subject=&quot;Rust&quot;,);
+
+    // Alignment
+    println!(&quot;{number:&gt;width$}&quot;, number=1, width=6);
+    println!(&quot;{number:&gt;0width$}&quot;, number=1, width=6);
+
+}</code></pre>
+</section><section id="debug-print" class="slide level2">
+<h2>Debug Print</h2>
+<ul>
+<li><code>std::fmt::Display</code> für <code>"{}"</code></li>
+<li><code>std::fmt::Debug</code> für <code>"{:?}"</code></li>
+</ul>
+<pre class="rust"><code>fn main(){
+
+    #[derive(Debug)]
+    struct Themenabend{
+      number: i32,
+      title: &amp;&#39;static str,
+    };
+
+    println!(&quot;Interne Struktur von {:?}&quot;,
+    Themenabend{
+      number:3,
+      title:&quot;Rust Themenabend&quot;
+    });
+}</code></pre>
+</section></section>
+<section><section id="datentypen" class="title-slide slide level1"><h1>Datentypen</h1></section><section id="primitive" class="slide level2">
+<h2>Primitive</h2>
+<pre class="rust-norun"><code>  let goku:u64 = 9001;     // expliziter Typ
+  let goku = 9_001;        // impliziter Typ
+  let goku = 9_001u64;     // suffix Form
+
+  let fourtytwo= 0b101010; // Binäre Form
+  let ladies = (&quot;x&quot;,&#39;y&#39;);  //Tuple, `&amp;str` und `char`</code></pre>
+</section><section id="arrays" class="slide level2">
+<h2>Arrays</h2>
+<pre class="rust-norun"><code>// hat konstante Länge
+let four_byte:[u8; 4] = [1, 2, 3, 4];
+let four_byte = [0; 4]; // -&gt; [0,0,0,0]</code></pre>
+</section><section id="vectors" class="slide level2">
+<h2>Vectors</h2>
+<pre class="rust"><code>fn main() {
+let _list = vec![1,2,3,4];
+
+// entspricht
+
+let _list2 = {
+  let mut list = Vec::new();
+  list.push(1);
+  list.push(2);
+  //...
+  list
+};
+
+let _range: Vec&lt;i32&gt; = (0..10).collect();
+}</code></pre>
+</section><section id="slices" class="slide level2">
+<h2>Slices</h2>
+<pre class="rust"><code>fn fill(slice: &amp;mut [i32], c: i32) {
+  for s in slice.iter_mut() {
+    *s = c;
+  }
+}
+
+fn main() {
+  let mut list = vec![1,2,3,4];
+  fill(&amp;mut list[1..3], 23);
+  println!(&quot;List: {:?}&quot;, list);
+}</code></pre>
+<p>Analog: <code>&amp;str</code> für <code>String</code></p>
+</section><section id="options" class="slide level2">
+<h2>Options</h2>
+<pre class="rust-norun"><code>pub enum Option&lt;T&gt; {
+    Some(T),
+    None
+}</code></pre>
+<div class="fragment">
+<pre class="rust"><code>fn divide(a:i32, b:i32) -&gt; Option&lt;i32&gt;{
+  if b == 0 {
+    None
+  } else { Some(a/b) }
+}
+
+fn main(){
+  println!(&quot;12/3 = {:?}&quot;, divide(12,3));
+  println!(&quot;12/0 = {:?}&quot;, divide(12,0));
+}</code></pre>
+</div>
+</section><section id="strings" class="slide level2">
+<h2>Strings</h2>
+<pre class="rust-norun"><code>let string_slice:&amp;str   = &quot;hello world&quot;;
+let owned_string:String = string_slice.to_string();
+
+fn say_some(message:&amp;str){
+  println!(&quot;{:?}&quot;, message);
+}
+
+say_some(&amp;owned_string);</code></pre>
+<div class="fragment">
+<pre class="rust-norun"><code>let owned_string:String = string_slice.to_owned();
+let owned_string:String = string_slice.into();
+let owned_string:String = String::from(string_slice);</code></pre>
+</div>
+</section><section id="lifetimes" class="slide level2">
+<h2>lifetimes</h2>
+<pre class="rust-norun"><code>// implicit
+fn foo(x: &amp;i32) {
+}
+
+// explicit
+fn bar&lt;&#39;a&gt;(x: &amp;&#39;a i32) {
+}</code></pre>
+<p><a href="http://doc.rust-lang.org/stable/book/lifetimes.html">RTFM</a></p>
+</section><section id="pointers" class="slide level2">
+<h2>Pointers</h2>
+<pre class="rust-norun"><code>fn main(){
+  let sushi = Box::new((&quot;rice&quot;, &quot;fish&quot;)); // like unique pointer
+}</code></pre>
+</section><section id="stop-already" class="slide level2">
+<h2>Stop already!!!</h2>
+<p>Es gibt ein tolles <a href="http://doc.rust-lang.org/stable/book/">Buch</a>, sogar auf <a href="https://github.com/panicbit/rustbook-de">deutsch</a>.<br />
+Dieser Vortrag wird sonst zu lang!</p>
+</section></section>
+<section><section id="do-you-have-oop" class="title-slide slide level1"><h1>Do you have OOP?</h1></section><section id="pepsi-ok" class="slide level2">
+<h2>pepsi ok?</h2>
+</section><section id="basics" class="slide level2">
+<h2>basics</h2>
+<h3 id="structs">structs</h3>
+<pre class="rust-norun"><code>struct Love;                    // unit struct
+struct Point ( i32, i32 );      // tuple struct
+struct Point { x: i32, y: i32 } // as you know from C</code></pre>
+<h3 id="enums">enums</h3>
+<pre class="rust-norun"><code>enum Message {
+    Quit,
+    ChangeColor(i32, i32, i32),
+    Move { x: i32, y: i32 },
+    Write(String),
+}</code></pre>
+<p><a href="http://doc.rust-lang.org/stable/book/structs.html">more</a> <a href="http://doc.rust-lang.org/stable/book/structs.html">more</a></p>
+</section><section id="impl" class="slide level2">
+<h2>Impl</h2>
+<pre class="rust-norun"><code>struct Point { x: i32, y: i32 }
+
+impl Point {
+    fn distance_from_origin(&amp;self) -&gt; i32 {
+        let Point { x, y } = *self;
+        let sum = (x*x + y*y) as f64;
+        sum.sqrt() as i32
+    }
+}</code></pre>
+<div class="fragment">
+<p>geht auch für enum!</p>
+</div>
+</section><section id="constructor" class="slide level2">
+<h2>Constructor?</h2>
+<div class="fragment">
+<pre class="rust"><code>struct Point { x: i32, y: i32, z:i32}
+
+impl Point {
+    fn new() -&gt; Point {
+      Point { x: 0, y: 0, z:0}
+    }
+
+    fn on_plane(x:i32, y:i32) -&gt; Self {
+      Point { x: x, y: y, ..Point::new()) }
+    }
+}</code></pre>
+<ul>
+<li><a href="http://doc.rust-lang.org/stable/std/marker/trait.Copy.html">trait Copy</a></li>
+<li><a href="http://doc.rust-lang.org/stable/std/clone/trait.Clone.html#tymethod.clone">clone()</a></li>
+<li><a href="http://doc.rust-lang.org/stable/std/convert/">std::convert</a></li>
+</ul>
+</div>
+</section><section id="self-so-wie-in-python" class="slide level2">
+<h2>self? so wie in python?</h2>
+<ul>
+<li><code>self</code> : Kurz für <code>self:Self</code>, konsumiert</li>
+<li><code>&amp;self</code> : Read-only</li>
+<li><code>&amp;mut self</code> : Read-Write</li>
+<li>mehr später</li>
+</ul>
+<p><img src="../happy.svg" width="50%" style="float:right" /></p>
+</section></section>
+<section><section id="sicher-schnell-wie" class="title-slide slide level1"><h1>Sicher, schnell, wie?</h1></section><section id="memory-model" class="slide level2">
+<h2>Memory Model</h2>
+<ul>
+<li>kein GarbageCollector</li>
+<li>keine manuelle Speicherverwaltung</li>
+<li><strong>borrow checker</strong> forciert Ownership and Move Semantics</li>
+<li>Destruktor: <code>trait Drop</code></li>
+</ul>
+</section><section id="move-semantics-1" class="slide level2">
+<h2>Move Semantics 1</h2>
+<pre class="rust"><code>fn main(){
+  let list = vec![1,2,3];
+  let x = list;
+  let y = list; // Compiletime Error: use after move
+}</code></pre>
+</section><section id="move-semantics-2" class="slide level2">
+<h2>Move Semantics 2</h2>
+<pre class="rust"><code>fn do_some(_foo:Vec&lt;i32&gt;){
+    // konsumiert `foo`
+}
+
+fn main(){
+  let list = vec![1,2,3];
+  println!(&quot;{}&quot;, list[0]);
+  do_some(list);
+  println!(&quot;{}&quot;, list[0]); // fails
+}</code></pre>
+</section><section id="sharing-is-caring-1" class="slide level2">
+<h2>Sharing is Caring 1</h2>
+<pre class="rust"><code>fn main(){
+  let list = vec![1,2,3];
+  let x = &amp;list;
+  let y = list; // Compiletime Error: use while borrowed
+}</code></pre>
+<div class="fragment">
+<p>Warum also? Borrowing gilt nur innerhalb von Scopes!</p>
+</div>
+</section><section id="sharing-is-caring-2" class="slide level2">
+<h2>Sharing is Caring 2</h2>
+<pre class="rust"><code>fn main(){
+  let list = vec![1,2,3];
+  {
+    let _x = &amp;list;
+  }
+  let _y = list;
+}</code></pre>
+</section><section id="borrowing" class="slide level2">
+<h2>Borrowing</h2>
+<pre class="rust"><code>fn do_some(_foo:&amp;Vec&lt;i32&gt;){
+}
+
+fn main(){
+  let list = vec![1,2,3];
+  println!(&quot;{}&quot;, list[0]);
+
+  do_some(&amp;list);          // explitzite Referenz, unlike C++
+  println!(&quot;{}&quot;, list[0]); // fails no more
+}</code></pre>
+</section><section id="references-at-a-glance" class="slide level2">
+<h2>References at a glance</h2>
+<table>
+<thead>
+<tr class="header">
+<th>Syntax</th>
+<th>Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>T</code></td>
+<td>Basistyp</td>
+</tr>
+<tr class="even">
+<td><code>mut T</code></td>
+<td>veränderlicher Typ</td>
+</tr>
+<tr class="odd">
+<td><code>&amp;T</code></td>
+<td>read-only Referenz <em>niemand kann schreiben</em></td>
+</tr>
+<tr class="even">
+<td><code>&amp;mut T</code></td>
+<td>schreibbare Referenze <em>nur einer kann schreiben</em></td>
+</tr>
+</tbody>
+</table>
+<pre class="rust-norun"><code>let v:Vec&lt;i32&gt; = vec![1,2,3,4];
+let v_ref:&amp;Vec&lt;i32&gt; = &amp;v;</code></pre>
+<pre class="rust-norun"><code>let mut v:Vec&lt;i32&gt; = vec![1,2,3,4];
+let v_ref:&amp;mut Vec&lt;i32&gt; = &amp;mut v;</code></pre>
+</section><section id="usecases" class="slide level2">
+<h2>Usecases</h2>
+<div class="fragment">
+<pre class="rust-norun"><code>fn read(v: &amp;Vec&lt;String&gt;) -&gt; String {
+    let first: &amp;String = &amp;v[0]; // borrow ref to first elem
+    println!(&quot;v[0]: {}&quot;, first);
+    first.clone()
+}</code></pre>
+</div>
+<div class="fragment">
+<pre class="rust-norun"><code>fn modify(v: &amp;mut Vec&lt;String&gt;, name: &amp;str) {
+    let freshly_created = format!(&quot;Hello {}&quot;, name);
+    v.push(freshly_created);
+}</code></pre>
+</div>
+<div class="fragment">
+<pre class="rust-norun"><code>fn consume(v: Vec&lt;String&gt;) -&gt; String {
+    for s in v { return s; }
+    panic!(&quot;v was empty?!?&quot;);
+}</code></pre>
+</div>
+<div class="fragment">
+<pre class="rust-norun"><code>fn read(v: &amp;Vec&lt;String&gt;) -&gt; String { ... }
+fn modify(v: &amp;mut Vec&lt;String&gt;, name: &amp;str) { ... }
+fn consume(v: Vec&lt;String&gt;) -&gt; String { ... }</code></pre>
+</div>
+</section><section id="drop" class="slide level2">
+<h2>Drop</h2>
+<pre class="rust-norun"><code>struct Point { x: i32, y: i32}
+
+impl Point {
+    fn Drop(self) {
+    }
+}</code></pre>
+<p><img src="../hang.svg" width="75%" style="float:right" /></p>
+</section><section id="drop-more" class="slide level2">
+<h2>Drop (more)</h2>
+<pre class="rust-norun"><code>struct Point { x: i32, y: i32, internal: *mut () }
+
+impl Point {
+    fn Drop(self) {
+        free_void_pointer(self.internal);
+    }
+}</code></pre>
+</section></section>
+<section><section id="control-flow" class="title-slide slide level1"><h1>Control Flow</h1></section><section id="what-if" class="slide level2">
+<h2>what if?</h2>
+<pre class="rust-norun"><code>let x = 5;
+if x == 5 {
+    println!(&quot;x is five!&quot;);
+} else if x == 6 {
+    println!(&quot;x is six!&quot;);
+} else {
+    println!(&quot;x is not five or six :(&quot;);
+}</code></pre>
+<div class="fragment">
+<pre class="rust-norun"><code>let y = if x == 5 {
+    10
+} else {
+    15
+}; // y = i32</code></pre>
+</div>
+</section><section id="loops" class="slide level2">
+<h2>loops</h2>
+<pre class="rust-norun"><code>loop {
+    println!(&quot;Loop forever!&quot;);
+}</code></pre>
+<div class="fragment">
+<pre class="rust-norun"><code>while !done {
+    x += x - 3;
+
+    println!(&quot;{}&quot;, x);
+
+    if x % 5 == 0 { done = true; }
+}</code></pre>
+</div>
+</section><section id="for-loops" class="slide level2">
+<h2>for loops</h2>
+<pre class="rust-norun"><code>for x in 0..10 {
+    println!(&quot;{}&quot;, x); // x: i32
+}</code></pre>
+<pre class="rust"><code>fn main(){
+  let list = vec![&quot;dog&quot;, &quot;cat&quot;, &quot;mouse&quot;, &quot;cheese&quot;, &quot;Lactobacillales&quot;];
+
+  for i in list {
+      print!(&quot;{} -&gt; &quot;, i);
+  }
+}</code></pre>
+</section><section id="expressions-vs-statements" class="slide level2">
+<h2>Expressions vs Statements</h2>
+<pre class="rust-norun"><code>fn add(a:i32, b:i32) -&gt; i32 {
+  a+b
+}</code></pre>
+<div class="fragment">
+<pre class="rust"><code>fn main(){
+  let x = 2;
+  let foo = if x &gt; 1 {&quot;enough&quot;} else {&quot;to few&quot;};
+  println!(&quot;x = {} -&gt; {:?}&quot;, x, foo);
+}</code></pre>
+</div>
+</section><section id="switch-cases" class="slide level2">
+<h2>Switch cases?</h2>
+<pre class="cpp"><code>int main(){
+    int auswahl;
+
+    cout &lt;&lt; &quot;Wählen Sie Ihre Lieblingsleckerei:\n&quot;
+            &quot;1 - Käsesahnetorte\n&quot;
+            &quot;2 - Streuselkuchen\n&quot;
+            &quot;3 - Windbeutel\n&quot;;
+
+    cin &gt;&gt; auswahl;
+
+    switch(auswahl){
+        case 1:  cout &lt;&lt; &quot;Käsesahnetorte!&quot;;
+        case 2:  cout &lt;&lt; &quot;Streuselkuchen&quot;;
+        case 3:  cout &lt;&lt; &quot;Windbeutel&quot;;
+        default: cout &lt;&lt; &quot;Nein Danke&quot;;
+    }
+}</code></pre>
+<div class="fragment">
+<pre><code>Streuselkuchen Windbeutel Nein Danke</code></pre>
+</div>
+</section><section id="section" class="slide level2">
+<h2></h2>
+<p><img src="../fallover.svg" width="75%" /></p>
+</section><section id="matching" class="slide level2">
+<h2>Matching</h2>
+<pre class="rust-norun"><code>let auswahl = 2;
+match auswahl {
+        1 =&gt; println!(&quot;Käsesahnetorte!&quot;),
+        2 =&gt; println!(&quot;Streuselkuchen&quot;),
+        3 =&gt; println!(&quot;Windbeutel&quot;),
+        _ =&gt; println!(&quot;Nein Danke&quot;)
+}</code></pre>
+<pre class="rust-norun"><code>let foo = match x {
+    1 | 2 =&gt; println!(&quot;one or two&quot;),
+    3 =&gt; println!(&quot;three&quot;),
+    _ =&gt; println!(&quot;anything&quot;),
+}</code></pre>
+<pre class="rust-norun"><code>let origin = Point { x: 0, y: 0 };
+match origin {
+    Point { y, .. } =&gt; println!(&quot;y is {}&quot;, y),
+}</code></pre>
+<pre class="rust-norun"><code>match &#39;f&#39; {
+    &#39;a&#39; ... &#39;j&#39; =&gt; println!(&quot;early letter&quot;),
+    &#39;k&#39; ... &#39;z&#39; =&gt; println!(&quot;late letter&quot;),
+    _ =&gt; println!(&quot;something else&quot;),
+}</code></pre>
+</section><section id="section-1" class="slide level2">
+<h2></h2>
+<p><img src="../jump.svg" width="75%" /></p>
+</section><section id="if-let" class="slide level2">
+<h2>if let</h2>
+<pre class="rust-norun"><code>// result: enum Option&lt;T, E&gt; { Ok(T), Err(E) }
+if let Err(error) = result {
+  println!(&quot;Fehler: {:?}&quot;, error);
+  return;
+}
+// result: Ok(T), keinesfalls Err(E)
+let result = result.unwrap();</code></pre>
+<p><img src="../hello.svg" width="50%" /></p>
+</section></section>
+<section><section id="y-u-no-parallel" class="title-slide slide level1"><h1>Y U NO parallel?</h1></section><section id="data-races" class="slide level2">
+<h2>Data Races?</h2>
+<ul>
+<li>threads greifen auf die selben Daten zu</li>
+<li>unsynchronisiert</li>
+<li>mehrere Schreiben</li>
+</ul>
+</section><section id="closures" class="slide level2">
+<h2>Closures</h2>
+<pre class="rust-norun"><code>let f1 = move || println!(&quot;from my env: {:?}&quot;, env_stuff);
+let f2 = move |a, b, c| { /* ... */ };</code></pre>
+<blockquote>
+<p>Without move, a closure may be tied to the stack frame that created it, while a move closure is self-contained. This means that you cannot generally return a non-move closure from a function, for example.</p>
+</blockquote>
+</section><section id="closure-types" class="slide level2">
+<h2>Closure types</h2>
+<ul>
+<li><code>FnOnce</code>: The closure can be called once. A closure called as FnOnce can move out values from its environment.</li>
+<li><code>FnMut</code>: The closure can be called multiple times as mutable. A closure called as FnMut can mutate values from its environment. FnMut inherits from FnOnce (i.e. anything implementing FnMut also implements FnOnce).</li>
+<li><code>Fn</code>: The closure can be called multiple times through a shared reference. A closure called as Fn can neither move out from nor mutate values from its environment. Fn inherits from FnMut, which itself inherits from FnOnce.</li>
+</ul>
+</section><section id="shared-nothing" class="slide level2">
+<h2>Shared nothing</h2>
+<pre class="rust"><code>use std::thread;
+use std::sync::mpsc;
+
+fn main(){
+  let (tx, rx) = mpsc::channel();
+  for task_num in 0..6{
+    let tx = tx.clone(); // spezielles clone()
+    thread::spawn(
+      move || {
+        let msg = format!(&quot;Task {:?} done!&quot;, task_num);
+        tx.send(msg).unwrap();
+      }
+    );
+  }
+
+  for data in rx.iter(){
+    println!(&quot;{:?}&quot;, data);
+  }
+}</code></pre>
+</section><section id="shared-immutable-state" class="slide level2">
+<h2>Shared <em>Immutable</em> State</h2>
+<pre class="rust"><code>use std::sync::Arc;
+use std::thread;
+use std::sync::mpsc;
+
+struct HugeStruct{
+  name: &amp;&#39;static str,
+}
+
+fn main(){
+  let (tx, rx) = mpsc::channel();
+  let huge_struct = HugeStruct{name:&quot;Bruce&quot;};
+  let arc = Arc::new(huge_struct);
+
+  for task_num in 0..6{
+    let tx = tx.clone();
+    let arc = arc.clone(); // increase counter
+    thread::spawn(
+      move || {
+        let msg = format!(&quot;Task {:?}?  Accessed {:?}!&quot;, task_num, arc.name);
+        tx.send(msg).unwrap();
+      }
+    );
+  }
+
+  for data in rx.iter(){
+    println!(&quot;{:?}&quot;, data);
+  }
+}</code></pre>
+</section><section id="mutation-with-synchronization" class="slide level2">
+<h2>Mutation <em>with</em> Synchronization</h2>
+<pre class="rust"><code>use std::sync::{Arc, Mutex};
+use std::thread;
+use std::sync::mpsc;
+
+struct HugeStruct{
+  name: &amp;&#39;static str,
+  access_count: u32
+}
+
+fn main(){
+  let (tx, rx) = mpsc::channel();
+  let huge_struct = HugeStruct{name:&quot;Bruce&quot;, access_count: 0};
+  let arc = Arc::new(Mutex::new(huge_struct));
+
+  for task_num in 0..6{
+    let tx = tx.clone();
+    let arc = arc.clone(); // increase counter
+    thread::spawn(
+      move || {
+        let mut guard = arc.lock().unwrap();
+        guard.access_count +=1;
+        let msg = format!(&quot;Task {:?}?  Accessed {:?} for the {:?}. time!&quot;, task_num, guard.name, guard.access_count);
+        tx.send(msg).unwrap();
+      }
+    );
+  }
+
+  for data in rx.iter(){
+    println!(&quot;{:?}&quot;, data);
+  }
+}
+</code></pre>
+</section><section id="scoped-threads" class="slide level2">
+<h2>Scoped threads</h2>
+<ul>
+<li>Stack-Variablen aus der Umgebung des thread-Closures müssen <strong>moved</strong> werden</li>
+<li>Sonst: Threads können Lifetime des spawnenden Stackframes überleben</li>
+<li><strong>Lösung:</strong>
+<ul>
+<li><code>thread_scoped::scoped(...) -&gt; JoinGuard</code></li>
+<li>impl Drop for JoinGuard: wartet im Spawner auf Beendigung des Threads</li>
+</ul></li>
+</ul>
+</section><section id="rayon" class="slide level2">
+<h2>rayon</h2>
+<pre class="rust-norun"><code>let list = vec![1,2,3,4,5,6,7,8,9];
+let new_list = list
+  .iter()
+  .map(|x| do_something_heavy(x))
+  .collect();</code></pre>
+<pre class="rust-norun"><code>let list = vec![1,2,3,4,5,6,7,8,9];
+let new_list = list
+  .par_iter()
+  .map(|x| do_something_heavy(x))
+  .collect();</code></pre>
+<p><a href="https://github.com/nikomatsakis/rayon/">rayon</a></p>
+</section><section id="weitere-libs" class="slide level2">
+<h2>Weitere Libs</h2>
+<ul>
+<li><a href="https://github.com/huonw/simple_parallel">simple_parallel</a></li>
+<li><a href="http://areweconcurrentyet.com/">viel mehr</a></li>
+</ul>
+</section><section id="extra" class="slide level2">
+<h2>Extra</h2>
+<pre class="rust"><code>use std::sync::{Arc, Mutex};
+use std::thread;
+
+fn main() {
+    let data = Arc::new(
+        Mutex::new(
+            vec![1, 2, 3]
+            )
+        );
+
+    for i in 0..3 {
+        let data = data.clone();
+        thread::spawn(move || {
+            let mut data = data.lock().unwrap();
+            data[i] += 1;
+        });
+    }
+
+    thread::sleep_ms(50);
+}</code></pre>
+</section></section>
+<section><section id="traits" class="title-slide slide level1"><h1>Traits</h1></section><section id="traits-1" class="slide level2">
+<h2>Traits</h2>
+<p>Vergleiche: Java Interfaces, Haskell Typeclasses</p>
+<pre class="rust-norun"><code>struct Circle { x: f64, y: f64, radius: f64, }
+
+impl Circle {
+    fn area(&amp;self) -&gt; f64 {
+        std::f64::consts::PI * (self.radius * self.radius)
+    }
+}</code></pre>
+<div class="fragment">
+<pre class="rust-norun"><code>struct Circle { x: f64, y: f64, radius: f64, }
+
+trait HasArea {
+    fn area(&amp;self) -&gt; f64;
+}
+
+impl HasArea for Circle {
+    fn area(&amp;self) -&gt; f64 {
+        std::f64::consts::PI * (self.radius * self.radius)
+    }
+}</code></pre>
+</div>
+</section><section id="trait-bounds" class="slide level2">
+<h2>Trait Bounds</h2>
+<pre class="rust-norun"><code>fn print_area&lt;T&gt;(shape: T) {
+    println!(&quot;This shape has an area of {}&quot;, shape.area());
+}</code></pre>
+<div class="fragment">
+<pre><code>error: no method named `area` found for type `T` in the current scope</code></pre>
+</div>
+<div class="fragment">
+<pre class="rust-norun"><code>fn print_area&lt;T: HasArea&gt;(shape: T) {
+    println!(&quot;This shape has an area of {}&quot;, shape.area());
+}</code></pre>
+</div>
+</section><section id="iterator-trait" class="slide level2">
+<h2>Iterator trait</h2>
+<p><a href="http://doc.rust-lang.org/stable/std/iter/trait.Iterator.htm">std::iter::Iterator</a></p>
+<pre class="rust-norun"><code>pub trait Iterator {
+    type Item;
+    fn next(&amp;mut self) -&gt; Option&lt;Self::Item&gt;;
+
+    /* ... */
+    fn collect&lt;B&gt;(self) -&gt; B where B: FromIterator&lt;Self::Item&gt;;
+}</code></pre>
+</section><section id="for-loops-1" class="slide level2">
+<h2>for-Loops</h2>
+<pre class="rust-norun"><code>pub trait IntoIterator where Self::IntoIter::Item == Self::Item {
+    type Item;
+    type IntoIter: Iterator;
+    fn into_iter(self) -&gt; Self::IntoIter;
+}</code></pre>
+</section><section id="deref-coercions" class="slide level2">
+<h2>Deref-Coercions</h2>
+<blockquote>
+<p>If you have a type U, and it implements Deref&lt;Target=T&gt;, values of &amp;U will automatically coerce to a &amp;T</p>
+</blockquote>
+<pre class="rust"><code>fn foo(s: &amp;str) {
+  println!(&quot;&amp;str: {}&quot;, s);
+}
+
+fn main() {
+  // String implements Deref&lt;Target=str&gt;
+  let owned = &quot;Hello&quot;.to_string();
+
+  // therefore, this works:
+  foo(&amp;owned);
+}</code></pre>
+</section></section>
+<section><section id="eco-system" class="title-slide slide level1"><h1>eco system</h1></section><section id="links" class="slide level2">
+<h2>Links</h2>
+<h3 id="news-community">News &amp;&amp; Community</h3>
+<ul>
+<li><a href="https://this-week-in-rust.org/">this-week-in-rust.org</a></li>
+<li><a href="https://www.reddit.com/r/rust">/r/rust</a></li>
+<li><a href="https://users.rust-lang.org">users.rust-lang.org</a></li>
+</ul>
+<h3 id="resources">Resources</h3>
+<ul>
+<li><a href="http://rustbyexample.com/">rustbyexample.com/</a></li>
+<li><a href="https://doc.rust-lang.org/stable/book/">The Rust Programming Language</a></li>
+<li><a href="https://danielkeep.github.io/tlborm/">The little book of Rust Macros</a></li>
+<li><a href="https://doc.rust-lang.org/nightly/nomicon/">Rustonomicon: Dark Arts of unsafe rust</a></li>
+</ul>
+</section><section id="mehr-tooling" class="slide level2">
+<h2>Mehr Tooling</h2>
+<ul>
+<li><code>clippy</code>: 100 more Warnings</li>
+<li><code>racer</code>: Completion</li>
+</ul>
+</section></section>
+<section><section id="stop-hacking-time" class="title-slide slide level1"><h1>Stop! hacking time</h1></section><section id="checklist" class="slide level2">
+<h2>Checklist:</h2>
+<ul>
+<li>☑ install rustc<br />
+</li>
+<li>☑ learn cargo<br />
+</li>
+<li>☑ scan crates.io<br />
+</li>
+</ul>
+</section></section>
+<section><section id="part-2---konkrete-beispiele" class="title-slide slide level1"><h1>Part 2 - konkrete Beispiele</h1></section><section class="slide level2">
+
+</section></section>
+<section><section id="beispiel-für-parameterisierte-typen" class="title-slide slide level1"><h1>Beispiel für Parameterisierte Typen</h1></section><section id="fresh-in-hyper" class="slide level2">
+<h2>Fresh in Hyper</h2>
+<ul>
+<li><strong>Motivation:</strong> HTTP Response Headers können nur geändert werden wenn Body noch nicht gesendet wird.</li>
+<li><strong>Lösung:</strong> Extra-Typparameter: <code>Fesh</code>, <code>Streaming</code>, <code>Any</code></li>
+</ul>
+<pre class="rust-norun"><code>pub trait Handler: Sync + Send {
+    fn handle&lt;&#39;a, &#39;k&gt;(&amp;&#39;a self, Request&lt;&#39;a, &#39;k&gt;, Response&lt;&#39;a, Fresh&gt;);
+    // ...
+}
+
+impl&lt;&#39;a&gt; Response&lt;&#39;a, Fresh&gt; {
+    fn start(self) -&gt; Result&lt;Response&lt;&#39;a, Streaming&gt;&gt; {
+        // ...
+    }
+}</code></pre>
+</section><section id="pulseaudio-api" class="slide level2">
+<h2>Pulseaudio-API</h2>
+<ul>
+<li>rust-bindgen</li>
+<li>https://crates.io/crates/libpulse-sys</li>
+</ul>
+</section><section id="pulseaudio-api-benutzung" class="slide level2">
+<h2>Pulseaudio-API: Benutzung</h2>
+<pre class="rust-norun"><code>let ss = pa_sample_spec {
+    format: PA_SAMPLE_S16LE,
+    channels: 1,
+    rate: 48000
+};
+let s = unsafe {
+    let name_c = CString::new(&quot;Rust!&quot;).unwrap();
+    let desc_c = CString::new(&quot;Example&quot;).unwrap();
+    pa_simple_new(null(),
+                  name_c.as_ptr() as *const i8,
+                  PA_STREAM_PLAYBACK,
+                  null(),
+                  desc_c.as_ptr() as *const i8,
+                  &amp;ss,
+                  null(),
+                  null(),
+                  null_mut(),
+                 )
+};</code></pre>
+<pre class="rust-norun"><code>let res = unsafe {
+    pa_simple_write(s, mem::transmute(buf), 2 * SAMPLES, null_mut())
+};</code></pre>
+</section><section id="crate-pulse-simple" class="slide level2">
+<h2>Crate pulse-simple</h2>
+<pre class="rust-norun"><code>const RATE: u32 = 48000;
+let p = Playback::new(&quot;Example&quot;, &quot;Playback&quot;, RATE);
+
+// Generate 1s of sound
+let mut data = Vec::with_capacity(RATE as usize);
+for i in 0..RATE {
+    let t = i as f64 / RATE as f64;
+    let make_freq = |f: f64| ((std::i16::MAX as f64) * (f * 2.0 * PI * t).sin()) as i16;
+    data.push([make_freq(440.0), make_freq(330.0)]);
+}
+
+// Play in a loop
+loop {
+    p.write(&amp;data[..]);
+}</code></pre>
+</section><section id="crate-pulse-simple-playback" class="slide level2">
+<h2>Crate pulse-simple: Playback</h2>
+<pre class="rust-norun"><code>pub struct Playback&lt;C: ChannelCount&gt; {
+    client: SimpleClient&lt;C&gt;
+}
+
+impl&lt;C: ChannelCount&gt; Playback&lt;C&gt; {
+    pub fn new(name: &amp;str, desc: &amp;str, rate: u32) -&gt; Self {
+        Playback {
+            client: SimpleClient::new(name, desc, PA_STREAM_PLAYBACK, rate)
+        }
+    }
+
+    pub fn write(&amp;self, data: &amp;[C]) {
+        let res = unsafe {
+            let ptr = transmute(data.as_ptr());
+            pa_simple_write(self.client.simple, ptr, data.len() * C::sample_size(), null_mut())
+        };
+        assert!(res == 0);
+    }
+}</code></pre>
+</section><section id="crate-pulse-simple-simpleclient" class="slide level2">
+<h2>Crate pulse-simple: SimpleClient</h2>
+<pre class="rust-norun"><code>struct SimpleClient&lt;C: ChannelCount&gt; {
+    simple: *mut pa_simple,
+    phantom: PhantomData&lt;C&gt;,
+}
+
+impl&lt;C: ChannelCount&gt; SimpleClient&lt;C&gt; {
+    fn new(name: &amp;str, desc: &amp;str, dir: pa_stream_direction_t, rate: u32) -&gt; Self {
+        let ss = pa_sample_spec {
+            format: C::format(),
+            channels: C::count(),
+            rate: rate
+        };
+        let name_c = CString::new(name).unwrap();
+        let desc_c = CString::new(desc).unwrap();
+        let s = unsafe {
+            pa_simple_new(null(), name_c.as_ptr() as *const i8,
+                          dir, null(),
+                          desc_c.as_ptr() as *const i8, &amp;ss,
+                          null(), null(), null_mut()
+                         )
+        };
+        assert!(s != null_mut());
+        SimpleClient {
+            simple: s,
+            phantom: PhantomData
+        }
+    }
+}</code></pre>
+</section><section id="crate-pulse-simple-channelcount" class="slide level2">
+<h2>Crate pulse-simple: ChannelCount</h2>
+<pre class="rust-norun"><code>pub trait ChannelCount {
+    fn count() -&gt; u8;
+
+    type S: Sampleable;
+    fn format() -&gt; pa_sample_format_t {
+        Self::S::format()
+    }
+    fn sample_size() -&gt; usize {
+        Self::count() as usize * size_of::&lt;Self::S&gt;()
+    }
+}</code></pre>
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.js"></script>
+  <script src="jquery-1.12.0.min.js"></script>
+  <script src="add_playpen.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
