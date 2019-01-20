@@ -26,6 +26,7 @@
         .reveal blockquote {
             box-shadow: 0px 0px #000;
             display:block;
+            margin-top: 50px;
         }
 
         .reveal blockquote.small {
@@ -33,6 +34,8 @@
         }
 
         .reveal blockquote:before {
+            position: absolute;
+            left: -10px;
             color: #ccc;
             font-size: 4em;
             line-height: 0.1em;
@@ -41,10 +44,27 @@
         }
         .reveal blockquote:before {
             content: "\"";
+            
             font-family:Georgia, 'Times New Roman', Times, serif
         }
+
         .reveal blockquote cite {
             font-size: 0.6em;
+        }
+
+        .reveal cite {
+            display:block;
+            float:right;
+            padding-top: 60px;
+            color: yellow;
+        }
+
+        .reveal cite a {
+            color: yellow;
+        }
+
+        .reveal cite:before{
+            content: "\2014 \2009";
         }
     </style>
 </head>
@@ -130,15 +150,16 @@
 
         Reveal.initialize({
             history: true,
+            slideNumber: true,
             // More info https://github.com/hakimel/reveal.js#dependencies
             dependencies: [
                 { src: 'plugin/markdown/marked.js' },
                 { src: 'plugin/markdown/markdown.js' },
                 { src: 'plugin/notes/notes.js', async: true },
+                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
                 /*
                 { src: 'socket.io/socket.io.js', async: true },
                 { src: 'plugin/notes-server/client.js', async: true }
-                   { src: 'lib/reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
                  */
             ]
         });

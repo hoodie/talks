@@ -29,6 +29,12 @@ https://rustwasm.github.io/book/what-is-webassembly.html
 
 --SLIDE--
 
+### Portability
+TODO: https://webassembly.org/docs/portability/
+### Semantics
+TODO: https://webassembly.org/docs/semantics/
+
+--SLIDE--
 
 ## Ein Schritt nach asm.js
 
@@ -52,6 +58,7 @@ http://asmjs.org/faq.html
  * simpler language model
  * precompiled, preoptimized
  * fewer allocations
+ * [what makes WASM fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/)
 * better languages
  * strongly typed languages
  * no GC
@@ -71,6 +78,7 @@ http://asmjs.org/faq.html
 
 ## Is WASM vs JavaApplets or Flash
 
+<small>
 * it's part of the browser<sup>*</sup>
  * not a plugin
  * not owned by other companies like flash or java
@@ -79,7 +87,11 @@ http://asmjs.org/faq.html
  * secure: sandboxed just like javascript
  * low maintainance for browser vendors
 
+</small>
+
+<cite>
 [kudos steve klabnik](https://words.steveklabnik.com/is-webassembly-the-return-of-java-applets-flash)
+</cite>
 
 --SECTION--
 
@@ -115,17 +127,73 @@ http://asmjs.org/faq.html
 --SLIDE--
 
 ## why doesn't it have `$X`?
-https://webassembly.org/docs/faq/
-https://webassembly.org/docs/future-features/module
-https://hacks.mozilla.org/2017/02/where-is-webassembly-now-and-whats-next/
+It's [designed incrementally](https://webassembly.org/docs/rationale/) -> it's an [MVP](https://webassembly.org/docs/mvp/)
+* https://webassembly.org/docs/faq/
+* https://webassembly.org/docs/future-features/module
+* https://hacks.mozilla.org/2017/02/where-is-webassembly-now-and-whats-next/
+
+--SLIDE--
+
+## Security
+TODO: https://webassembly.org/docs/security/
 
 --SECTION--
 
-# How does it get into the browser
+## How does it get into the browser?
 
-[Understanding the JS API](https://webassembly.org/getting-started/js-api/)
+--SLIDE--
 
-* 
+## compile...
+
+![compile](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png)
+<br/>
+<small>
+... more on this later
+</small>
+
+--SLIDE--
+ 
+* Get the .wasm bytes into a typed array or ArrayBuffer
+* Compile the bytes into a WebAssembly.Module
+* Instantiate the WebAssembly.Module with imports to get the callable exports
+
+<cite>
+https://webassembly.org/getting-started/js-api/
+</cite>
+
+--SLIDE--
+
+```javascript
+function fetchAndInstantiate(url, importObject) {
+  return fetch(url).then(response =>
+    response.arrayBuffer()
+  ).then(bytes =>
+    WebAssembly.instantiate(bytes, importObject)
+  ).then(results =>
+    results.instance
+  );
+}
+```
+<cite> [Lin Clark](https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/) / [MDN](https://developer.mozilla.org/en-US/docs/WebAssembly) </cite>
+
+--SLIDE--
+
+Now just do a bunch of FFI 😨 because the you have to tunnel everything 😩through an essentially 😱 C-like interface
+<img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-04-memory04.png" alt="ffi" style="width:100%"/>
+ 🤷‍♂️  
+--SLIDE--
+
+...oh and your 🦀 Rust has to expose a C-Like interface too, sorry 🙇🏻
+
+--SLIDE--
+
+### notes
+* [Modules](https://webassembly.org/docs/modules/), [JsApi](https://webassembly.org/docs/js/)
+* [Understanding the JS API](https://webassembly.org/getting-started/js-api/)
+* [Creating and working with WebAssembly modules](https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/)
+* [wasm-Bindgen](https://hacks.mozilla.org/2018/04/javascript-to-rust-and-back-again-a-wasm-bindgen-tale/)
+* [Wasm-pack](https://hacks.mozilla.org/2018/04/javascript-to-rust-and-back-again-a-wasm-bindgen-tale/)
+* [Making WebAssembly better for Rust & for all languages](https://hacks.mozilla.org/2018/03/making-webassembly-better-for-rust-for-all-languages/)
 
 --SECTION--
 
@@ -135,6 +203,11 @@ https://hacks.mozilla.org/2017/02/where-is-webassembly-now-and-whats-next/
 --SLIDE--
 
 ![test](images/happy.svg)
+
+wasm-bindgen
+https://rustwasm.github.io/book/
+https://rustwasm.github.io/wasm-pack/
+https://rustwasm.github.io/wasm-bindgen/
 
 --SECTION--
 
@@ -204,6 +277,7 @@ https://webassembly.studio/
 https://webassembly.org/
 https://github.com/AssemblyScript/assemblyscript
 https://www.chromestatus.com/features#webassembly
+https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts
 
 
 []
