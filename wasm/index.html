@@ -9,17 +9,41 @@
     <link rel="stylesheet" href="lib/reveal.js/css/reveal.css">
     <link rel="stylesheet" href="lib/reveal.js/css/theme/sky.css">
     <style>
-    .reveal section img {
-        border: 0;
-        box-shadow: 0px 0px #000;
-        width: 40%;
-    }
-    .reveal h1,
-    .reveal h2,
-    .reveal h3,
-    .reveal h4 {
-        text-transform: none;
-    }
+        .reveal section img {
+            border: 0;
+            box-shadow: 0px 0px #000;
+            width: 40%;
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4 {
+            text-transform: none;
+        }
+
+        .reveal blockquote {
+            box-shadow: 0px 0px #000;
+            display:block;
+        }
+
+        .reveal blockquote.small {
+            font-size: 0.7em;
+        }
+
+        .reveal blockquote:before {
+            color: #ccc;
+            font-size: 4em;
+            line-height: 0.1em;
+            margin-right: 0.25em;
+            vertical-align: -0.4em;
+        }
+        .reveal blockquote:before {
+            content: open-quote;
+        }
+        .reveal blockquote cite {
+            font-size: 0.6em;
+        }
     </style>
 </head>
 
@@ -41,6 +65,7 @@
                 data-separator-vertical="--SLIDE--"
                 data-separator-notes="^Note:"
                 data-leadingws="16"></section>
+
         </div>
     </div>
 
