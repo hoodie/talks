@@ -1,223 +1,6 @@
+# « notes »
 markdown
 --SECTION--
-
-## What is WebAssembly?
-
---SLIDE--
-
-<blockquote>
-... a simple machine model and executable format with an [extensive specification](https://webassembly.github.io/spec/). It is designed to be portable, compact, and execute at or near native speeds.
-<cite>
-https://rustwasm.github.io/book/what-is-webassembly.html
-</cite>
-</blockquote>
-
---SLIDE--
-
-<blockquote>
-...it is a new, low-level, assembly-like language
-<cite> [mozilla research](https://rustwasm.github.io/book/what-is-webassembly.html) </cite>
-</blockquote>
-
---SLIDE--
-
-<blockquote>
-...is backward-compatible with its precursor, [asm.js](http://asmjs.org/).
-<cite> [mozilla research](https://research.mozilla.org/webassembly/) </cite>
-</blockquote>
-
-
---SLIDE--
-
-### Portability
-TODO: https://webassembly.org/docs/portability/
-### Semantics
-TODO: https://webassembly.org/docs/semantics/
-
---SLIDE--
-
-## Ein Schritt nach asm.js
-
-<blockquote class="small">
-...a strict subset of JavaScript [...] provides an abstraction similar to the C/C++ virtual machine: a large binary heap with efficient loads and stores, integer and floating-point arithmetic, first-order function definitions, and function pointers.
-<cite>[asmjs spec](http://asmjs.org/spec/latest/#introduction)</cite>
-</blockquote>
-
-http://asmjs.org/faq.html
-
-
-
---SECTION--
-
-
-
-## Pros
-
-* portablity (reuse your code 😒)
-* better performance
- * simpler language model
- * precompiled, preoptimized
- * fewer allocations
- * [what makes WASM fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/)
-* better languages
- * strongly typed languages
- * no GC
- * better tooling
-
---SLIDE--
-
-## cons
-
-* [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
-* less transparency on the web
- * possiblity for proprietary code in your browser
-* binary size
-* serialization
-
---SLIDE--
-
-## Is WASM vs JavaApplets or Flash
-
-<small>
-* it's part of the browser<sup>*</sup>
- * not a plugin
- * not owned by other companies like flash or java
- * [standardized](https://webassembly.github.io/spec/)
-* runs in the javascript engine
- * secure: sandboxed just like javascript
- * low maintainance for browser vendors
-
-</small>
-
-<cite>
-[kudos steve klabnik](https://words.steveklabnik.com/is-webassembly-the-return-of-java-applets-flash)
-</cite>
-
---SECTION--
-
-## what can it do?
-
-* available APIS? everything that JavaScript has to offer (including WebGL) 
-
---SLIDE--
-
-## what can it not do?
-* SIMD ([yet](https://github.com/WebAssembly/simd))
-* threads ([yet](https://github.com/WebAssembly/threads)[?](https://www.chromestatus.com/features/5724132452859904))
-* network udp<sup>*</sup>
-* fs access<sup>*</sup>
-* memory outside of the browser
-* more precise timers<sup>*</sup>
-* 64 bit
-
---SLIDE--
-
-## what is it good for?
-
-* crypto
-* audio/video/image edition
-* computer vision
-* high performance apps: CAD, Science, Games
-* low latency apps: VR
-* binary protocols, parsers
-* emulation: Gameboy to x86
-* [use cases...](https://webassembly.org/docs/use-cases/)
-
-
---SLIDE--
-
-## why doesn't it have `$X`?
-It's [designed incrementally](https://webassembly.org/docs/rationale/) -> it's an [MVP](https://webassembly.org/docs/mvp/)
-* https://webassembly.org/docs/faq/
-* https://webassembly.org/docs/future-features/module
-* https://hacks.mozilla.org/2017/02/where-is-webassembly-now-and-whats-next/
-
---SLIDE--
-
-## Security
-TODO: https://webassembly.org/docs/security/
-
---SECTION--
-
-## Where is it used?
-
-
-
-
-
---SECTION--
-
-## How does it get into the browser?
-
---SLIDE--
-
-## compile to <code>.wasm</code>  ...
-
-![compile](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png)
-<br/>
-<small>
-... more on this later
-</small>
-
---SLIDE--
-There is no integration with ES Modules yet
-
-<div class="fragment emoji">🙄 sorry</div>
-
---SLIDE--
-* Get the <code>.wasm</code> bytes into a typed array or ArrayBuffer
-* Compile the bytes into a <code>WebAssembly.Module</code>
-* Instantiate the <code>WebAssembly.Module</code> with imports to get the callable exports
-
-<div class="fragment emoji">🤯</div>
-
-<cite> [webassembly.org](https://webassembly.org/getting-started/js-api/) </cite>
-
-
-
---SLIDE--
-
-<pre><code class="javascript">
-fetch('simple.wasm')
-  .then(response => response.arrayBuffer())
-  .then(bytes => WebAssembly.instantiate(bytes, importObject))
-  .then(results => results.instance.exports.exported_func());
-}
-</code></pre>
-<cite> [mdn](https://developer.mozilla.org/en-US/docs/WebAssembly/Loading_and_running#Using_Fetch) </cite>
-
---SLIDE--
-
-
-<pre><code class="javascript">
-const object = await WebAssembly.instantiateStreaming(
-  fetch('simple.wasm'),
-  importObject
-);
-
-obj.instance.exports.exported_func()
-</code></pre>
-
-<cite>[mdn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiateStreaming)</cite>
-
---SLIDE--
-
-## what is that <code>importObject</code> ?
-
---SLIDE--
-
-## how do I talk to WebAssembly?
---SLIDE--
-
-Now just do a bunch of FFI 😨 because the you have to tunnel everything 😩through an essentially 😱 C-like interface
-<img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-04-memory04.png" alt="ffi" style="width:100%"/>
-
-
-<span class="fragment">
- it's assembly after all 🤷‍♂️  
- </span>
-
---SLIDE--
 
 ...oh and your 🦀 Rust has to expose a C-Like interface too, sorry 🙇🏻
 
@@ -287,7 +70,6 @@ links from TWIR please
 ### why?
 
 * most advanced WASM tooling and integration
-* WASM vs JAVA BYTECODE
 * webrtc foo (zoom) (audio classifier)
 
 ### homework
@@ -310,6 +92,7 @@ https://rustwasm.github.io/book/game-of-life/code-size.html
 https://webassembly.org/demo/Tanks/
 http://naubino.de/awsm-gorillas/
 https://blogs.unity3d.com/2017/03/31/5-6-is-now-available-and-completes-the-unity-5-cycle/#webassembly
+https://github.com/richardanaya/virtual-dom-rs-counter
 
 ## References
 
@@ -325,4 +108,6 @@ https://www.chromestatus.com/features#webassembly
 https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts
 
 
+### benchmarks
+https://blog.sqreen.io/webassembly-performance/ (before https://hacks.mozilla.org/2018/10/calls-between-javascript-and-webassembly-are-finally-fast-%f0%9f%8e%89/)
 []
