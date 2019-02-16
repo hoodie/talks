@@ -53,7 +53,7 @@ http://asmjs.org/faq.html
 
 ## Pros
 
-* portablity (reuse your code)
+* portablity (reuse your code 😒)
 * better performance
  * simpler language model
  * precompiled, preoptimized
@@ -139,11 +139,19 @@ TODO: https://webassembly.org/docs/security/
 
 --SECTION--
 
+## Where is it used?
+
+
+
+
+
+--SECTION--
+
 ## How does it get into the browser?
 
 --SLIDE--
 
-## compile...
+## compile to <code>.wasm</code>  ...
 
 ![compile](https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png)
 <br/>
@@ -152,35 +160,63 @@ TODO: https://webassembly.org/docs/security/
 </small>
 
 --SLIDE--
- 
-* Get the .wasm bytes into a typed array or ArrayBuffer
-* Compile the bytes into a WebAssembly.Module
-* Instantiate the WebAssembly.Module with imports to get the callable exports
+There is no integration with ES Modules yet
 
-<cite>
-https://webassembly.org/getting-started/js-api/
-</cite>
+<div class="fragment emoji">🙄 sorry</div>
+
+--SLIDE--
+* Get the <code>.wasm</code> bytes into a typed array or ArrayBuffer
+* Compile the bytes into a <code>WebAssembly.Module</code>
+* Instantiate the <code>WebAssembly.Module</code> with imports to get the callable exports
+
+<div class="fragment emoji">🤯</div>
+
+<cite> [webassembly.org](https://webassembly.org/getting-started/js-api/) </cite>
+
+
 
 --SLIDE--
 
-```javascript
-function fetchAndInstantiate(url, importObject) {
-  return fetch(url).then(response =>
-    response.arrayBuffer()
-  ).then(bytes =>
-    WebAssembly.instantiate(bytes, importObject)
-  ).then(results =>
-    results.instance
-  );
+<pre><code class="javascript">
+fetch('simple.wasm')
+  .then(response => response.arrayBuffer())
+  .then(bytes => WebAssembly.instantiate(bytes, importObject))
+  .then(results => results.instance.exports.exported_func());
 }
-```
-<cite> [Lin Clark](https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/) / [MDN](https://developer.mozilla.org/en-US/docs/WebAssembly) </cite>
+</code></pre>
+<cite> [mdn](https://developer.mozilla.org/en-US/docs/WebAssembly/Loading_and_running#Using_Fetch) </cite>
 
+--SLIDE--
+
+
+<pre><code class="javascript">
+const object = await WebAssembly.instantiateStreaming(
+  fetch('simple.wasm'),
+  importObject
+);
+
+obj.instance.exports.exported_func()
+</code></pre>
+
+<cite>[mdn](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiateStreaming)</cite>
+
+--SLIDE--
+
+## what is that <code>importObject</code> ?
+
+--SLIDE--
+
+## how do I talk to WebAssembly?
 --SLIDE--
 
 Now just do a bunch of FFI 😨 because the you have to tunnel everything 😩through an essentially 😱 C-like interface
 <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-04-memory04.png" alt="ffi" style="width:100%"/>
- 🤷‍♂️  
+
+
+<span class="fragment">
+ it's assembly after all 🤷‍♂️  
+ </span>
+
 --SLIDE--
 
 ...oh and your 🦀 Rust has to expose a C-Like interface too, sorry 🙇🏻
@@ -194,6 +230,15 @@ Now just do a bunch of FFI 😨 because the you have to tunnel everything 😩th
 * [wasm-Bindgen](https://hacks.mozilla.org/2018/04/javascript-to-rust-and-back-again-a-wasm-bindgen-tale/)
 * [Wasm-pack](https://hacks.mozilla.org/2018/04/javascript-to-rust-and-back-again-a-wasm-bindgen-tale/)
 * [Making WebAssembly better for Rust & for all languages](https://hacks.mozilla.org/2018/03/making-webassembly-better-for-rust-for-all-languages/)
+
+--SLIDE--
+
+how to compile to <code>.wasm</code>?
+
+
+
+
+
 
 --SECTION--
 

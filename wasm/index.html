@@ -8,6 +8,7 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <link rel="stylesheet" href="lib/reveal.js/css/reveal.css">
     <link rel="stylesheet" href="lib/reveal.js/css/theme/blood.css">
+    <link rel="stylesheet" href="styles/tomorrow-night-bright.css">
     <style>
         .reveal section img {
             border: 0;
@@ -25,7 +26,7 @@
 
         .reveal blockquote {
             box-shadow: 0px 0px #000;
-            display:block;
+            display: block;
             margin-top: 50px;
         }
 
@@ -42,10 +43,11 @@
             margin-right: 0.25em;
             vertical-align: -0.4em;
         }
+
         .reveal blockquote:before {
             content: "\"";
-            
-            font-family:Georgia, 'Times New Roman', Times, serif
+
+            font-family: Georgia, 'Times New Roman', Times, serif
         }
 
         .reveal blockquote cite {
@@ -53,8 +55,8 @@
         }
 
         .reveal cite {
-            display:block;
-            float:right;
+            display: block;
+            float: right;
             padding-top: 60px;
             color: yellow;
         }
@@ -63,8 +65,19 @@
             color: yellow;
         }
 
-        .reveal cite:before{
+        .reveal cite:before {
             content: "\2014 \2009";
+        }
+    </style>
+    <style>
+        .emoji {
+            font-size: 2em !important;
+            text-align: center;
+        }
+
+        pre code {
+            border-radius: 15px;
+            padding: 20px 35px !important;
         }
     </style>
 </head>
@@ -80,6 +93,7 @@
                 <h2>WebAssembly</h2>
 
             </section>
+            <!--
             <section data-markdown>
                 #### roter Faden
                 * what?
@@ -90,63 +104,78 @@
                 * examples examples examples
 
             </section>
+            -->
+            <section>
+                <h3> WebAssembly </h3>
+                <h4> What is it
+                    <span class="fragment"> good for </span>
+                    <span class="fragment">?</span>
+                </h4>
+            </section>
 
-            <section data-transition="concave">
-                <h2> Background: <small>Javascript performance</small></h2>
+            <section title="javascript performance" data-transition="concave">
+                <h2> Background </h2>
+                <section>
+                    <span class="fragment"> JavaScript performance </span>
+                </section>
 
                 <section>
-                    <span class="fragment">
                     Why do you use Javascript?
-                    </span>
                     <ol>
                         <li class="fragment">because it's convenient </li>
                         <li class="fragment">because it's async </li>
                         <li class="fragment">because it comes with every browser </li>
-                        <li class="fragment">Not because it's fast, it's not<sup class="fragment">*</sup>
-                            <br>
-                        <small class="fragment">* native browser APIs don't count</small>
+                        <li class="fragment">Not because it's fast <span class="fragment">, it's not </span>
+                            <sup class="fragment">*</sup>
+                            <br> <small class="fragment">* native browser APIs don't count</small>
+                            <br> <small class="fragment"><small>**</small> jit vis allocations</small>
                         </li>
                         <li class="fragment">competing implementations</li>
                     </ol>
                 </section>
 
                 <section>
-                    <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-01-perf_graph05.png" />
+                    <img
+                        src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-01-perf_graph05.png" />
                     <br>
                     <small>
-                    <a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">
-                        A cartoon intro to WebAssembly, by Lin Clark
-                    </a>
+                        <a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">
+                            A cartoon intro to WebAssembly, by Lin Clark
+                        </a>
                     </small>
                 </section>
 
                 <section>
-                    <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-02-perf_graph10.png" />
+                    <img
+                        src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-02-perf_graph10.png" />
                 </section>
                 <section data-markdown>
-                    1. [a crash course in jit compilers ](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/ )
-                    2. [A crash course in just-in-time (JIT) compilers](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/ )
+                    1. [a crash course in jit compilers
+                    ](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/ )
+                    2. [A crash course in just-in-time (JIT)
+                    compilers](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/ )
                     3. [A crash course in assembly ](https://hacks.mozilla.org/2017/02/a-crash-course-in-assembly/ )
-                    4. [Creating and working with WebAssembly modules ](https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/ )
+                    4. [Creating and working with WebAssembly modules
+                    ](https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/ )
                     5. [What makes WebAssembly fast? ](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/ )
                     6. [Where is WebAssembly now and what’s next? ](https://hacks.mozilla.org/?p=30522 )
                 </section>
 
             </section>
 
-            <section
-                data-markdown="talk.md"
-                data-separator="--SECTION--"
-                data-separator-vertical="--SLIDE--"
-                data-separator-notes="^Note:"
-                data-leadingws="16"></section>
+            
+
+            <section data-markdown="talk.md" data-separator="--SECTION--" data-separator-vertical="--SLIDE--"
+                data-separator-notes="^Note:" data-leadingws="16"></section>
 
         </div>
     </div>
 
     <script src="lib/reveal.js/js/reveal.js"></script>
     <script src="lib/headjs/dist/1.0.0/head.js"></script>
+    <script src="lib/highlight.pack.js"></script>
     <script>
+        hljs.initHighlightingOnLoad();
 
         Reveal.initialize({
             history: true,
