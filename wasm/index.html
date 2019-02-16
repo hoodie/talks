@@ -69,15 +69,28 @@
         .reveal cite:before {
             content: "\2014 \2009";
         }
+
         .reveal .white-slide,
         .reveal .white-slide h2 {
             color: black !important;
         }
     </style>
     <style>
+        
         .emoji {
             font-size: 2em !important;
             text-align: center;
+        }
+
+        .todo {
+            display: block
+        }
+
+        .todo::before {
+            content: "TODO: ";
+            font-weight: bold;
+            color: black;
+            background-color: yellow;
         }
 
         pre code {
@@ -323,74 +336,79 @@
             <section title="where is it used">
                 <h2> Where is it used? </h2>
                 <section>
-                    <ul>
-                        <li>
-
+                    <ol>
+                        <li class="fragment fade-up">
+                             <a href="https://hacks.mozilla.org/2018/01/oxidizing-source-maps-with-rust-and-webassembly/ "> mozillas source-map library </a>
                         </li>
-                    </ul>
-                    <a href=" https://hacks.mozilla.org/2018/01/oxidizing-source-maps-with-rust-and-webassembly/ ">
-                        mozillas source-map library </a>
+                        <li class="fragment fade-up">
+                            <a href="https://webrtchacks.com/zoom-avoids-using-webrtc/">zoom.us (instead of WebRTC)</a>
+                        </li>
+                        <div class="fragment fade-up">
+                             🤷🏼‍♀️ who knows where else?
+                        </div>
+                        <div class="fragment fade-up"> <a href="https://twitter.com/hoodie_de/status/1096865768258629632">🐦</a> </div>
+
+                    </ol>
                 </section>
-                <section> who knows where else? </section>
             </section>
 
             <section title="How does it get into the browser">
                 <section>
-                    <h2>
-                        How does it get into the browser?
-                    </h2>
+                    <h2> How does it get into the browser? </h2>
 
                 </section>
 
-                <section >
+                <section>
                     <h2> compile to <code>.wasm</code> ... </h2>
                     <img
                         src=" https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png">
                     <br />
-                    <small> ... more on this later
-                    </small>
+                    <small class="fragment grow">not in scope</small>
                 </section>
 
                 <section>
-                    There is no integration with ES Modules yet
-
+                        <pre><code class="html">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;script src="example.wasm"/&gt;
+    &lt;/head&gt;
+&lt;/html&gt;
+                    </code></pre>
+                    <div class="fragment">Nope!!! There is no integration with ES Modules yet <cite>28.02.2019</cite> </div>
                     <div class="fragment emoji">🙄 sorry</div>
                 </section>
 
                 <section>
-                    <span data-markdown>
-                        * Get the <code>.wasm</code> bytes into a typed array or ArrayBuffer
-                        * Compile the bytes into a <code>WebAssembly.Module</code>
-                        * Instantiate the <code>WebAssembly.Module</code> with imports to get the callable exports
-                    </span>
+                    <ol>
+                        <li>Get the <code>.wasm</code> bytes into a typed array or ArrayBuffer</li>
+                        <li class="fragment fade-up">Compile the bytes into a <code>WebAssembly.Module</code></li>
+                        <li class="fragment fade-up">Instantiate the <code>WebAssembly.Module</code> with imports to get the callable exports</li>
+                    </ol>
 
+
+                    <cite class="fragment"> <a href="https://webassembly.org/getting-started/js-api/">webassembly.org</a> </cite>
                     <div class="fragment emoji">🤯</div>
-
-                    <cite> <a href="https://webassembly.org/getting-started/js-api/">webassembly.org</a> </cite>
                 </section>
 
                 <section>
-                    <pre><code class="javascript">
-fetch('simple.wasm')
-    .then(response => response.arrayBuffer())
-    .then(bytes => WebAssembly.instantiate(bytes, importObject))
-    .then(results => results.instance.exports.exported_func());
-}
-                    </code></pre>
+                    <small><em>modules by hand</em></small>
+                    <pre><code class="javascript">fetch('simple.wasm')
+.then(response => response.arrayBuffer())
+.then(bytes => WebAssembly.instantiate(bytes, importObject))
+.then(results => results.instance.exports.exported_func());</code></pre>
                     <cite> <a
                             href="https://developer.mozilla.org/en-US/docs/WebAssembly/Loading_and_running#Using_Fetch">mdn</a>
                     </cite>
                 </section>
 
                 <section>
-                    <pre><code class="javascript">
-const object = await WebAssembly.instantiateStreaming(
+                    <small><em>await!</em></small>
+                    <pre><code class="javascript">const object = await WebAssembly.instantiateStreaming(
     fetch('simple.wasm'),
     importObject
 );
 
-obj.instance.exports.exported_func()
-                    </code></pre>
+obj.instance.exports.exported_func();</code></pre>
 
                     <cite> <a
                             href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiateStreaming">mdn</a>
@@ -398,26 +416,56 @@ obj.instance.exports.exported_func()
                 </section>
 
                 <section>
-                    <h2>
-                    what is that <code>importObject</code> ?
-                    </h2>
+                    <h4> what is that <code>importObject</code> ? </h4>
+                    <pre class="fragment"><code class="javascript">const importObject = {
+    env: {
+        logger: (str) => console.info(str)
+    },
+}; </code></pre>
                 </section>
 
-                <section >
-                    <h2>how do I talk to WebAssembly?</h2>
-                </section>
-
-                <section >
-                    Now just do a bunch of FFI 😨 because the you have to tunnel everything 😩through an essentially 😱
-                    C-like interface
-                    <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-04-memory04.png"
-                        alt="ffi" style="width:100%" />
-
+                <section>
+                    <h4>how do I talk to WebAssembly?</h4>
 
                     <span class="fragment">
-                        it's assembly after all 🤷‍♂️
-                    </span>
+                        just do a bunch of FFI 😨 because the you have to tunnel everything 😩through an essentially 😱
+                        C-like interface
+                        <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-04-memory04.png"
+                            alt="ffi" style="width:100%" />
 
+
+                        <div class="fragment"> 🙇 you don't even get strings</div>
+                        <div class="fragment">it's assembly after all 🤷‍♂️ </div>
+
+                    </span>
+                </section>
+
+                <section>
+                    <h4> 🦀 Rust exposing a c-like interface </h4> 
+                    <pre><code class="rust">#[no_mangle]
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b + 100
+}</code></pre>
+<pre><code class="javascript">const { exports: { add } }  =
+    await fetch('rust-lib.wasm')
+        .then(response => response.arrayBuffer())
+        .then(bytes => WebAssembly.instantiate(bytes))
+        .then(result => result.instance);
+
+console.dir(add(1,2)); // → 103</code></pre>
+                </section>
+
+                <section>
+                    <span class="emoji">😀</span>
+                    codegen to  the rescue
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h4>introducing wasm-bindgen</h4>
+                    <span class="todo">rnnoise</span>
+                    <span class="todo">awsm gorillas</span>
                 </section>
 
             </section>
