@@ -8,138 +8,43 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <link rel="stylesheet" href="lib/reveal.js/css/reveal.css">
     <link rel="stylesheet" href="lib/reveal.js/css/theme/blood.css">
-    <link rel="stylesheet" href="styles/tomorrow-night-bright.css">
-    <style>
-        .reveal section img {
-            border: 0;
-            box-shadow: 0px 0px #000;
-            width: 40%;
-            background: none;
-        }
-
-        .reveal h1,
-        .reveal h2,
-        .reveal h3,
-        .reveal h4 {
-            text-transform: none;
-        }
-
-        .reveal blockquote {
-            box-shadow: 0px 0px #000;
-            display: block;
-            margin-top: 50px;
-        }
-
-        .reveal blockquote.small {
-            font-size: 0.7em;
-        }
-
-        .reveal blockquote:before {
-            position: absolute;
-            left: -10px;
-            color: #ccc;
-            font-size: 4em;
-            line-height: 0.1em;
-            margin-right: 0.25em;
-            vertical-align: -0.4em;
-        }
-
-        .reveal blockquote:before {
-            content: "\"";
-
-            font-family: Georgia, 'Times New Roman', Times, serif
-        }
-
-        .reveal blockquote cite {
-            font-size: 0.6em;
-        }
-
-        .reveal blockquote cite,
-        .reveal cite {
-            font-size: 0.7em;
-            display: block;
-            float: right;
-            padding-top: 60px;
-            color: yellow;
-        }
-
-        .reveal cite a {
-            color: yellow;
-        }
-
-        .reveal cite:before {
-            content: "\2014 \2009";
-        }
-
-        .reveal .white-slide,
-        .reveal .white-slide cite,
-        .reveal .white-slide cite a,
-        .reveal .white-slide h1 ,
-        .reveal .white-slide h2 ,
-        .reveal .white-slide h3 ,
-        .reveal .white-slide h4 ,
-        .reveal .white-slide h5 ,
-        .reveal .white-slide h6 {
-            color: #222 !important;
-        }
-    </style>
-    <style>
-
-        .emoji {
-            font-size: 2em !important;
-            text-align: center;
-        }
-
-        .todo {
-            display: block
-        }
-
-        .todo::before {
-            content: "TODO: ";
-            font-weight: bold;
-            color: black;
-            background-color: yellow;
-        }
-
-        pre code {
-            border-radius: 15px;
-            padding: 20px 35px !important;
-        }
-    </style>
+    <link rel="stylesheet" href="highlight-styles/tomorrow-night-bright.css">
+    <link rel="stylesheet" href="talk.css">
 </head>
 
 <body>
 
+    <!--
+        #### roter Faden
+        * what?
+        * why?
+            * javascript performance -> asm.js -> wasm
+        * how does it work in the browser?
+        * how to WASM from Rust
+        * examples examples examples
+    -->
     <div class="reveal">
         <div class="slides">
 
-            <section>
-                <h3>Rust Dresden</h3>
-                <img src="images/rust-logo-blk.svg" alt="rust logo" class="plain" style="width:30%">
-                <h2>WebAssembly</h2>
+            <section name="title">
+                <section>
+                    <h3>Rust Dresden</h3>
+                    <img src="images/rust-logo-blk.svg" alt="rust logo" class="plain" style="width:30%">
+                    <h2>WebAssembly</h2>
+                </section>
 
-            </section>
-            <!--
-            <section data-markdown>
-                #### roter Faden
-                * what?
-                * why?
-                    * javascript performance -> asm.js -> wasm
-                * how does it work in the browser?
-                * how to WASM from Rust
-                * examples examples examples
-
-            </section>
-            -->
-            <section>
-                <h3> WebAssembly </h3>
-                <h4> What is it
-                    <span class="fragment"> good for </span>
-                    <span class="fragment">?</span>
-                </h4>
+                <section>
+                    <h3> WebAssembly </h3>
+                    <h4> What is it
+                        <span class="fragment"> good for </span>
+                        ?
+                    </h4>
+                </section>
             </section>
 
             <section title="javascript performance" data-transition="concave">
+                <span class="chapter">preamble</span>
+
                 <section>
                     <h5> Background </h5>
                     <span class="fragment"> JavaScript </span>
@@ -149,21 +54,21 @@
                 <section>
                     Why do you use Javascript?
                     <ol>
-                        <li class="fragment">because it's convenient </li>
-                        <li class="fragment">because it's async </li>
-                        <li class="fragment">because it comes with every browser </li>
-                        <li class="fragment">Not because it's fast <span class="fragment">, it's not </span>
-                            <sup class="fragment">*</sup>
+                        <li class="fragment">✅ it's convenient </li>
+                        <li class="fragment">✅ it's async </li>
+                        <li class="fragment">✅ it comes with every browser </li>
+                        <li class="fragment">✅ competing implementations</li>
+                        <li class="fragment">💔 not because it's fast<span class="fragment">, it's not</span><sup class="fragment">*</sup>
                             <br> <small class="fragment">* native browser APIs don't count</small>
-                            <br> <small class="fragment"><small>**</small> jit vis allocations</small>
+                            <br> <small class="fragment"><small>**</small> jit vs allocations</small>
                         </li>
-                        <li class="fragment" data-state="white-slide">competing implementations</li>
                     </ol>
                 </section>
 
-                <section data-background-color="#ffffff"  data-transition="none" data-background-transition="slide" class="white-slide">
+                <section data-background-color="#ffffff"  data-transition=""="zoom" data-background-transition="zoom" class="white-slide">
                     <img
-                        src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-01-perf_graph05.png" />
+                        src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-01-perf_graph05.png"
+                        />
                     <br/>
                     <small>
                     <cite>
@@ -186,10 +91,10 @@
 
             </section>
 
-
-
-            <section title="from asm.js to wasm">
+            <section title="history: asm.js">
+                <span class="chapter">history: asm.js</span>
                 <section>
+
                     <h5>doing less</h5>
                     <h4> simplified JavaScript: <span class="fragment">asm.js</span> </h4>
                     <aside class="notes" data-markdown>
@@ -278,33 +183,36 @@
 
                     so we're compiling <strong class="fragment highlight-blue" >C</strong>
                     to <strong class="fragment highlight-red">JavaScript</strong>
-                    that looks something like <strong class="fragment highlight-current-blue" >C</strong>
-                    so that the JavaScript <strong class="fragment highlight-current-green">Engine</strong> can compile it in the Browser
+                    that looks something like <strong class="fragment highlight-blue" >C</strong>
+                    so that the JavaScript <strong class="fragment highlight-green">Engine</strong> can compile it in the Browser
 
                     <span class="fragment"> <strong>after</strong> it has been downloaded </span>
 
                 </section>
 
-                <section data-background-color="#ffffff" class="white-slide">
+            </section>
+
+            <section name="Introducing WebAssembly" data-background-color="#ffffff" class="white-slide">
+                <section>
                     <img src="images/web-assembly-logo.svg" alt="webassembly logo"/>
                 </section>
-                <!--
+
                 <section>
                     <h4> What Is WebAssembly? </h4>
-                    <blockquote>
-                        ...low-level, assembly-like language
-                    </blockquote>
 
                     <blockquote class="fragment">
                         ... a simple machine model and executable format with an
                         <a href="https://webassembly.github.io/spec/"> extensive specification </a> .
                         It is designed to be portable, compact, and
-                        execute at or near native speeds.
-                        <cite> <a href="https://rustwasm.github.io/book/what-is-webassembly.html"> what is webassembly
+                        execute at or near native speeds
+                    </blockquote>
+
+                    <blockquote class="fragment">
+                        ...low-level, assembly-like language
+                        <cite> <a href="https://rustwasm.github.io/book/what-is-webassembly.html"> rust wasm book
                             </a> </cite>
                     </blockquote>
                 </section>
-                -->
 
                 <!--
                 <section>
@@ -315,7 +223,11 @@
                     </blockquote>
                 </section>
                 -->
+            </section>
 
+
+            <section name="WebAssembly" data-background-color="#ffffff"  data-background-transition="none" class="white-slide">
+                <span class="chapter">WebAssembly</span>
                 <section name="faster" data-background-color="#ffffff" class="white-slide">
                     <aside class="notes" data-markdown>
                         #### Startup
@@ -345,12 +257,14 @@
                     </cite>
                 </section>
 
-                </section>
-                <section data-background-color="#ffffff" data-background-transition="slide" class="white-slide">
-                    Doing even less!
+            </section>
+
+
+            <section name="startup" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
+                <span class="chapter">WebAssembly Startup</span>
 
                 <section data-transition="none" data-background-color="#ffffff" data-background-transition="slide">
-                    <img src="images/05-01-diagram_now01-768x198.png" alt="" class="stretch fragment">
+                    <img src="images/05-01-diagram_now01-768x198.png" alt="" class="stretch">
                 </section>
                 <section data-transition="none" data-background-color="#ffffff" data-background-transition="slide">
                     <img src="images/05-03-diagram_future01-768x328.png" alt="" class="stretch">
@@ -370,140 +284,111 @@
                 <section data-transition="none" data-background-color="#ffffff" data-background-transition="slide">
                     <img src="images/05-08-diagram_compare06-768x314.png" alt="" class="stretch">
                 </section>
-                    <small><cite><a href="https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/">Lin Clark "What makes WebAssembly fast?"</a></cite></small>
-
-                <section data-markdown name="bonus">
-                    #### [BONUS]
-                    1. [a crash course in jit compilers ](https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/ )
-                    2. [A crash course in assembly ](https://hacks.mozilla.org/2017/02/a-crash-course-in-assembly/ )
-                    3. [Creating and working with WebAssembly modules
-                    ](https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/ )
-                    4. [What makes WebAssembly fast? ](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/ )
-                    5. [Where is WebAssembly now and what’s next? ](https://hacks.mozilla.org/?p=30522 )
-
-                    #### Portability
-                    TODO: https://webassembly.org/docs/portability/
-                    #### Semantics
-                    TODO: https://webassembly.org/docs/semantics/
-
-                </section>
-
-                <section>
-                    <span class="todo">WASM and GC Languages</span>
-                </section>
 
 
-
-            </section>
-
-
-
-            <section title="what can it do?" data-markdown data-separator-vertical="--SLIDE--">
-                ## what can it do?
-
-                available APIS?
-
-                everything that JavaScript has to offer (including WebGL)
-
-                --SLIDE--
-
-                ## what can it not do?
-                * SIMD ([yet](https://github.com/WebAssembly/simd))
-                * threads
-                ([yet](https://github.com/WebAssembly/threads)[?](https://www.chromestatus.com/features/5724132452859904))
-                * network udp<sup>*</sup>
-                * fs access<sup>*</sup>
-                * memory outside of the browser
-                * more precise timers<sup>*</sup>
-                * 64 bit
-
-                --SLIDE--
-
-                ## what is it good for?
-
-                * crypto
-                * audio/video/image edition
-                * computer vision
-                * high performance apps: CAD, Science, Games
-                * low latency apps: VR
-                * binary protocols, parsers
-                * emulation: Gameboy to x86
-                * [use cases...](https://webassembly.org/docs/use-cases/)
-
-
-                --SLIDE--
-
-                ## why doesn't it have `$X`?
-                It's [designed incrementally](https://webassembly.org/docs/rationale/) -> it's an
-                [MVP](https://webassembly.org/docs/mvp/)
-                * https://webassembly.org/docs/faq/
-                * https://webassembly.org/docs/future-features/module
-                * https://hacks.mozilla.org/2017/02/where-is-webassembly-now-and-whats-next/
-
-                --SLIDE--
-
-                ## Security
-                TODO: https://webassembly.org/docs/security/
-
-                ## Pros
-
-                * portablity (reuse your code 😒)
-                * better performance
-                * simpler language model
-                * precompiled, preoptimized
-                * fewer allocations
-                * [what makes WASM fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/)
-                * better languages
-                * strongly typed languages
-                * no GC
-                * better tooling
-
-                --SLIDE--
-
-                ## cons
-
-                * [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
-                * less transparency on the web
-                * possiblity for proprietary code in your browser
-                * binary size
-                * serialization
-
-                --SLIDE--
-
-                ## Is WASM vs JavaApplets or Flash
-
-                <small>
-                    * it's part of the browser<sup>*</sup>
-                    * not a plugin
-                    * not owned by other companies like flash or java
-                    * [standardized](https://webassembly.github.io/spec/)
-                    * runs in the javascript engine
-                    * secure: sandboxed just like javascript
-                    * low maintainance for browser vendors
-
+                <small class="bottom" >
+                    <cite><a href="https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/">Lin Clark "What makes WebAssembly fast?"</a></cite>
                 </small>
 
-                <cite>
-                    [kudos steve
-                    klabnik](https://words.steveklabnik.com/is-webassembly-the-return-of-java-applets-flash)
-                </cite>
+                <section name="bonus">
+                    <ol>
+                        <li><a href="https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/">
+                            A crash course in jit compilers </a></li>
+                        <li><a href="https://hacks.mozilla.org/2017/02/a-crash-course-in-assembly/">
+                            A crash course in assembly </a></li>
+                        <li><a href="https://hacks.mozilla.org/2017/02/creating-and-working-with-webassembly-modules/">
+                            Creating and working with WebAssembly modules</a></li>
+                        <li><a href="https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/">
+                            What makes WebAssembly fast? </a></li>
+                        <li><a href="https://hacks.mozilla.org/?p=30522">
+                            Where is WebAssembly now and what’s next? </a></li>
+                    </ol>
+
+                    <ul>
+                        <li class="todo">https://webassembly.org/docs/portability/ </li>
+                        <li class="todo">https://webassembly.org/docs/semantics/ </li>
+                    <li class="todo">WASM and GC Languages</li>
+                    </ul>
+
+                </section>
 
             </section>
 
-            <section title="where is it used">
-                <h2> Where is it used? </h2>
+
+            <section title="capabilities">
+                <span class="chapter">capabilities</span>
+
+                <section title="what can it do?">
+                    <h3>what can we do with it?</h3>
+
+                    <p class="fragment"> everything that JavaScript has to offer </p>
+                    <span class="fragment">including</span>
+                    <span class="fragment">WebGL</span><span class="fragment">,
+                        WebAudio</span><span class="fragment">,
+                        Canvas</span><span class="fragment">,
+                        everything you can access from JavaScript</span>
+                    </section>
+
+                <section title="what can it not do?">
+                    <h3> what can it not do? </h4>
+                    <dl>
+                        <dt class="fragment"> ⏳ not yet </dt>
+                        <dd class="fragment" > SIMD<sup><a href="https://github.com/WebAssembly/simd">*</a></sup>
+                        <dd class="fragment" > threads<sup><a href="https://github.com/WebAssembly/threads">*</a></sup><sup><a href=" https://www.chromestatus.com/features/5724132452859904 ">*</a></sup> </dd>
+                        <dd class="fragment" > 64 bit </dd>
+
+                        <dt class="fragment"> 🚫 not ever </dt>
+                        <dd class="fragment"> udp<sup><a href="https://new.gafferongames.com/post/why_cant_i_send_udp_packets_from_a_browser/">*</a></sup></dd>
+                        <dd class="fragment"> fs access </dd>
+                        <dd class="fragment"> more precise timers <a href="https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/"><sup>*</sup></a>
+                        <dd class="fragment"> everything you also couldn't do in JavaScript</dd>
+                    </dl>
+                </section>
+
+                <section title="what can it do?" data-markdown>
+                    ### what is it good for?
+
+                    * crypto
+                    * audio/video/image editing (<a href="https://people.xiph.org/~jm/demo/rnnoise/">rnnoise</a>)
+                    * computer vision
+                    * high performance apps: CAD, Science, Games
+                    * low latency apps: VR
+                    * binary protocols, parsers
+                    * emulation: Gameboy to x86
+                    * [use cases...](https://webassembly.org/docs/use-cases/)
+                    https://twitter.com/hoodie_de/status/1096865768258629632
+
+                </section>
+
+                <section>
+                </section>
+
+                <section title="why doesn't it have `$X`?" data-markdown>
+                    ### why doesn't it have `$X`?
+                    It's [designed incrementally](https://webassembly.org/docs/rationale/) -> it's an
+                    [MVP](https://webassembly.org/docs/mvp/)
+                    * https://webassembly.org/docs/faq/
+                    * https://webassembly.org/docs/future-features/module
+                    * https://hacks.mozilla.org/2017/02/where-is-webassembly-now-and-whats-next/
+
+                </section>
+            </section>
+
+            <section title="where is it already used">
+                <h3> Where is it already used? </h3>
                 <section>
                     <ol>
+                        <li class="fragment fade-up"> <a href="https://hacks.mozilla.org/2018/01/oxidizing-source-maps-with-rust-and-webassembly/ "> mozillas source-map library </a></li>
+                        <li class="fragment"><a href="https://web.autocad.com">web.autocad.com</a></li>
+                        <li class="fragment"><a href="https://blogs.unity3d.com/2018/08/15/webassembly-is-here/">Unity Web Target</a></li>
+                        <li class="fragment"><a href="https://wiki.qt.io/Qt_for_WebAssembly">Qt for WebAssembly</a></li>
+                        <li class="fragment"><a href="https://github.com/ethereum"> Etherium</a> </li>
+                        <li class="fragment"> <a href="https://webrtchacks.com/zoom-avoids-using-webrtc/">zoom.us (instead of WebRTC)</a> </li>
+                        <li class="fragment"> <a href="https://wasm.fastlylabs.com/">fastlylabs terrarium</a> </li>
                         <li class="fragment fade-up">
-                             <a href="https://hacks.mozilla.org/2018/01/oxidizing-source-maps-with-rust-and-webassembly/ "> mozillas source-map library </a>
+                            🤷🏼‍♀️ you might be using WebAssembly right now
+                            <a href="https://twitter.com/hoodie_de/status/1096865768258629632">🐦</a>
                         </li>
-                        <li class="fragment fade-up">
-                            <a href="https://webrtchacks.com/zoom-avoids-using-webrtc/">zoom.us (instead of WebRTC)</a>
-                        </li>
-                        <div class="fragment fade-up">
-                             🤷🏼‍♀️ who knows where else?
-                        </div>
-                        <div class="fragment fade-up"> <a href="https://twitter.com/hoodie_de/status/1096865768258629632">🐦</a> </div>
 
                     </ol>
                 </section>
@@ -560,7 +445,7 @@
 
                 <section>
                     <small><em>await!</em></small>
-                    <pre><code class="javascript">const object = await WebAssembly.instantiateStreaming(
+                    <pre><code class="javascript">const obj = await WebAssembly.instantiateStreaming(
     fetch('simple.wasm'),
     importObject
 );
@@ -613,35 +498,96 @@ console.dir(add(1,2)); // → 103</code></pre>
                 </section>
 
                 <section>
+                    <span class="todo"> RUST string example </span>
+                </section>
+
+                <section>
                     <span class="emoji">😀</span>
                     codegen to  the rescue
                 </section>
+
+                <section>
+                    <span class="emoji">🦀</span>
+                    Does it only work with Rust?
+                </section>
+
             </section>
 
-            <section>
+            <section name="wasm-bindgen">
                 <section>
                     <h4>introducing wasm-bindgen</h4>
-                    <span class="todo">rnnoise</span>
                     <span class="todo">awsm gorillas</span>
                 </section>
 
             </section>
 
+            <section name="discussion">
+                <span class="chapter">discussion</span>
+
+                <section title="what can it do?" data-markdown>
+                    ## Pros
+
+                    * portablity (reuse your code 😒)
+                    * better performance
+                    * simpler language model
+                    * precompiled, preoptimized
+                    * fewer allocations
+                    * [what makes WASM fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/)
+                    * better languages
+                    * strongly typed languages
+                    * no GC
+                    * better tooling
+
+                </section>
+
+                <section title="what can it do?" data-markdown>
+                    ## cons
+
+                    * [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
+                    * less transparency on the web
+                    * possiblity for proprietary code in your browser
+                    * binary size
+                    * serialization
+
+                </section>
+
+                <section title="what can it do?">
+                    <h3>Isn't WASM just like JavaApplets or Flash?</h3>
+                    <h1 class="fragment">no</h1>
+                    <blockquote class="fragment">
+                        <small data-markdown>
+                            * it's part of the browser<sup>*</sup>
+                            * not a plugin
+                            * not owned by other companies like flash or java
+                            * [standardized](https://webassembly.github.io/spec/)
+                            * runs in the javascript engine
+                            * secure: sandboxed just like javascript
+                            * low maintainance for browser vendors
+                        </small>
+                        <cite>
+                            <a href="https://words.steveklabnik.com/is-webassembly-the-return-of-java-applets-flash">kudos steve klabnik </a>
+                        </cite>
+                    </blockquote>
+
+
+                </section>
+
+            </section>
             <section name="conclusion">
                 <section>
                     <h4>Conclusion</h4>
                     <ul>
-                        <li>WebAssembly startup is faster</li>
-                    <li>only replace hot paths</li>
-                    <li>performance is better, but it's still a browser</li>
-                    <li>only port your full app if you have absolutely no other coice</li>
-                    <li></li>
-                    <li></li>
+                        <li>startup is and execution are much faster</li>
+                        <li>performance is better, but it's still a browser</li>
+                        <li>JavaScript lives on, only replace hot paths</li>
+                        <li>only port your full app if you have absolutely no other coice</li>
+                        <li>it's a standard</li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
                     </ul>
                 </section>
             </section>
-
-
 
             <section title="" data-markdown data-separator-vertical="--SLIDE--">
                 ...here be dragons
