@@ -26,7 +26,7 @@
     <div class="reveal">
         <div class="slides">
 
-            <section name="title">
+            <section id="title">
                 <section>
                     <h3>Rust Dresden</h3>
                     <img src="images/rust-logo-blk.svg" alt="rust logo" class="plain" style="width:30%">
@@ -42,7 +42,7 @@
                 </section>
             </section>
 
-            <section title="javascript performance" data-transition="concave">
+            <section id="javascript-performance" data-transition="concave">
                 <span class="chapter">preamble</span>
 
                 <section>
@@ -94,7 +94,7 @@
 
             </section>
 
-            <section title="history: asm.js">
+            <section id="history-asmjs">
                 <span class="chapter">history: asm.js</span>
                 <section>
 
@@ -196,7 +196,7 @@
 
             </section>
 
-            <section name="Introducing WebAssembly" data-background-color="#ffffff" class="white-slide">
+            <section id="introducing-webassembly" data-background-color="#ffffff" class="white-slide">
                 <section>
                     <img src="images/web-assembly-logo.svg" alt="webassembly logo"/>
                 </section>
@@ -230,9 +230,9 @@
             </section>
 
 
-            <section name="WebAssembly" data-background-color="#ffffff"  data-background-transition="none" class="white-slide">
+            <section id="webassembly-faster" data-background-color="#ffffff"  data-background-transition="none" class="white-slide">
                 <span class="chapter">WebAssembly</span>
-                <section name="faster" data-background-color="#ffffff" class="white-slide">
+                <section id="how-is-it-faster" data-background-color="#ffffff" class="white-slide">
                     <aside class="notes" data-markdown>
                         #### Startup
                         * download size, 10-20% smaller than gzipped
@@ -264,7 +264,7 @@
             </section>
 
 
-            <section name="startup" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
+            <section id="startup" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
                 <span class="chapter">WebAssembly Startup</span>
 
                 <section data-transition="none" data-background-color="#ffffff" data-background-transition="slide">
@@ -294,7 +294,7 @@
                     <cite><a href="https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/">Lin Clark "What makes WebAssembly fast?"</a></cite>
                 </small>
 
-                <section name="bonus">
+                <section id="bonus">
                     <ol>
                         <li><a href="https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/">
                             A crash course in jit compilers </a></li>
@@ -319,10 +319,10 @@
             </section>
 
 
-            <section title="capabilities">
+            <section id="wasm-capabilities">
                 <span class="chapter">capabilities</span>
 
-                <section title="what can it do?">
+                <section id="what can it do?">
                     <h3>what can we do with it?</h3>
                 
                     <p class="fragment"> everything that JavaScript has to offer</p>
@@ -340,23 +340,27 @@
                 
                 </section>
 
-                <section title="what can it not do?">
+                <section id="what-can-it-not-do">
                     <h4> what can it not do? </h4>
                     <dl>
                         <dt class="fragment"> ⏳ not yet </dt>
                         <dd class="fragment" > SIMD<sup><a href="https://github.com/WebAssembly/simd">*</a></sup><sup> <small><a href="https://twitter.com/DasSurma/status/1098915542608609280">🐦</a></small></sup></dd>
                         <dd class="fragment" > threads<sup><a href="https://github.com/WebAssembly/threads">*</a></sup><sup><a href=" https://www.chromestatus.com/features/5724132452859904">*</a></sup> </dd>
-                        <dd class="fragment" > 64 bit </dd>
+                        <dd class="fragment" > x64 binaries </dd>
 
                         <dt class="fragment"> 🚫 not ever </dt>
                         <dd class="fragment"> udp<sup><a href="https://new.gafferongames.com/post/why_cant_i_send_udp_packets_from_a_browser/">*</a></sup></dd>
                         <dd class="fragment"> syscalls: fs, clock, etc </dd>
                         <dd class="fragment"> more precise timers<a href="https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/"><sup>*</sup></a>
-                        <dd class="fragment"> everything you also couldn't do in JavaScript</dd>
+                        <dd class="fragment">
+                            <span class="fragment highlight-red"> everything you couldn't do</span><sup class="fragment"><a href="#wasm-isolation">*</a></sup>
+                            in JavaScript
+                        </dd>
+
                     </dl>
                 </section>
 
-                <section title="what can it do?">
+                <section id="what-can-it-do">
 
                     <dl class="small">
                         <dt class="fragment">Web, Binary</dt>
@@ -386,7 +390,7 @@
                 <section>
                 </section>
 
-                <section title="why doesn't it have `$X`?" data-markdown>
+                <section id="why-doesnt-it-have-x" data-markdown>
                     ### why doesn't it have `$X`?
                     It's [designed incrementally](https://webassembly.org/docs/rationale/) -> it's an
                     [MVP](https://webassembly.org/docs/mvp/)
@@ -397,7 +401,7 @@
                 </section>
             </section>
 
-            <section title="where is it already used">
+            <section id="where-is it-already-used">
                 <h3> Where is it already used? </h3>
                 <section>
                     <ol>
@@ -417,7 +421,7 @@
                 </section>
             </section>
 
-            <section title="How does it get into the browser">
+            <section id="how-does-it-get-into-the-browser">
                 <section>
                     <h2> How does it get into the browser? </h2>
 
@@ -536,7 +540,7 @@ console.dir(add(1,2)); // → 103</code></pre>
 
             </section>
 
-            <section name="wasm-bindgen">
+            <section id="wasm-bindgen">
                 <section>
                     <h4>introducing wasm-bindgen</h4>
                     <span class="todo">awsm gorillas</span>
@@ -544,10 +548,10 @@ console.dir(add(1,2)); // → 103</code></pre>
 
             </section>
 
-            <section name="discussion">
+            <section id="discussion">
                 <span class="chapter">discussion</span>
 
-                <section title="what can it do?" data-markdown>
+                <section id="what-can-it-do" data-markdown>
                     ## Pros
 
                     * portablity (reuse your code 😒)
@@ -563,7 +567,7 @@ console.dir(add(1,2)); // → 103</code></pre>
 
                 </section>
 
-                <section title="what can it do?" data-markdown>
+                <section id="what-can-it-do" data-markdown>
                     ## cons
 
                     * [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
@@ -574,7 +578,7 @@ console.dir(add(1,2)); // → 103</code></pre>
 
                 </section>
 
-                <section title="what can it do?">
+                <section id="wasm-vs-javaapplets-vs-flash">
                     <h3>Isn't WASM just like JavaApplets or Flash?</h3>
                     <h1 class="fragment">no</h1>
                     <blockquote class="fragment">
@@ -594,9 +598,9 @@ console.dir(add(1,2)); // → 103</code></pre>
 
 
                 </section>
-
             </section>
-            <section name="conclusion">
+
+            <section id="conclusion">
                 <section>
                     <h4>Conclusion</h4>
                     <ul>
@@ -612,16 +616,31 @@ console.dir(add(1,2)); // → 103</code></pre>
                 </section>
             </section>
 
-            <section>
-                <section>
+            <section id="bonus">
+                <section id="google-io17">
                     <iframe src="https://www.youtube.com/embed/6v4E6oksar0?start=627" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     <iframe src="https://www.youtube.com/embed/6v4E6oksar0?start=831" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </section>
+
+                <section id="wasm-isolation">
+                    <h4>WebAssembly for Isolation</h4>
+                    <ul>
+                        <li class="fragment">UNIX is unsafe</li>
+                        <li class="fragment">Binaries can open Files and NetworkSockets themselves</li>
+                        <li class="fragment">VMs or Docker?</li>
+                        <li class="fragment">JavaScript/wasm isolation model</li>
+                        <li class="fragment">CloudABI</li>
+                        <li class="fragment">WASMER</li>
+                        <li class="fragment"><a href="https://youtu.be/3N29vrPoDv8?t=979">CloudABI @ 32c3</a></li>
+                    </ul>
+                </section>
+
                 <section></section>
+
                 <section></section>
-                <section></section>
+
             </section>
-            <section title="" data-markdown data-separator-vertical="--SLIDE--">
+            <section id="here-be-dragons" data-markdown data-separator-vertical="--SLIDE--">
                 ...here be dragons
             </section>
 
