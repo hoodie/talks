@@ -5,13 +5,15 @@ extern crate wee_alloc;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 extern "C" {
-    // fn logger(output: i32);
+    fn logger_num(output: i32);
+    fn logger_str(output: &str);
 }
 
-// #[no_mangle]
-// pub unsafe fn speak() {
-//     logger(42);
-// }
+#[no_mangle]
+pub unsafe fn speak() {
+    logger_num(42);
+    logger_str("42");
+}
 
 #[no_mangle]
 pub fn add(a: i32, b: i32) -> i32 {

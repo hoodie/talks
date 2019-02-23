@@ -6,18 +6,21 @@
     <script>
         const dec = new TextDecoder('utf-8');
         (async () => {
-            importObject = {
+            const importObject = {
                 env: {
-                    logger: (str) => console.info(str)
+                    logger_num: (num) => console.info('logger_num', num),
+                    logger_str: (str) => console.warn('logger_str', str),
                 },
             };
 
-            let { add, speak }  = await fetch('rust-lib-snipped.wasm')
-                .then(response => response.arrayBuffer())
-                .then(bytes => WebAssembly.instantiate(bytes, importObject))
-                .then(result => result.instance.exports);
+            let { add, speak }  = await fetch('rust-lib.wasm')
+                    .then(response => response.arrayBuffer())
+                    .then(bytes => WebAssembly.instantiate(bytes, importObject))
+                    .then(result => result.instance.exports);
 
-            console.dir(add(1,2));
+
+            console.dir('add(1,2)', add(1,2)); // 103
+            speak(); // 42, 1048576 
         })()
     </script>
 </head>
