@@ -57,11 +57,10 @@
                         <li class="fragment">✅ it's convenient </li>
                         <li class="fragment">✅ it's async </li>
                         <li class="fragment">✅ it comes with every browser </li>
-                        <li class="fragment">✅ competing implementations</li>
                         <li class="fragment">💔 not because it's fast<span class="fragment">, it's not</span><sup class="fragment">*</sup>
                             <br> <small class="fragment">* native browser APIs don't count</small>
-                            <br> <small class="fragment"><small>**</small> jit vs allocations</small>
                         </li>
+                        <li class="fragment">✅ competing implementations</li>
                     </ol>
                 </section>
 
@@ -86,6 +85,10 @@
                         <a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">Lin Clark "A cartoon intro to WebAssembly"</a>
                     </cite>
                     </small>
+                </section>
+
+                <section data-background-color="#ffffff" data-transition="none" data-background-transition="none" class="white-slide">
+                    <img src="images/05-01-diagram_now01-768x198.png" alt="" class="stretch">
                 </section>
 
 
@@ -164,6 +167,7 @@
                         * needs to be parsed
                             * full JavaScript syntax
                             * some weird corners remain
+                        * still technically GC
                     </aside>
 
                     <h3>limitations of asm.js</h3>
@@ -320,44 +324,63 @@
 
                 <section title="what can it do?">
                     <h3>what can we do with it?</h3>
-
-                    <p class="fragment"> everything that JavaScript has to offer </p>
-                    <span class="fragment">including</span>
-                    <span class="fragment">WebGL</span><span class="fragment">,
-                        WebAudio</span><span class="fragment">,
-                        Canvas</span><span class="fragment">,
-                        everything you can access from JavaScript</span>
-                    </section>
+                
+                    <p class="fragment"> everything that JavaScript has to offer</p>
+                    <p>
+                        <span class="fragment">including</span>
+                        <span class="fragment">WebGL</span><span class="fragment">,
+                            WebAudio</span><span class="fragment">,
+                            Canvas</span><span class="fragment">,
+                            everything you can access from JavaScript</span>
+                    </p>
+                
+                    <p>
+                        <strong class="fragment">Can JavaApplets, flash or NAcl do that?</strong>
+                    </p>
+                
+                </section>
 
                 <section title="what can it not do?">
-                    <h3> what can it not do? </h4>
+                    <h4> what can it not do? </h4>
                     <dl>
                         <dt class="fragment"> ⏳ not yet </dt>
-                        <dd class="fragment" > SIMD<sup><a href="https://github.com/WebAssembly/simd">*</a></sup>
-                        <dd class="fragment" > threads<sup><a href="https://github.com/WebAssembly/threads">*</a></sup><sup><a href=" https://www.chromestatus.com/features/5724132452859904 ">*</a></sup> </dd>
+                        <dd class="fragment" > SIMD<sup><a href="https://github.com/WebAssembly/simd">*</a></sup><sup> <small><a href="https://twitter.com/DasSurma/status/1098915542608609280">🐦</a></small></sup></dd>
+                        <dd class="fragment" > threads<sup><a href="https://github.com/WebAssembly/threads">*</a></sup><sup><a href=" https://www.chromestatus.com/features/5724132452859904">*</a></sup> </dd>
                         <dd class="fragment" > 64 bit </dd>
 
                         <dt class="fragment"> 🚫 not ever </dt>
                         <dd class="fragment"> udp<sup><a href="https://new.gafferongames.com/post/why_cant_i_send_udp_packets_from_a_browser/">*</a></sup></dd>
-                        <dd class="fragment"> fs access </dd>
-                        <dd class="fragment"> more precise timers <a href="https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/"><sup>*</sup></a>
+                        <dd class="fragment"> syscalls: fs, clock, etc </dd>
+                        <dd class="fragment"> more precise timers<a href="https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/"><sup>*</sup></a>
                         <dd class="fragment"> everything you also couldn't do in JavaScript</dd>
                     </dl>
                 </section>
 
-                <section title="what can it do?" data-markdown>
-                    ### what is it good for?
+                <section title="what can it do?">
 
-                    * crypto
-                    * audio/video/image editing (<a href="https://people.xiph.org/~jm/demo/rnnoise/">rnnoise</a>)
-                    * computer vision
-                    * high performance apps: CAD, Science, Games
-                    * low latency apps: VR
-                    * binary protocols, parsers
-                    * emulation: Gameboy to x86
-                    * [use cases...](https://webassembly.org/docs/use-cases/)
-                    https://twitter.com/hoodie_de/status/1096865768258629632
+                    <dl class="small">
+                        <dt class="fragment">Web, Binary</dt>
+                        <dd class="fragment">Crypto</dd>
+                        <dd class="fragment">Audio<sup><a href="https://people.xiph.org/~jm/demo/rnnoise/" class="fragment">*</a></sup>/Video/Image Processing</dd>
+                        <dd class="fragment">Computer vision </dd>
+                        <dd class="fragment">Binary protocols, parsers </dd>
+                        <dd class="fragment">Emulation: Gameboy to x86 </dd>
 
+                        <dt class="fragment">Web, High Performance</dt>
+                        <dd class="fragment">CAD, Science, Games</dd>
+                        <dd class="fragment">Low latency apps: VR </dd>
+
+                        <dt class="fragment">As a VM</dt>
+                        <dd class="fragment"><a href="https://www.wasmjit.org/">wasmjit</a> or <a href="https://wasmer.io/">wasmer</a></dd>
+
+                        <dt class="fragment">in the <span class="emoji">☁️</span></dt>
+                        <dd class="fragment"><a href="https://nuxi.nl/">CloudABI</a></dd>
+                        <dd class="fragment"><a href="https://blog.cloudflare.com/webassembly-on-cloudflare-workers/">on cloudflare workers</a></dd>
+                        <dd class="fragment"><a href="https://blog.scottlogic.com/2018/10/18/serverless-rust.html">in AWS Lambda</a><sup><a href="https://crates.io/crates/lambda_runtime" title="official aws rust runtime">*</a></sup></dd>
+
+                        <dt class="fragment">More</dt>
+                        <dd class="fragment"><a href="https://twitter.com/hoodie_de/status/1096865768258629632 ">even</a> <a href="https://webassembly.org/docs/use-cases/" class="fragment">moar</a></dd>
+                    </dl>
                 </section>
 
                 <section>
@@ -589,6 +612,15 @@ console.dir(add(1,2)); // → 103</code></pre>
                 </section>
             </section>
 
+            <section>
+                <section>
+                    <iframe src="https://www.youtube.com/embed/6v4E6oksar0?start=627" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/6v4E6oksar0?start=831" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </section>
+                <section></section>
+                <section></section>
+                <section></section>
+            </section>
             <section title="" data-markdown data-separator-vertical="--SLIDE--">
                 ...here be dragons
             </section>
