@@ -421,21 +421,56 @@
                 </section>
             </section>
 
+            <section id="building-wasm">
+                <span class="chapter">building WebAssembly</span>
+
+                <section id="compile-to-wasm" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
+                    <img src=" https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png" class="stretch">
+                </section>
+
+                <section id="using-emsdk" data-background-color="#ffffff">
+                    <p>
+                    <img src="images/Emscripten_logo_full.png" alt="emscripten logo">
+                    </p>
+                    <ul>
+                        <li><a href="https://emscripten.org/">compile with emsdk etc</a> </li>
+                        <li class="fragment"><a href="https://people.xiph.org/~jm/demo/rnnoise/">e.g. RNNoise Demo</a></li>
+                    </ul>
+                    
+                </section>
+
+
+                <section id="webassembly-studio">
+                    <h4>WebAssembly Studio</h4>
+                    <img src="images/WebAssemblyStudio.png" alt="WebAssemblyStudio" class="stretch">
+                </section>
+
+
+                <section id="assemblyscript">
+                    <a href="https://github.com/AssemblyScript">
+                        <img src="images/assemblyscript.svg" alt="AssemblyScript logo" class="stretch">
+                    </a>
+                    <h4> Assembly Script</h4>
+                    <p class="fragment">almost but not quite entirely unlike <a href="http://typescriptlang.org/">TypeScript</a></p>
+                </section>
+
+                <section id="rust-for-webassembly">
+                    <a href="https://rustwasm.github.io/"><img src="images/rustwasm.svg" alt="rust wasm"></a>
+                    <h4>Rust for WebAssembly</h4>
+                    <ul>
+                        <li class="fragment">great <a href="https://rustwasm.github.io/wasm-bindgen/">documentation</a> and <a href="https://docs.rs/web-sys/">bindings</a></li>
+                        <li class="fragment">best language</li>
+                    </ul>
+                </section>
+
+            </section>
+
             <section id="browser-api">
                 <span class="chapter">browser API</span>
                 <section id="how-does-it-get-into-the-browser">
                     <h2> How does it get into the browser? </h2>
 
                 </section>
-
-                <section id="startup" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
-                    <h2> compile to <code>.wasm</code> ... </h2>
-                    <img
-                        src=" https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png">
-                    <br />
-                    <small class="fragment grow">not in scope</small>
-                </section>
-
                 <section>
                         <pre><code class="html">
 &lt;html&gt;
@@ -456,16 +491,16 @@
                     </ol>
 
 
-                    <cite class="fragment"> <a href="https://webassembly.org/getting-started/js-api/">webassembly.org</a> </cite>
                     <div class="fragment emoji">🤯</div>
+                    <cite > <a href="https://webassembly.org/getting-started/js-api/">webassembly.org</a> </cite>
                 </section>
 
                 <section>
                     <small><em>modules by hand</em></small>
                     <pre><code class="javascript">fetch('simple.wasm')
-.then(response => response.arrayBuffer())
-.then(bytes => WebAssembly.instantiate(bytes, importObject))
-.then(results => results.instance.exports.exported_func());</code></pre>
+    .then(response => response.arrayBuffer())
+    .then(bytes => WebAssembly.instantiate(bytes, {}))
+    .then(results => results.instance.exports);</code></pre>
                     <cite> <a
                             href="https://developer.mozilla.org/en-US/docs/WebAssembly/Loading_and_running#Using_Fetch">mdn</a>
                     </cite>
@@ -510,8 +545,12 @@ obj.instance.exports.exported_func();</code></pre>
                     </span>
                 </section>
 
+                <section>
+                    <img src="images/happy.svg" alt="jumping ferris"/>
+                </section>
+
                 <section id="raw-rust-example" >
-                    <h4> 🦀 Rust exposing a c-like interface </h4>
+                    <h4> exposing a c-like interface <img src="images/shy.svg" alt="shy ferris" style="width:2em;vertical-align: bottom;margin-left:-4em;"> </h4>
                     <pre><code class="rust">#[no_mangle]
 pub fn add(a: i32, b: i32) -> i32 {
     a + b + 100
@@ -526,7 +565,9 @@ console.dir(add(1,2)); // → 103</code></pre>
                 </section>
 
                 <section>
-                    <h4>ffi safety</h4>
+                    <h4>
+                        ffi safety<img src="images/hang.svg" alt="fallen over ferris" style="width:1em; vertical-align: top; margin-top:0.5em;margin-left:-3em;margin-bottom:-0.5em">
+                    </h4>
                     <pre><code class="javascript">const importObject = { env: {
     logger_num: (num) => console.info('logger_num', num),
     logger_str: (str) => console.warn('logger_str', str),
@@ -546,62 +587,32 @@ pub unsafe fn speak() {
                 </section>
 
                 <section>
-                    <span class="emoji">😀</span>
+                    <img src="images/jump.svg" alt="jumping ferris"/>
+                    <p>
                     codegen to  the rescue
+                    </p>
                 </section>
 
             </section>
 
-            <section id="building-wasm">
-                <span class="chapter">building WebAssembly</span>
-
-                <section id="using-emsdk" data-background-color="#ffffff">
-                    <img src="images/Emscripten_logo_full.png" alt="emscripten logo">
-                    <h4>Use <a href="https://emscripten.org/">emscripten</a> </h4>
-                    <ul>
-                        <li class="fragment"><a href="https://people.xiph.org/~jm/demo/rnnoise/">e.g. RNNoise Demo</a></li>
-                    </ul>
-                    
-                </section>
-
-
-                <section id="webassembly-studio">
-                    <h4>WebAssembly Studio</h4>
-                    <img src="images/WebAssemblyStudio.png" alt="WebAssemblyStudio" class="stretch">
-                </section>
-
-
-                <section id="assemblyscript">
-                    <a href="https://github.com/AssemblyScript">
-                        <img src="images/assemblyscript.svg" alt="AssemblyScript logo" class="stretch">
-                    </a>
-                    <h4> Assembly Script</h4>
-                    <p class="fragment">almost but not quite entirely unlike <a href="http://typescriptlang.org/">TypeScript</a></p>
-                </section>
-
-
-                <section id="rust-wasm">
-                    <a href="https://rustwasm.github.io/"><img src="images/rustwasm.svg" alt="rust wasm"></a>
-                    <h4>Rust for WebAssembly</h4>
-                    <ul>
-                        <li class="frament">great <a href="https://rustwasm.github.io/wasm-bindgen/">documentation</a> and <a href="https://docs.rs/web-sys/">bindings</a></li>
-                    </ul>
-                </section>
-
+            <section>
 
                 <section id="rustwasm">
-                    <h4>rustwasm toolbox<sup><a href="https://rustwasm.github.io/book/introduction.html">*</a></sup> </h4>
+                    <h4>
+                        <img src="images/hello.svg" alt="hello ferris" style="width:1.8em; vertical-align: middle; margin-right:-1em;">
+                        rustwasm toolbox<sup><a href="https://rustwasm.github.io/book/introduction.html">*</a></sup> </h4>
                     <ul>
-                        <li>wasm-bindgen</li>
-                        <li>web-sys & js-sys</li>
-                        <li>wasm-pack</li>
-                        <li>twiggy, wee_alloc, wasm-snip, wabt, binaryen</li>
+                        <li class="fragment highlight-current-green">wasm-bindgen</li>
+                        <li class="fragment highlight-current-green">web-sys & js-sys</li>
+                        <li class="fragment highlight-current-green">wasm-pack</li>
+                        <li class="fragment highlight-current-green">twiggy, wee_alloc, wasm-snip, wabt, binaryen</li>
                     </ul>
 
-                    <p>
+                    <cite>
                         <a href="https://rustwasm.github.io/sfhtml5-rust-and-wasm/#1">@fixgen</a>
+                        and
                         <a href="https://rustwasm.github.io/hello-wasm-bindgen/#1">@ag_dubs</a>
-                    </p>
+                    </cite>
                 </section>
 
                 <section id="wasm-bindgen">
@@ -738,6 +749,10 @@ pub fn run() -> Result<(), JsValue> {
                         <li class="fragment highlight-current-blue">it's still a browser, you will get better performance but no new capabilities</li>
                     </ul>
                 </section>
+
+                <section>
+                    <img src="images/happy.svg" alt="waving ferris">
+                </section>
             </section>
 
             <section id="bonus">
@@ -777,13 +792,6 @@ pub fn run() -> Result<(), JsValue> {
 
 
             </section>
-            <section id="here-be-dragons" data-markdown data-separator-vertical="--SLIDE--">
-                ...here be dragons
-            </section>
-
-
-            <section data-markdown="talk.md" data-separator="--SECTION--" data-separator-vertical="--SLIDE--"
-                data-separator-notes="^Note:" data-leadingws="16"></section>
 
         </div>
     </div>
