@@ -510,34 +510,44 @@ obj.instance.exports.exported_func();</code></pre>
                     </span>
                 </section>
 
-                <section>
+                <section id="raw-rust-example" >
                     <h4> 🦀 Rust exposing a c-like interface </h4>
                     <pre><code class="rust">#[no_mangle]
 pub fn add(a: i32, b: i32) -> i32 {
     a + b + 100
 }</code></pre>
 <pre><code class="javascript">// import { add } from 'rust-lib.wasm';
-const { add }  =
-    await fetch('rust-lib.wasm')
-        .then(response => response.arrayBuffer())
-        .then(bytes => WebAssembly.instantiate(bytes))
-        .then(result => result.instance.exports);
+const { add } = await fetch('rust-lib.wasm')
+    .then(response => response.arrayBuffer())
+    .then(bytes => WebAssembly.instantiate(bytes))
+    .then(result => result.instance.exports);
 
 console.dir(add(1,2)); // → 103</code></pre>
                 </section>
 
                 <section>
-                    <span class="todo"> RUST string example </span>
+                    <h4>ffi safety</h4>
+                    <pre><code class="javascript">const importObject = { env: {
+    logger_num: (num) => console.info('logger_num', num),
+    logger_str: (str) => console.warn('logger_str', str),
+}}</code></pre>
+
+                    <pre><code class="rust">extern "C" {
+    fn logger_num(output: i32);
+    fn logger_str(output: &str);
+}
+
+#[no_mangle]
+pub unsafe fn speak() {
+    logger_num(42); // 42
+    logger_str("42"); // 1048576 ????
+}</code></pre>
+
                 </section>
 
                 <section>
                     <span class="emoji">😀</span>
                     codegen to  the rescue
-                </section>
-
-                <section>
-                    <span class="emoji">🦀</span>
-                    Does it only work with Rust?
                 </section>
 
             </section>
