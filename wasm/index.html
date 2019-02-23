@@ -421,13 +421,14 @@
                 </section>
             </section>
 
-            <section id="how-does-it-get-into-the-browser">
-                <section>
+            <section id="browser-api">
+                <span class="chapter">browser API</span>
+                <section id="how-does-it-get-into-the-browser">
                     <h2> How does it get into the browser? </h2>
 
                 </section>
 
-                <section>
+                <section id="startup" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
                     <h2> compile to <code>.wasm</code> ... </h2>
                     <img
                         src=" https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png">
@@ -515,11 +516,12 @@ obj.instance.exports.exported_func();</code></pre>
 pub fn add(a: i32, b: i32) -> i32 {
     a + b + 100
 }</code></pre>
-<pre><code class="javascript">const { exports: { add } }  =
+<pre><code class="javascript">// import { add } from 'rust-lib.wasm';
+const { add }  =
     await fetch('rust-lib.wasm')
         .then(response => response.arrayBuffer())
         .then(bytes => WebAssembly.instantiate(bytes))
-        .then(result => result.instance);
+        .then(result => result.instance.exports);
 
 console.dir(add(1,2)); // → 103</code></pre>
                 </section>
@@ -540,10 +542,127 @@ console.dir(add(1,2)); // → 103</code></pre>
 
             </section>
 
-            <section id="wasm-bindgen">
-                <section>
-                    <h4>introducing wasm-bindgen</h4>
-                    <span class="todo">awsm gorillas</span>
+            <section id="building-wasm">
+                <span class="chapter">building WebAssembly</span>
+
+                <section id="using-emsdk" data-background-color="#ffffff">
+                    <img src="images/Emscripten_logo_full.png" alt="emscripten logo">
+                    <h4>Use <a href="https://emscripten.org/">emscripten</a> </h4>
+                    <ul>
+                        <li class="fragment"><a href="https://people.xiph.org/~jm/demo/rnnoise/">e.g. RNNoise Demo</a></li>
+                    </ul>
+                    
+                </section>
+
+
+                <section id="webassembly-studio">
+                    <h4>WebAssembly Studio</h4>
+                    <img src="images/WebAssemblyStudio.png" alt="WebAssemblyStudio" class="stretch">
+                </section>
+
+
+                <section id="assemblyscript">
+                    <a href="https://github.com/AssemblyScript">
+                        <img src="images/assemblyscript.svg" alt="AssemblyScript logo" class="stretch">
+                    </a>
+                    <h4> Assembly Script</h4>
+                    <p class="fragment">almost but not quite entirely unlike <a href="http://typescriptlang.org/">TypeScript</a></p>
+                </section>
+
+
+                <section id="rust-wasm">
+                    <a href="https://rustwasm.github.io/"><img src="images/rustwasm.svg" alt="rust wasm"></a>
+                    <h4>Rust for WebAssembly</h4>
+                    <ul>
+                        <li class="frament">great <a href="https://rustwasm.github.io/wasm-bindgen/">documentation</a> and <a href="https://docs.rs/web-sys/">bindings</a></li>
+                    </ul>
+                </section>
+
+
+                <section id="rustwasm">
+                    <h4>rustwasm toolbox<sup><a href="https://rustwasm.github.io/book/introduction.html">*</a></sup> </h4>
+                    <ul>
+                        <li>wasm-bindgen</li>
+                        <li>web-sys & js-sys</li>
+                        <li>wasm-pack</li>
+                        <li>twiggy, wee_alloc, wasm-snip, wabt, binaryen</li>
+                    </ul>
+
+                    <p>
+                        <a href="https://rustwasm.github.io/sfhtml5-rust-and-wasm/#1">@fixgen</a>
+                        <a href="https://rustwasm.github.io/hello-wasm-bindgen/#1">@ag_dubs</a>
+                    </p>
+                </section>
+
+                <section id="wasm-bindgen">
+                    <h4>wasm-bindgen<sup><a href="https://rustwasm.github.io/book/introduction.html">📕</a></sup></h4>
+                    <pre><code class="rust">use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+extern "C" {
+    fn alert(s: &str);
+}
+
+#[wasm_bindgen]
+pub fn greet(name: &str) {
+    alert(&format!("Hello, {}!", name));
+}</code></pre>
+
+                </section>
+
+                <section id="wasm-bindgen-classes">
+                    <h4>wasm-bindgen: exporting classes</h4>
+<pre><code class="rust">#[wasm_bindgen]
+pub struct Foo {
+    contents: u32,
+}
+#[wasm_bindgen]
+impl Foo {
+    #[wasm_bindgen(constructor)]
+    pub fn new() -> Foo {
+        Foo { contents: 0 }
+    }
+
+    pub fn get_contents(&self) -> u32 {
+        self.contents
+    }
+}</code></pre>
+<pre><code class="rust">import { Foo } from './my_module';
+const f = new Foo();
+console.log(f.get_contents());</code></pre>
+                </section>
+
+                <section id="web-sys">
+                    <aside class="notes" data-markdown>
+                        * DOM Apis and JavaScript builtins
+                    </aside>
+
+                    <h4>web-sys<sup><a href="https://rustwasm.github.io/wasm-bindgen/web-sys/index.html">📕</a></sup>
+                        / js-sys<sup><a href="https://rustwasm.github.io/wasm-bindgen/contributing/js-sys/index.html">📕</a></sup>
+                    </h4>
+                    <pre><code class="rust">#[wasm_bindgen(start)]
+pub fn run() -> Result<(), JsValue> {
+    let window = web_sys::window().unwrap();
+    let document = window.document().unwrap();
+    let body = document.body().unwrap();
+
+    let val = document.create_element("p")?;
+    val.set_inner_html("Hello from Rust!");
+
+    body.append_child(&val)?;
+
+    Ok(())
+}</code></pre>
+                </section>
+
+                <section id="wasm-pack">
+                    <h4>wasm-pack<sup><a href="https://rustwasm.github.io/wasm-pack/book/">📕</a></sup></h4>
+                    <img src="https://raw.githubusercontent.com/rustwasm/wasm-pack/master/demo.gif" alt="wasm-pack demo" class="stretch">
+                </section>
+
+                <section id="aswm-gorillas-demo">
+                    <h4>AWSM-Gorillas</h4>
+                        <p class="frament"><a href="http://naubino.de/awsm-gorillas/">STOP! Demo Time</a></p>
                 </section>
 
             </section>
@@ -551,51 +670,48 @@ console.dir(add(1,2)); // → 103</code></pre>
             <section id="discussion">
                 <span class="chapter">discussion</span>
 
-                <section id="what-can-it-do" data-markdown>
+                <section id="discussion-pros" data-markdown class="small">
                     ## Pros
 
-                    * portablity (reuse your code 😒)
                     * better performance
-                    * simpler language model
-                    * precompiled, preoptimized
-                    * fewer allocations
-                    * [what makes WASM fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/)
-                    * better languages
-                    * strongly typed languages
-                    * no GC
-                    * better tooling
+                        * simpler language model
+                        * precompiled, preoptimized
+                        * fewer allocations
+                        * [what makes WASM fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/)
+                        * no GC
+                    * target for existing native code (reuse your code 😒)
+                    * strong isolation model
+                    * new languages on the web
+                        * better tooling
+                    * strongly typed
 
                 </section>
 
-                <section id="what-can-it-do" data-markdown>
+                <section id="discussion-cons" data-markdown class="small">
                     ## cons
 
-                    * [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
+                    * some weirdness [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
                     * less transparency on the web
-                    * possiblity for proprietary code in your browser
-                    * binary size
-                    * serialization
-
+                        * possiblity for proprietary code in your browser
                 </section>
 
                 <section id="wasm-vs-javaapplets-vs-flash">
-                    <h3>Isn't WASM just like JavaApplets or Flash?</h3>
-                    <h1 class="fragment">no</h1>
-                    <blockquote class="fragment">
-                        <small data-markdown>
-                            * it's part of the browser<sup>*</sup>
-                            * not a plugin
-                            * not owned by other companies like flash or java
-                            * [standardized](https://webassembly.github.io/spec/)
-                            * runs in the javascript engine
-                            * secure: sandboxed just like javascript
-                            * low maintainance for browser vendors
-                        </small>
+                    <h3>Isn't WASM just like JavaApplets or Flash? <strong class="fragment">no</strong></h3>
+                    <blockquote class="fragment small">
+                            <ul>
+                                <li>it's part of the browser*</li>
+                                <li>not a plugin</li>
+                                <li>not owned by other companies like flash or java</li>
+                                <li><a href="https://webassembly.github.io/spec/">standardized</a></li>
+                                <li>runs in the javascript engine</li>
+                                <li>secure: sandboxed just like javascript</li>
+                                <li>low maintainance for browser vendors</li>
+                            </ul>
                         <cite>
-                            <a href="https://words.steveklabnik.com/is-webassembly-the-return-of-java-applets-flash">kudos steve klabnik </a>
+                            <a href="https://words.steveklabnik.com/is-webassembly-the-return-of-java-applets-flash">kudos steve klabnik
+                            </a>
                         </cite>
                     </blockquote>
-
 
                 </section>
             </section>
@@ -603,23 +719,32 @@ console.dir(add(1,2)); // → 103</code></pre>
             <section id="conclusion">
                 <section>
                     <h4>Conclusion</h4>
-                    <ul>
-                        <li>startup is and execution are much faster</li>
-                        <li>performance is better, but it's still a browser</li>
-                        <li>JavaScript lives on, only replace hot paths</li>
-                        <li>only port your full app if you have absolutely no other coice</li>
-                        <li>it's a standard</li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                    <ul class="small">
+                        <li class="fragment highlight-current-blue">WebAssembly is the new hot sh*t</li>
+                        <li class="fragment highlight-current-blue">startup is and execution are much faster</li>
+                        <li class="fragment highlight-current-blue">it's a standard <small class="fragment">(unlike asm.js, Flash, JavaApplets or NaCL)</small></li>
+                        <li class="fragment highlight-current-blue">it's not just for the Web <small class="fragment">(see e.g. CloudABI)</small></li>
+                        <li class="fragment highlight-current-blue">JavaScript lives on</li>
+                        <li class="fragment highlight-current-blue">it's still a browser, you will get better performance but no new capabilities</li>
                     </ul>
                 </section>
             </section>
 
             <section id="bonus">
-                <section id="google-io17">
-                    <iframe src="https://www.youtube.com/embed/6v4E6oksar0?start=627" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <iframe src="https://www.youtube.com/embed/6v4E6oksar0?start=831" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <span class="chapter">bonus</span>
+
+                <section id="rust-wasm-binary-size">
+                    <h4>binary sizes</h4>
+                    <dl>
+                        <dt>binaryen<a href="https://github.com/WebAssembly/binaryen">🔗</a></dt>
+                        <dd>wasm-opt</dd>
+                        <dt>wabt<a href="https://github.com/WebAssembly/wabt">🔗</a></dt>
+                        <dd>wasm-strip</dd>
+                        <dt>rust wasm</dt>
+                        <dd><a href="https://github.com/rustwasm/wee_alloc">wee_alloc</a></dd>
+                        <dd><a href="https://github.com/rustwasm/twiggy">twiggy</a> wasm size profiler</dd>
+                        <dd><a href="https://github.com/rustwasm/wasm-snip">wasm-snip</a> replace functions with <code>unreachable</code></dd>
+                    </dl>
                 </section>
 
                 <section id="wasm-isolation">
@@ -635,9 +760,11 @@ console.dir(add(1,2)); // → 103</code></pre>
                     </ul>
                 </section>
 
-                <section></section>
+                <section id="google-io17">
+                    <iframe src="https://www.youtube.com/embed/6v4E6oksar0?start=627" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/6v4E6oksar0?start=831" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </section>
 
-                <section></section>
 
             </section>
             <section id="here-be-dragons" data-markdown data-separator-vertical="--SLIDE--">

@@ -103,3 +103,9 @@ pre code {
 .reveal .bottom {
     margin-top: 59%;
 }
+
+.reveal img.logo {
+   width: 2em;
+   vertical-align: bottom;
+    
+}
