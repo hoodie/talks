@@ -2,6 +2,8 @@
 rm -rf gadgets* module
 mkdir module
 
+export GADGETS_BUILD_DATE=$(date)
+
 WASM_BIN=target/wasm32-unknown-unknown/release/gadgets.wasm
 JAVASCRIPT_GEN_BIN=module/gadgets.js
 WASM_GEN_BIN=module/gadgets_bg.wasm

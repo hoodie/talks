@@ -50,6 +50,11 @@
         let varg0 = getStringFromWasm(arg0, arg1);
         alert(varg0);
     };
+
+    __exports.__wbg_info_df0c2aef072cccfb = function(arg0, arg1) {
+        let varg0 = getStringFromWasm(arg0, arg1);
+        console.info(varg0);
+    };
     /**
     * @param {string} arg0
     * @returns {void}
@@ -92,6 +97,13 @@
 
         }
 
+    };
+
+    /**
+    * @returns {void}
+    */
+    __exports.main = function() {
+        return wasm.main();
     };
 
     function freePerson(ptr) {
@@ -165,7 +177,7 @@
     }
     return instantiation.then(({instance}) => {
         wasm = init.wasm = instance.exports;
-
+        wasm.__wbindgen_start();
     });
 };
 self.wasm_bindgen = Object.assign(init, __exports);
