@@ -3,7 +3,7 @@
     const __exports = {};
 
 
-    let cachedTextEncoder = new TextEncoder('utf-8');
+    let cachedTextDecoder = new TextDecoder('utf-8');
 
     let cachegetUint8Memory = null;
     function getUint8Memory() {
@@ -13,37 +13,8 @@
         return cachegetUint8Memory;
     }
 
-    let WASM_VECTOR_LEN = 0;
-
-    function passStringToWasm(arg) {
-
-        const buf = cachedTextEncoder.encode(arg);
-        const ptr = wasm.__wbindgen_malloc(buf.length);
-        getUint8Memory().set(buf, ptr);
-        WASM_VECTOR_LEN = buf.length;
-        return ptr;
-    }
-
-    let cachedTextDecoder = new TextDecoder('utf-8');
-
     function getStringFromWasm(ptr, len) {
         return cachedTextDecoder.decode(getUint8Memory().subarray(ptr, ptr + len));
-    }
-
-    let cachedGlobalArgumentPtr = null;
-    function globalArgumentPtr() {
-        if (cachedGlobalArgumentPtr === null) {
-            cachedGlobalArgumentPtr = wasm.__wbindgen_global_argument_ptr();
-        }
-        return cachedGlobalArgumentPtr;
-    }
-
-    let cachegetUint32Memory = null;
-    function getUint32Memory() {
-        if (cachegetUint32Memory === null || cachegetUint32Memory.buffer !== wasm.memory.buffer) {
-            cachegetUint32Memory = new Uint32Array(wasm.memory.buffer);
-        }
-        return cachegetUint32Memory;
     }
 
     __exports.__wbg_alert_e8ffef40349eb77e = function(arg0, arg1) {
@@ -55,6 +26,19 @@
         let varg0 = getStringFromWasm(arg0, arg1);
         console.info(varg0);
     };
+
+    let cachedTextEncoder = new TextEncoder('utf-8');
+
+    let WASM_VECTOR_LEN = 0;
+
+    function passStringToWasm(arg) {
+
+        const buf = cachedTextEncoder.encode(arg);
+        const ptr = wasm.__wbindgen_malloc(buf.length);
+        getUint8Memory().set(buf, ptr);
+        WASM_VECTOR_LEN = buf.length;
+        return ptr;
+    }
     /**
     * @param {string} arg0
     * @returns {void}
@@ -72,6 +56,21 @@
 
     };
 
+    let cachedGlobalArgumentPtr = null;
+    function globalArgumentPtr() {
+        if (cachedGlobalArgumentPtr === null) {
+            cachedGlobalArgumentPtr = wasm.__wbindgen_global_argument_ptr();
+        }
+        return cachedGlobalArgumentPtr;
+    }
+
+    let cachegetUint32Memory = null;
+    function getUint32Memory() {
+        if (cachegetUint32Memory === null || cachegetUint32Memory.buffer !== wasm.memory.buffer) {
+            cachegetUint32Memory = new Uint32Array(wasm.memory.buffer);
+        }
+        return cachegetUint32Memory;
+    }
     /**
     * @param {string} arg0
     * @param {number} arg1

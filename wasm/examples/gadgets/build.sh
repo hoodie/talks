@@ -12,7 +12,7 @@ cargo build --target wasm32-unknown-unknown --release
 wasm-bindgen --browser --no-modules $WASM_BIN --out-dir module
 
 wasm-strip $WASM_GEN_BIN
-# wasm-opt --vacuum $WASM_GEN_BIN -o $WASM_GEN_BIN
+wasm-opt --vacuum $WASM_GEN_BIN -o $WASM_GEN_BIN
 wasm-snip --snip-rust-panicking-code  --snip-rust-fmt-code $WASM_GEN_BIN  main -o $WASM_GEN_BIN
 wasm2wat $WASM_GEN_BIN | wc -l
 
