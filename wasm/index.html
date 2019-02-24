@@ -16,9 +16,9 @@
     <script src="./examples/gadgets/gadgets.js"></script>
     <script>
         async function load_wasm() {
-            const { greet } = wasm_bindgen;
+            const { greet, Person, left_pad } = wasm_bindgen;
             await wasm_bindgen('./examples/gadgets/gadgets_bg.wasm');
-            window.wasmGadgets = { greet };
+            window.wasmGadgets = { greet, Person, leftPad: left_pad };
         }
         load_wasm()
     </script>
@@ -725,23 +725,24 @@ pub fn greet(name: &str) {
                 <section id="wasm-bindgen-classes">
                     <h4>wasm-bindgen: exporting classes</h4>
 <pre><code class="rust">#[wasm_bindgen]
-pub struct Foo {
-    contents: u32,
+pub struct Person {
+    name: String, // UTF-8
 }
+
 #[wasm_bindgen]
-impl Foo {
+impl Person {
     #[wasm_bindgen(constructor)]
-    pub fn new() -> Foo {
-        Foo { contents: 0 }
+    pub fn new(name: String) -> Person {
+        Self { name }
     }
 
-    pub fn get_contents(&self) -> u32 {
-        self.contents
+    pub fn get_name(&self) -> String {
+        self.name.to_owned()
     }
 }</code></pre>
 <pre><code class="rust">import { Foo } from './my_module';
-const f = new Foo();
-console.log(f.get_contents());</code></pre>
+const p = new Person('hendrik');
+console.log(p.get_name());</code></pre>
                 </section>
 
                 <section id="web-sys">
