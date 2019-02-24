@@ -27,12 +27,14 @@
         <div class="slides">
 
             <section id="title">
+
+                <!--
                 <section>
                     <h3>Rust Dresden</h3>
                     <img src="images/rust-logo-blk.svg" alt="rust logo" class="plain" style="width:30%">
                     <h2>WebAssembly</h2>
                 </section>
-
+                -->
                 <section>
                     <h3> WebAssembly </h3>
                     <h4> What is it
@@ -247,7 +249,7 @@
 
                     <ol>
                         <li class="fragment">Startup</li>
-                        <li class="fragment">CPU Features</li>
+                        <li class="fragment">CPU Features<sup><a href="https://kripken.github.io/talks/emwasm.html#/10">*</a></sup></li>
                         <li class="fragment">Toolchain Improvements</li>
                         <li class="fragment">Predictably Good Performance</li>
                     </ol>
@@ -294,6 +296,8 @@
                     <cite><a href="https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/">Lin Clark "What makes WebAssembly fast?"</a></cite>
                 </small>
 
+                <section id="awsm"><h1>🕺AWSM!💃</h1></section>
+
                 <section id="bonus">
                     <ol>
                         <li><a href="https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/">
@@ -323,25 +327,20 @@
                 <span class="chapter">capabilities</span>
 
                 <section id="what can it do?">
-                    <h3>what can we do with it?</h3>
+                    <h4>what can we do with it?</h4>
                 
                     <p class="fragment"> everything that JavaScript has to offer</p>
                     <p>
                         <span class="fragment">including</span>
-                        <span class="fragment">WebGL</span><span class="fragment">,
+                        <span class="fragment">DOM Apis</span><span class="fragment">, WebGL</span><span class="fragment">,
                             WebAudio</span><span class="fragment">,
                             Canvas</span><span class="fragment">,
                             everything you can access from JavaScript</span>
                     </p>
-                
-                    <p>
-                        <strong class="fragment">Can JavaApplets, flash or NAcl do that?</strong>
-                    </p>
-                
                 </section>
 
                 <section id="what-can-it-not-do">
-                    <h4> what can it not do? </h4>
+                    <h4>what can we <span class="fragment highlight-red">not</span> do with it?</h4>
                     <dl>
                         <dt class="fragment"> ⏳ not yet </dt>
                         <dd class="fragment" > SIMD<sup><a href="https://github.com/WebAssembly/simd">*</a></sup><sup> <small><a href="https://twitter.com/DasSurma/status/1098915542608609280">🐦</a></small></sup></dd>
@@ -350,17 +349,17 @@
 
                         <dt class="fragment"> 🚫 not ever </dt>
                         <dd class="fragment"> udp<sup><a href="https://new.gafferongames.com/post/why_cant_i_send_udp_packets_from_a_browser/">*</a></sup></dd>
-                        <dd class="fragment"> syscalls: fs, clock, etc </dd>
+                        <dd class="fragment"> syscalls: fs, clock, etc<sup><a href="https://browsix.org/">*</a></sup> </dd>
                         <dd class="fragment"> more precise timers<a href="https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/"><sup>*</sup></a>
                         <dd class="fragment">
-                            <span class="fragment highlight-red"> everything you couldn't do</span><sup class="fragment"><a href="#wasm-isolation">*</a></sup>
-                            in JavaScript
+                            <span class="fragment highlight-red"> everything you couldn't do</span><sup><a href="#wasm-isolation">*</a></sup> in JavaScript
                         </dd>
 
                     </dl>
                 </section>
 
                 <section id="what-can-it-do">
+                    <h4>use cases</h4>
 
                     <dl class="small">
                         <dt class="fragment">Web, Binary</dt>
@@ -374,36 +373,23 @@
                         <dd class="fragment">CAD, Science, Games</dd>
                         <dd class="fragment">Low latency apps: VR </dd>
 
+                    </dl>
+                    <dl class="small">
                         <dt class="fragment">As a VM</dt>
                         <dd class="fragment"><a href="https://www.wasmjit.org/">wasmjit</a> or <a href="https://wasmer.io/">wasmer</a></dd>
-
-                        <dt class="fragment">in the <span class="emoji">☁️</span></dt>
                         <dd class="fragment"><a href="https://nuxi.nl/">CloudABI</a></dd>
+
+                        <dt class="fragment">in the <span class="emoji">☁️</span>Cloud</dt>
                         <dd class="fragment"><a href="https://blog.cloudflare.com/webassembly-on-cloudflare-workers/">on cloudflare workers</a></dd>
                         <dd class="fragment"><a href="https://blog.scottlogic.com/2018/10/18/serverless-rust.html">in AWS Lambda</a><sup><a href="https://crates.io/crates/lambda_runtime" title="official aws rust runtime">*</a></sup></dd>
 
                         <dt class="fragment">More</dt>
-                        <dd class="fragment"><a href="https://twitter.com/hoodie_de/status/1096865768258629632 ">even</a> <a href="https://webassembly.org/docs/use-cases/" class="fragment">moar</a></dd>
+                        <dd class="fragment"><a href="https://twitter.com/hoodie_de/status/1096865768258629632 ">even</a> <a href="https://webassembly.org/docs/use-cases/">moar</a></dd>
                     </dl>
                 </section>
 
-                <section>
-                </section>
-
-                <section id="why-doesnt-it-have-x" data-markdown>
-                    ### why doesn't it have `$X`?
-                    It's [designed incrementally](https://webassembly.org/docs/rationale/) -> it's an
-                    [MVP](https://webassembly.org/docs/mvp/)
-                    * https://webassembly.org/docs/faq/
-                    * https://webassembly.org/docs/future-features/module
-                    * https://hacks.mozilla.org/2017/02/where-is-webassembly-now-and-whats-next/
-
-                </section>
-            </section>
-
-            <section id="where-is it-already-used">
-                <h3> Where is it already used? </h3>
-                <section>
+                <section id="where-is it-already-used">
+                    <h3> Where is it already used? </h3>
                     <ol>
                         <li class="fragment fade-up"> <a href="https://hacks.mozilla.org/2018/01/oxidizing-source-maps-with-rust-and-webassembly/ "> mozillas source-map library </a></li>
                         <li class="fragment"><a href="https://web.autocad.com">web.autocad.com</a></li>
@@ -419,44 +405,120 @@
 
                     </ol>
                 </section>
+                <section>
+                    <h2>😁 Lets start Hacking🔨</h2>
+
+                    <h3> 👨‍💻👩‍💻👨🏾‍💻👨🏽‍💻👩🏽‍💻👨🏼‍💻👨🏿‍💻</h3>
+                    <h3> 👨🏿‍💻👩🏿‍💻👩🏼‍💻👨🏻‍💻👩🏻‍💻👩🏾‍💻  🙋‍♂️</h3>
+                </section>
+
+                <!--
+                <section id="why-doesnt-it-have-x" data-markdown>
+                    ### why doesn't it have `$X`?
+                    It's [designed incrementally](https://webassembly.org/docs/rationale/) -> it's an
+                    [MVP](https://webassembly.org/docs/mvp/)
+                    * https://webassembly.org/docs/faq/
+                    * https://webassembly.org/docs/future-features/module
+                    * https://hacks.mozilla.org/2017/02/where-is-webassembly-now-and-whats-next/
+
+                </section>
+                -->
             </section>
 
-            <section id="building-wasm">
+
+            <section id="compiling-wasm" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
                 <span class="chapter">building WebAssembly</span>
 
-                <section id="compile-to-wasm" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
+                <section id="compiling">
+                    <h2>compiling</h2>
+                </section>
+
+                <section id="handwritten-wat">
+                    <h4>artisan WebAssembly</h4>
+                    <h3 class="fragment" data-fragment-index="2">«WAT»</h3>
+                    <pre class="fragment" data-fragment-index="1"><code class="lisp">(module
+  (func $i (import "imports" "i") (param i32))
+  (func (export "e")
+    i32.const 42
+    call $i))</code></pre>
+
+                </section>
+
+                <section id="compiler-toolchain" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
                     <img src=" https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png" class="stretch">
                 </section>
 
-                <section id="using-emsdk" data-background-color="#ffffff">
+                <section id="compiler-emscripten" data-background-color="#ffffff">
                     <p>
-                    <img src="images/Emscripten_logo_full.png" alt="emscripten logo">
+                        <img src="images/Emscripten_logo_full.png" alt="emscripten logo">
                     </p>
                     <ul>
                         <li><a href="https://emscripten.org/">compile with emsdk etc</a> </li>
                         <li class="fragment"><a href="https://people.xiph.org/~jm/demo/rnnoise/">e.g. RNNoise Demo</a></li>
                     </ul>
-                    
+                </section>
+
+                <section id="compiler-llvm" data-background-color="#ffffff">
+                        <img src="images/LLVM_Logo.svg" alt="llvm logo" class="stretch"/>
+                        <a href="https://kripken.github.io/talks/wasm.html#/">*</a>
+
+                </section>
+            </section>
+
+            <section class="white-slide" data-background-color="#ffffff" >
+                <span class="chapter">languages</span>
+
+                <section id="wasm-languages">
+                    <h2>languages</h2>
                 </section>
 
 
                 <section id="webassembly-studio">
                     <h4>WebAssembly Studio</h4>
                     <img src="images/WebAssemblyStudio.png" alt="WebAssemblyStudio" class="stretch">
+                    <small>
+                    <a href="https://webassembly.studio">webassembly.studio</a>
+                    </small>
                 </section>
 
+                <section>
+                    <img src="images/go.jpeg" alt="go" class="stretch">
+                    <h4>Go</h4>
+                    <ul>
+                        <li class="fragment"><a href="https://github.com/golang/go/wiki/WebAssembly#reducing-the-size-of-wasm-files">Hefty Binary Sizes</a></li>
+                        <li class="fragment"><a href="https://github.com/aykevl/tinygo">Tiny</a><a href="https://tinygo.org/webassembly/webassembly/">Go</a></li>
+                        <li class="fragment"><a href="https://github.com/WebAssembly/proposals/issues/16">GC is one unsolved problem</a></li>
+                    </ul>
+
+                </section>
 
                 <section id="assemblyscript">
                     <a href="https://github.com/AssemblyScript">
                         <img src="images/assemblyscript.svg" alt="AssemblyScript logo" class="stretch">
                     </a>
-                    <h4> Assembly Script</h4>
+                    <h4>AssemblyScript</h4>
                     <p class="fragment">almost but not quite entirely unlike <a href="http://typescriptlang.org/">TypeScript</a></p>
+                </section>
+
+                <section id="assemblyscript-example">
+                    <aside class="notes">expect your existing TypeScript code not to work out of the box</aside>
+                    <h4>AssemblyScript: Limitations<sup><a href="https://github.com/AssemblyScript/assemblyscript/wiki/Limitations">*</a></sup></h4>
+                    <ul>
+                        <li class="fragment">no union types</li>
+                        <li class="fragment">no <code>any</code> or <code>undefined</code></li>
+                        <li class="fragment">Primitive and Reference Types</li>
+                        <li class="fragment">Memory Management</li>
+                    </ul>
+                    <pre class="fragment"><code class="typescript">import "allocator/tlsf";
+var ptr = memory.allocate(64);
+//...
+memory.free(ptr);
+</code></pre>
                 </section>
 
                 <section id="rust-for-webassembly">
                     <a href="https://rustwasm.github.io/"><img src="images/rustwasm.svg" alt="rust wasm"></a>
-                    <h4>Rust for WebAssembly</h4>
+                    <h4 class="fragment">Rust for WebAssembly</h4>
                     <ul>
                         <li class="fragment">great <a href="https://rustwasm.github.io/wasm-bindgen/">documentation</a> and <a href="https://docs.rs/web-sys/">bindings</a></li>
                         <li class="fragment">best language</li>
@@ -520,16 +582,17 @@ obj.instance.exports.exported_func();</code></pre>
                     </cite>
                 </section>
 
-                <section>
+                <section id="importobject">
                     <h4> what is that <code>importObject</code> ? </h4>
                     <pre class="fragment"><code class="javascript">const importObject = {
     env: {
         logger: (str) => console.info(str)
     },
 }; </code></pre>
+<small class="fragment"><a href="https://webassembly.org/getting-started/js-api/">📗 Understanding the JS API</a></small>
                 </section>
 
-                <section>
+                <section id="ffi">
                     <h4>how do I talk to WebAssembly?</h4>
 
                     <span class="fragment">
@@ -544,8 +607,8 @@ obj.instance.exports.exported_func();</code></pre>
 
                     </span>
                 </section>
-
-                <section>
+ 
+                <section id="ferris-happy">
                     <img src="images/happy.svg" alt="jumping ferris"/>
                 </section>
 
@@ -605,7 +668,14 @@ pub unsafe fn speak() {
                         <li class="fragment highlight-current-green">wasm-bindgen</li>
                         <li class="fragment highlight-current-green">web-sys & js-sys</li>
                         <li class="fragment highlight-current-green">wasm-pack</li>
-                        <li class="fragment highlight-current-green">twiggy, wee_alloc, wasm-snip, wabt, binaryen</li>
+                        <li class="fragment highlight-current-green">
+                            twiggy,<sup><a href="https://github.com/rustwasm/twiggy">*</a></sup>
+                            wee_alloc,<sup><a href="https://github.com/rustwasm/wee_alloc">*</a></sup>
+                            wasm-snip,<sup><a href="https://github.com/rustwasm/wasm-snip">*</a></sup>
+                            wabt,<sup><a href="https://github.com/WebAssembly/wabt">*️</a></sup>
+                            binaryen,<sup><a href="https://github.com/WebAssembly/binaryen">*️</a></sup>
+                            wasm-explorer<sup><a href="https://mbebenita.github.io/WasmExplorer/">*</a></sup>
+                        </li>
                     </ul>
 
                     <cite>
@@ -681,6 +751,9 @@ pub fn run() -> Result<(), JsValue> {
                     <img src="https://raw.githubusercontent.com/rustwasm/wasm-pack/master/demo.gif" alt="wasm-pack demo" class="stretch">
                 </section>
 
+            </section>
+
+            <section id="demos">
                 <section id="aswm-gorillas-demo">
                     <h4>AWSM-Gorillas</h4>
                         <p class="frament"><a href="http://naubino.de/awsm-gorillas/">STOP! Demo Time</a></p>
@@ -692,24 +765,25 @@ pub fn run() -> Result<(), JsValue> {
                 <span class="chapter">discussion</span>
 
                 <section id="discussion-pros" data-markdown class="small">
-                    ## Pros
+                    ### Pros
 
+                    * strongly typed
+                    * faster loading
                     * better performance
                         * simpler language model
                         * precompiled, preoptimized
                         * fewer allocations
                         * [what makes WASM fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/)
                         * no GC
-                    * target for existing native code (reuse your code 😒)
+                    * target for existing native code (don't reuse your code 😒)
                     * strong isolation model
                     * new languages on the web
                         * better tooling
-                    * strongly typed
 
                 </section>
 
                 <section id="discussion-cons" data-markdown class="small">
-                    ## cons
+                    ### cons
 
                     * some weirdness [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
                     * less transparency on the web
@@ -741,12 +815,11 @@ pub fn run() -> Result<(), JsValue> {
                 <section>
                     <h4>Conclusion</h4>
                     <ul class="small">
-                        <li class="fragment highlight-current-blue">WebAssembly is the new hot sh*t</li>
-                        <li class="fragment highlight-current-blue">startup is and execution are much faster</li>
+                        <li class="fragment highlight-current-blue">WebAssembly is a new Powerful tool</li>
                         <li class="fragment highlight-current-blue">it's a standard <small class="fragment">(unlike asm.js, Flash, JavaApplets or NaCL)</small></li>
-                        <li class="fragment highlight-current-blue">it's not just for the Web <small class="fragment">(see e.g. CloudABI)</small></li>
-                        <li class="fragment highlight-current-blue">JavaScript lives on</li>
+                        <li class="fragment highlight-current-blue">it's a compliment to JavaScript</li>
                         <li class="fragment highlight-current-blue">it's still a browser, you will get better performance but no new capabilities</li>
+                        <li class="fragment highlight-current-blue">it's not just for the Web <small class="fragment">(see e.g. CloudABI)</small></li>
                     </ul>
                 </section>
 
@@ -767,7 +840,7 @@ pub fn run() -> Result<(), JsValue> {
                         <dd>wasm-strip</dd>
                         <dt>rust wasm</dt>
                         <dd><a href="https://github.com/rustwasm/wee_alloc">wee_alloc</a></dd>
-                        <dd><a href="https://github.com/rustwasm/twiggy">twiggy</a> wasm size profiler</dd>
+                        <dd><a href="https://github.com/rustwasm/j">twiggy</a> wasm size profiler</dd>
                         <dd><a href="https://github.com/rustwasm/wasm-snip">wasm-snip</a> replace functions with <code>unreachable</code></dd>
                     </dl>
                 </section>
@@ -784,12 +857,6 @@ pub fn run() -> Result<(), JsValue> {
                         <li class="fragment"><a href="https://youtu.be/3N29vrPoDv8?t=979">CloudABI @ 32c3</a></li>
                     </ul>
                 </section>
-
-                <section id="google-io17">
-                    <iframe src="https://www.youtube.com/embed/6v4E6oksar0?start=627" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    <iframe src="https://www.youtube.com/embed/6v4E6oksar0?start=831" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </section>
-
 
             </section>
 
