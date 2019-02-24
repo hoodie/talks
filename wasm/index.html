@@ -155,22 +155,22 @@
                         * numbers -> int vs float
                         * heap [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
                     </aside>
-                    <pre class="fragment"><code class="javascript">function MyAsmModule(stdlib, foreign, heap) {
+                    <pre class="fragment"><code class="javascript small">function MyAsmModule(stdlib, foreign, heap) {
     "use asm";
-
     // module body...
-
     return {
         export1: f1,
-        export2: f2,
         // ...
     };
-}</code></pre> <pre class="fragment"><code class="javascript">function add1(x) {
+}</code></pre> 
+<pre class="fragment"><code class="javascript">function add1(x) {
     x = x|0; // x : int
     return (x+1)|0;
 }</code></pre>
 
-<pre class="fragment"><code class="javascript">var heap = new ArrayBuffer(0x10000);          // 64k heap </code></pre>
+                    <pre class="fragment"><code class="javascript">var heap = new ArrayBuffer(0x10000);          // 64k heap </code></pre>
+                    <small><a href="http://asmjs.org/spec/latest/#introduction">asm.js spec</a></small>
+
                 </section>
 
 
@@ -339,7 +339,7 @@
                 <span class="chapter">capabilities</span>
 
                 <section id="what can it do?">
-                    <h4>what can we do with it?</h4>
+                    <h4>🤔 what can we do with it?</h4>
                 
                     <p class="fragment"> everything that JavaScript has to offer</p>
                     <p>
