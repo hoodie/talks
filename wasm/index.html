@@ -10,6 +10,18 @@
     <link rel="stylesheet" href="lib/reveal.js/css/theme/blood.css">
     <link rel="stylesheet" href="highlight-styles/tomorrow-night-bright.css">
     <link rel="stylesheet" href="talk.css">
+    <script>
+    delete WebAssembly.instantiateStreaming;
+    </script>
+    <script src="./examples/gadgets/gadgets.js"></script>
+    <script>
+        async function load_wasm() {
+            const { greet } = wasm_bindgen;
+            await wasm_bindgen('./examples/gadgets/gadgets_bg.wasm');
+            window.wasmGadgets = { greet };
+        }
+        load_wasm()
+    </script>
 </head>
 
 <body>
@@ -698,6 +710,15 @@ extern "C" {
 pub fn greet(name: &str) {
     alert(&format!("Hello, {}!", name));
 }</code></pre>
+
+
+
+<!--this is so meta right now-->
+<button onclick="wasmGadgets.greet('audience')">greet audience</button>
+
+
+
+
 
                 </section>
 
