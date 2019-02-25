@@ -8,7 +8,7 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <link rel="stylesheet" href="lib/reveal.js/css/reveal.css">
     <link rel="stylesheet" href="lib/reveal.js/css/theme/blood.css">
-    <link rel="stylesheet" href="highlight-styles/tomorrow-night-bright.css">
+    <link rel="stylesheet" href="highlight-styles/tomorrow-night-eighties.css">
     <link rel="stylesheet" href="talk.css">
     <script>
     delete WebAssembly.instantiateStreaming;
@@ -48,16 +48,14 @@
                 </section>
                 -->
                 <section>
-                    <h3> WebAssembly </h3>
-                    <h4> What is it
-                        <span class="fragment"> good for </span>
-                        ?
-                    </h4>
+                    <h2> WebAssembly </h2>
+                    <h3 class="fragment fade-in"> What is it? </h3>
+                    <h4 class="fragment"> What is it good for ?</h4>
                 </section>
             </section>
 
             <section id="javascript-performance" data-transition="concave">
-                <span class="chapter">preamble</span>
+                <span class="chapter">preface</span>
 
                 <section>
                     <h5> Background </h5>
@@ -91,6 +89,9 @@
                 </section>
 
                 <section data-background-color="#ffffff" data-transition="none" data-background-transition="none" class="white-slide">
+                    <aside class="notes">
+                        it's a very dynamic language
+                    </aside>
                     <img
                         src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-02-perf_graph10.png" />
                         <br/>
@@ -135,17 +136,21 @@
 
                 </section>
 
-                <!--
                 <section>
                     <blockquote class="small fragment">
-                        ...provides an abstraction similar to the C/C++ virtual
-                        machine:
-                        a large binary heap with efficient loads and stores, integer and floating-point arithmetic,
-                        first-order function definitions, and function pointers.
-                        <cite> <a href="http://asmjs.org/spec/latest/#introduction">asmjs spec</a> <a
+<p>
+... can be used as a low-level,<br>
+efficient <span class="fragment highlight-red">target language for compilers</span>.
+</p>
+<p>
+The asm.js language provides an abstraction similar to the C/C++ virtual machine: a large binary
+heap with efficient loads and stores, integer and floating-point arithmetic, first-order function definitions, and
+function pointers.
+</p>
+                        <cite> <a href="http://asmjs.org/spec/latest/#introduction">asm.js spec</a> <a
                                 href="http://asmjs.org/faq.html">(faq)</a> </cite>
                     </blockquote>
-                </section>-->
+                </section>
 
                 <section>
 
@@ -162,7 +167,8 @@
         export1: f1,
         // ...
     };
-}</code></pre> 
+}</code></pre>
+
 <pre class="fragment"><code class="javascript">function add1(x) {
     x = x|0; // x : int
     return (x+1)|0;
@@ -186,8 +192,8 @@
 
                     <h3>limitations of asm.js</h3>
                     <ul>
-                        <li class="fragment">it might be asm</li>
-                        <li class="fragment">but it's also js</li>
+                        <li class="fragment">it is not assembly</li>
+                        <li class="fragment">but it is javascript</li>
                     </ul>
                 <!--
                    <cite class="fragment"><a href="https://brendaneich.com/2015/06/from-asm-js-to-webassembly/">Brendan Eich</a></cite>
@@ -199,13 +205,27 @@
                         what comes next? why not compile it to assembly directly
                     </aside>
 
-                    so we're compiling <strong class="fragment highlight-blue" >C</strong>
-                    to <strong class="fragment highlight-red">JavaScript</strong>
-                    that looks something like <strong class="fragment highlight-blue" >C</strong>
-                    so that the JavaScript <strong class="fragment highlight-green">Engine</strong> can compile it in the Browser
+                    <p>
+                    so we're compiling some <strong class="fragment highlight-blue">native language</strong>
+                    to <strong class="fragment highlight-blue">JavaScript</strong>
+                    that looks something like <strong class="fragment highlight-blue">C</strong>
+                    so that <br> the <strong class="fragment highlight-blue">JavaScript Engine</strong> can compile it in the Browser
+                    </p>
 
-                    <span class="fragment"> <strong>after</strong> it has been downloaded </span>
+                    <span class="fragment">
+                        <p class="fragment grow"> <strong>after</strong> it has been downloaded </p>
+                    </span>
 
+                </section>
+                <section>
+                    <h3>drawbacks</h3>
+                    <ul>
+                        <li>still JavaScript syntax</li>
+                        <li class="fragment">still have to parse</li>
+                        <li class="fragment">optimizations may vary</li>
+                        <li class="fragment">not ideal</li>
+                        <li class="fragment">but easier to JIT</li>
+                    </ul>
                 </section>
 
             </section>
@@ -340,7 +360,7 @@
 
                 <section id="what can it do?">
                     <h4>🤔 what can we do with it?</h4>
-                
+
                     <p class="fragment"> everything that JavaScript has to offer</p>
                     <p>
                         <span class="fragment">including</span>
@@ -408,8 +428,8 @@
                         <li class="fragment"><a href="https://blogs.unity3d.com/2018/08/15/webassembly-is-here/">Unity Web Target</a></li>
                         <li class="fragment"><a href="https://wiki.qt.io/Qt_for_WebAssembly">Qt for WebAssembly</a></li>
                         <li class="fragment"><a href="https://github.com/ethereum"> Etherium</a> </li>
-                        <li class="fragment"> <a href="https://webrtchacks.com/zoom-avoids-using-webrtc/">zoom.us (instead of WebRTC)</a> </li>
                         <li class="fragment"> <a href="https://wasm.fastlylabs.com/">fastlylabs terrarium</a> </li>
+                        <li class="fragment"> <a href="https://webrtchacks.com/zoom-avoids-using-webrtc/">zoom.us (instead of WebRTC)</a> </li>
                         <li class="fragment fade-up">
                             🤷🏼‍♀️ you might be using WebAssembly right now
                             <a href="https://twitter.com/hoodie_de/status/1096865768258629632">🐦</a>
@@ -619,7 +639,7 @@ obj.instance.exports.exported_func();</code></pre>
 
                     </span>
                 </section>
- 
+
                 <section id="ferris-happy">
                     <img src="images/happy.svg" alt="jumping ferris"/>
                 </section>
@@ -890,6 +910,7 @@ pub fn run() -> Result<(), JsValue> {
     <script src="lib/highlight.pack.js"></script>
     <script>
 
+        hljs.initHighlightingOnLoad();
         Reveal.initialize({
             history: true,
             slideNumber: true,
@@ -898,7 +919,6 @@ pub fn run() -> Result<(), JsValue> {
                 { src: 'plugin/markdown/marked.js' },
                 { src: 'plugin/markdown/markdown.js' },
                 { src: 'plugin/notes/notes.js', async: true },
-                { src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
                 /*
                 { src: 'socket.io/socket.io.js', async: true },
                 { src: 'plugin/notes-server/client.js', async: true }
