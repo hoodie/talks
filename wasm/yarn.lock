@@ -475,6 +475,11 @@ raw-body@2.3.3:
     iconv-lite "0.4.23"
     unpipe "1.0.0"
 
+reveal.js-menu@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/reveal.js-menu/-/reveal.js-menu-1.2.0.tgz#b8d8f060a25b933fad253ffb51012662e31b8c0d"
+  integrity sha512-jOuMjakDx90GO01Z29Vq6MS3qogjML/qTA14werk/PDj9zpV5Pl0GRLwWq91b20vS1JgYi4sD1POd33deDQAQg==
+
 reveal.js@^3.7.0:
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/reveal.js/-/reveal.js-3.7.0.tgz#7afaf72fd963000381289d58f3aa54c0c46b150c"

@@ -6,10 +6,13 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "headjs": "^1.0.3",
-    "reveal.js": "^3.7.0",
     "express": "^4.16.2",
+    "headjs": "^1.0.3",
     "mustache": "^2.3.0",
+    "reveal.js": "^3.7.0",
     "socket.io": "^1.7.3"
+  },
+  "dependencies": {
+    "reveal.js-menu": "^1.2.0"
   }
 }
