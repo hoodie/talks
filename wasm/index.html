@@ -17,6 +17,7 @@
             const { greet, Person, left_pad } = wasm_bindgen;
             await wasm_bindgen('./examples/gadgets/gadgets_bg.wasm');
             window.wasmGadgets = { greet, Person, leftPad: left_pad };
+            window.Person = Person;
         }
         load_wasm()
     </script>
@@ -466,6 +467,21 @@
 
                 </section>
 
+                <section id="web-dsp">
+                    <h4>web-dsp</h4>
+                    <a href="http://tiny.cc/webdsp">http://tiny.cc/webdsp</a>
+                </section>
+
+                <section id="rnnoise">
+                    <h4>rnnoise</h4>
+                    <a href="https://people.xiph.org/~jm/demo/rnnoise/">https://people.xiph.org/~jm/demo/rnnoise/</a>
+                </section>
+
+                <section id="picovoice">
+                    <h4>picovoice</h4>
+                    <a href="https://picovoice.ai/products/">wake word demo</a>
+                </section>
+
 
                 <section>
                     <h2>😁 Lets start Hacking🔨</h2>
@@ -821,22 +837,7 @@ pub fn run() -> Result<(), JsValue> {
 
             </section>
 
-            <section id="demos">
-                <section id="web-dsp">
-                    <h4>web-dsp</h4>
-                    <a href="http://tiny.cc/webdsp">http://tiny.cc/webdsp</a>
-                </section>
-
-                <section id="rnnoise">
-                    <h4>rnnoise</h4>
-                    <a href="https://people.xiph.org/~jm/demo/rnnoise/">https://people.xiph.org/~jm/demo/rnnoise/</a>
-                </section>
-
-                <section id="picovoice">
-                    <h4>picovoice</h4>
-                    <a href="https://picovoice.ai/products/">wake word demo</a>
-                </section>
-
+            <section id="demo">
                 <section id="aswm-gorillas">
                     <h4>AWSM-Gorillas</h4>
                     <p class="frament"><a href="http://naubino.de/awsm-gorillas/">STOP! Demo Time</a></p>
