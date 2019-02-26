@@ -22,11 +22,15 @@
     font-size: 0.7em;
 }
 
+.reveal .serif {
+    font-family: "Vollkorn";
+}
+
 .reveal blockquote:before {
     position: absolute;
     left: -10px;
     color: #ccc;
-    font-size: 4em;
+    font-size: 6em;
     line-height: 0.1em;
     margin-right: 0.25em;
     vertical-align: -0.4em;
@@ -34,7 +38,6 @@
 
 .reveal blockquote:before {
     content: "\"";
-
     font-family: Georgia, 'Times New Roman', Times, serif
 }
 
@@ -48,15 +51,27 @@
     display: block;
     float: right;
     padding-top: 60px;
-    color: yellow;
+    color: #d33682;
 }
 
 .reveal cite a {
-    color: yellow;
+    color: #d33682;
 }
 
 .reveal cite:before {
     content: "\2014 \2009";
+}
+
+.reveal .black-slide,
+.reveal .black-slide cite,
+.reveal .black-slide cite a,
+.reveal .black-slide h1 ,
+.reveal .black-slide h2 ,
+.reveal .black-slide h3 ,
+.reveal .black-slide h4 ,
+.reveal .black-slide h5 ,
+.reveal .black-slide h6 {
+    color: #fff !important;
 }
 
 .reveal .white-slide,
@@ -84,7 +99,7 @@
     content: "TODO: ";
     font-weight: bold;
     color: black;
-    background-color: yellow;
+    background-color: #d33682;
 }
 
 .reveal .chapter {
@@ -95,9 +110,14 @@
     right:0;
 }
 
+pre {
+    border-radius: 15px;
+    font-size: 0.9em;
+}
+
 pre code {
     border-radius: 15px;
-    padding: 20px 35px !important;
+    padding: 25px 35px !important;
 }
 
 .reveal .bottom {
@@ -107,5 +127,5 @@ pre code {
 .reveal img.logo {
    width: 2em;
    vertical-align: bottom;
-    
+
 }
