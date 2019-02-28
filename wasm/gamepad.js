@@ -36,6 +36,8 @@ window.toggleGamePadControls= () => {
     window.onGamePadRightPressed = () => console.log('gamepad right')
     window.onGamePadUpPressed = () => console.log('gamepad up')
     window.onGamePadDownPressed = () => console.log('gamepad down')
+    window.onGamePadOPressed = () => console.log('gamepad o')
+    window.onGamePadoPressed = () => console.log('gamepad x')
     window.onGamePadL1Pressed = () => console.log('gamepad l1')
     window.onGamePadR1Pressed = () => console.log('gamepad r1')
     window.onGamePadL2Pressed = () => console.log('gamepad l2')
@@ -71,14 +73,17 @@ window.toggleGamePadControls= () => {
         const btnL2 = gamePad.buttons[6].pressed
         const btnR2 = gamePad.buttons[7].pressed
 
-        if (freeToLe && btnLe && document.hasFocus()) { window.onGamePadLeftPressed() }
-        if (freeToRi && btnRi && document.hasFocus()) { window.onGamePadRightPressed() }
-        if (freeToUp && btnUp && document.hasFocus()) { window.onGamePadUpPressed() }
-        if (freeToDo && btnDo && document.hasFocus()) { window.onGamePadDownPressed() }
-        if (freeToL1 && btnL1 && document.hasFocus()) { window.onGamePadL1Pressed() }
-        if (freeToR1 && btnR1 && document.hasFocus()) { window.onGamePadR1Pressed() }
-        if (freeToL2 && btnL2 && document.hasFocus()) { window.onGamePadL2Pressed() }
-        if (freeToR2 && btnR2 && document.hasFocus()) { window.onGamePadR2Pressed() }
+        if (freeToO && btnO   ) { window.onGamePadOPressed() }
+        if (freeToX && btnX   ) { window.onGamePadXPressed() }
+
+        if (freeToLe && btnLe ) { window.onGamePadLeftPressed() }
+        if (freeToRi && btnRi ) { window.onGamePadRightPressed() }
+        if (freeToUp && btnUp ) { window.onGamePadUpPressed() }
+        if (freeToDo && btnDo ) { window.onGamePadDownPressed() }
+        if (freeToL1 && btnL1 ) { window.onGamePadL1Pressed() }
+        if (freeToR1 && btnR1 ) { window.onGamePadR1Pressed() }
+        if (freeToL2 && btnL2 ) { window.onGamePadL2Pressed() }
+        if (freeToR2 && btnR2 ) { window.onGamePadR2Pressed() }
 
         freeToSq = !btnSq;
         freeToX = !btnX;

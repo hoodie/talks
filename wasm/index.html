@@ -16,8 +16,9 @@
         async function load_wasm() {
             const { greet, Person, left_pad } = wasm_bindgen;
             await wasm_bindgen('./examples/gadgets/gadgets_bg.wasm');
-            window.wasmGadgets = { greet, Person, leftPad: left_pad };
+            window.wasmGadgets = { greet, Person, left_pad };
             window.Person = Person;
+            window.leftPad = left_pad;
         }
         load_wasm()
     </script>
@@ -44,7 +45,7 @@
                 </section>
                 -->
                 <section>
-                    <h2 class="fragment"> WebAssembly </h2>
+                    <h2> WebAssembly </h2>
                     <h3 class="fragment fade-in"> What is it? </h3>
                     <h4 class="fragment"> What is it good for?</h4>
                     <cite>Hendrik Sollich</cite>
@@ -86,8 +87,9 @@
                 </section>
 
                 <section data-background-color="#ffffff" data-transition="none" data-background-transition="none" class="white-slide">
-                    <aside class="notes">
-                        it's a very dynamic language
+                    <aside class="notes" data-markdown>
+                        * what makes it hard to make JavaScript fast?
+                        * it's a very dynamic language
                     </aside>
                     <img
                         src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-02-perf_graph10.png" />
@@ -100,6 +102,10 @@
                 </section>
 
                 <section data-background-color="#ffffff" data-transition="none" data-background-transition="none" class="white-slide">
+                    <aside class="notes" data-markdown>
+                        * what makes it hard to make JavaScript fast?
+                        * it's a very dynamic language
+                    </aside>
                     <img src="images/05-01-diagram_now01-768x198.png" alt="" class="stretch">
                 </section>
 
@@ -184,27 +190,6 @@
 
                 </section>
 
-
-                <section>
-                    <aside class="notes" data-markdown>
-                        * text format (large)
-                        * may require compression
-                        * needs to be parsed
-                            * full JavaScript syntax
-                            * some weird corners remain
-                        * still technically GC
-                    </aside>
-
-                    <h3>limitations of asm.js</h3>
-                    <ul>
-                        <li class="fragment">it is not assembly</li>
-                        <li class="fragment">but it is JavaScript</li>
-                    </ul>
-                <!--
-                   <cite class="fragment"><a href="https://brendaneich.com/2015/06/from-asm-js-to-webassembly/">Brendan Eich</a></cite>
-                -->
-                </section>
-
                 <section>
                     <aside class="notes">
                         what comes next? why not compile it to assembly directly
@@ -222,10 +207,24 @@
                     </span>
 
                 </section>
+
                 <section>
-                    <h3>shortcomings</h3>
+                    <aside class="notes" data-markdown>
+                        * text format (large)
+                        * may require compression
+                        * needs to be parsed
+                        * full JavaScript syntax
+                        * some weird corners remain
+                        * still technically GC
+                    </aside>
+
+                    <h3>limitations of asm.js</h3>
                     <ul>
-                        <li>still JavaScript syntax</li>
+                        <li class="fragment">it is not assembly</li>
+                        <li class="fragment">but it is JavaScript</li>
+                        <li class="fragment emoji" style="list-style: none"> 🧐</li>
+                    <!-- <cite class="fragment"><a href="https://brendaneich.com/2015/06/from-asm-js-to-webassembly/">Brendan Eich</a></cite> -->
+                        <li class="fragment">still JavaScript syntax</li>
                         <li class="fragment">still have to parse</li>
                         <li class="fragment">larger download size</li>
                         <li class="fragment">optimizations vary</li>
@@ -337,6 +336,13 @@
                     <cite><a href="https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/">Lin Clark "What makes WebAssembly fast?"</a></cite>
                 </small>
 
+            </section>
+
+            <section id="google-io-talk">
+                <section id="google-io">
+                    <img src="images/compiling the web - youtube 6v4E6oksar0.png" alt="youtube 6v4E6oksar0" class="stretch">
+                    <cite><a href="https://www.youtube.com/watch?v=6v4E6oksar0">compiling the web - Google IO'17</a></cite>
+                </section>
 
                 <!--
                 <section id="bonus">
@@ -364,10 +370,77 @@
 
             </section>
 
-            <section id="awsm"><h1>🕺AWSM!💃</h1></section>
+            <section id="performance">
+                <span class="chapter">performance</span>
+                <section id="performance-title">
+                    <h2>Performance vs ...</h2>
+                </section>
+                <section id="performance-vs-javascript">
+                    <h3>WASM vs JavaScript</h3>
+                    <span class="fragment">
+                        <p style="margin-top: 10%;">
+                            <blockquote>
+                            it's 30x Faster
+                            </blockquote>
+                        <cite><a href="https://medium.com/@mbebenita/webassembly-is-30x-faster-than-javascript-c71ea54d2f96">WebAssembly is “30X” Faster than JavaScript</a></cite>
+                    </p>
+                    </span>
+                    </section>
 
-            <section id="wasm-capabilities">
-                <span class="chapter">capabilities</span>
+                <section id="performance-vs-asmjs">
+                    <h2>WASM vs asm.js</h2>
+                    <span class="fragment">
+
+                    <img src="images/MindTheGap0.png" alt="wasm vs asm.js" class="stretch"/>
+                    <cite><a href="https://arxiv.org/abs/1901.09056">Mind the Gap</a></cite>
+                    </span>
+                </section>
+
+                <section id="performance-vs-native">
+                    <h2>WASM vs Native</h2>
+                    <p>...of the 24 benchmarks evaluated, seven run within 10% of native execution and almost all of them run less than 2× slower.</p>
+                    <cite><a href="https://dl.acm.org/citation.cfm?id=3243858">Bringing the web up to speed</a></cite>
+                </section>
+
+                <section>
+                    <img src="images/MindTheGap1.png" alt="wasm vs native" class="stretch"/>
+                    <cite><a href="https://arxiv.org/abs/1901.09056">Mind the Gap</a></cite>
+                </section>
+
+                <section>
+                    <span class="emoji"></span>
+                </section>
+
+            </section>
+
+            <section id="discussion">
+                <span class="chapter">discussion</span>
+
+                <section id="discussion-pros" data-markdown class="small">
+                    ### Pros
+
+                    * strongly typed
+                    * faster loading
+                    * better performance
+                        * simpler language model
+                        * precompiled, preoptimized
+                        * fewer allocations
+                        * [what makes WASM fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/)
+                        * no GC
+                    * target for existing native code
+                    * strong isolation model
+                    * new languages on the web
+                    * better tooling
+
+                </section>
+
+                <section id="discussion-cons" data-markdown class="small">
+                    ### cons
+
+                    * some weirdness [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
+                    * less transparency on the web
+                        * possiblity for proprietary code in your browser
+                </section>
 
                 <section id="wasm-vs-javaapplets-vs-flash">
                     <h3>Isn't WASM just like JavaApplets or Flash? <strong class="fragment">no</strong></h3>
@@ -386,7 +459,14 @@
                     </blockquote>
                 </section>
 
-                <section id="what can it do?">
+            </section>
+
+            <section id="awsm"><h1>🕺AWSM!💃</h1></section>
+
+            <section id="wasm-capabilities">
+                <span class="chapter">capabilities</span>
+
+                <section id="what-can-it-do">
                     <h2>and now?</h2>
                     <h4 class="fragment">🤔 what can we do with it?</h4>
 
@@ -479,8 +559,11 @@
                 </section>
 
                 <section id="rnnoise">
-                    <h4>rnnoise</h4>
+                    <h4>rnnoise<sup>*</sup></h4>
                     <a href="https://people.xiph.org/~jm/demo/rnnoise/">https://people.xiph.org/~jm/demo/rnnoise/</a>
+                    <p>
+                    <small><sub>*here asm.js</sub></small>
+                    </p>
                 </section>
 
                 <section id="picovoice">
@@ -488,13 +571,6 @@
                     <a href="https://picovoice.ai/products/">wake word demo</a>
                 </section>
 
-
-                <section>
-                    <h2>😁 Lets start Hacking🔨</h2>
-
-                    <h3> 👨‍💻👩‍💻👨🏾‍💻👨🏽‍💻👩🏽‍💻👨🏼‍💻👨🏿‍💻</h3>
-                    <h3> 👨🏿‍💻👩🏿‍💻👩🏼‍💻👨🏻‍💻👩🏻‍💻👩🏾‍💻  🙋‍♂️</h3>
-                </section>
 
                 <!--
                 <section id="why-doesnt-it-have-x" data-markdown>
@@ -509,6 +585,31 @@
                 -->
             </section>
 
+
+
+            <section id="conclusion">
+                <section>
+                    <h3>Conclusion</h3>
+                    <ul class="small fragment">
+                        <li class="fragment highlight-current-blue">WebAssembly is a new Powerful tool</li>
+                        <li class="fragment highlight-current-blue">it's a Standard <small class="fragment">(unlike asm.js, Flash, JavaApplets or NaCL)</small></li>
+                        <li class="fragment highlight-current-blue">it's a compliment to JavaScript</li>
+                        <li class="fragment highlight-current-blue">it's still a browser, you will get better performance but no new capabilities</li>
+                        <li class="fragment highlight-current-blue">Everybody is doing it</li>
+                        <li class="fragment highlight-current-blue">it's not just for the Web <small class="fragment">(see e.g. CloudABI)</small></li>
+                    </ul>
+                </section>
+
+            </section>
+
+            <section id="hands-on">
+                <section>
+                    <h2>😁 Lets start Hacking🔨</h2>
+
+                    <h3> 👨‍💻👩‍💻👨🏾‍💻👨🏽‍💻👩🏽‍💻👨🏼‍💻👨🏿‍💻</h3>
+                    <h3> 👨🏿‍💻👩🏿‍💻👩🏼‍💻🙋🏻‍♂️👨🏻‍💻👩🏻‍💻👩🏾‍💻</h3>
+                </section>
+            </section>
 
             <section id="compiling-wasm" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
                 <span class="chapter">building WebAssembly</span>
@@ -538,7 +639,6 @@
                     </p>
                     <ul>
                         <li><a href="https://emscripten.org/">compile with emsdk etc</a> </li>
-                        <li class="fragment"><a href="https://people.xiph.org/~jm/demo/rnnoise/">e.g. RNNoise Demo</a></li>
                     </ul>
                 </section>
 
@@ -549,7 +649,7 @@
                 </section>
             </section>
 
-            <section class="white-slide" data-background-color="#ffffff" >
+            <section id="languages" class="white-slide" data-background-color="#ffffff" >
                 <span class="chapter">languages</span>
 
                 <section id="wasm-languages">
@@ -741,7 +841,7 @@ pub unsafe fn speak() {
 
             </section>
 
-            <section>
+            <section id="rust">
 
                 <section id="rustwasm">
                     <h4>
@@ -851,50 +951,8 @@ pub fn run() -> Result<(), JsValue> {
 
             </section>
 
-            <section id="discussion">
-                <span class="chapter">discussion</span>
 
-                <section id="discussion-pros" data-markdown class="small">
-                    ### Pros
-
-                    * strongly typed
-                    * faster loading
-                    * better performance
-                        * simpler language model
-                        * precompiled, preoptimized
-                        * fewer allocations
-                        * [what makes WASM fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/)
-                        * no GC
-                    * target for existing native code
-                    * strong isolation model
-                    * new languages on the web
-                        * better tooling
-
-                </section>
-
-                <section id="discussion-cons" data-markdown class="small">
-                    ### cons
-
-                    * some weirdness [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
-                    * less transparency on the web
-                        * possiblity for proprietary code in your browser
-                </section>
-
-
-            </section>
-
-            <section id="conclusion">
-                <section>
-                    <h4>Conclusion</h4>
-                    <ul class="small">
-                        <li class="fragment highlight-current-blue">WebAssembly is a new Powerful tool</li>
-                        <li class="fragment highlight-current-blue">it's a standard <small class="fragment">(unlike asm.js, Flash, JavaApplets or NaCL)</small></li>
-                        <li class="fragment highlight-current-blue">it's a compliment to JavaScript</li>
-                        <li class="fragment highlight-current-blue">it's still a browser, you will get better performance but no new capabilities</li>
-                        <li class="fragment highlight-current-blue">it's not just for the Web <small class="fragment">(see e.g. CloudABI)</small></li>
-                    </ul>
-                </section>
-
+            <section id="bye-bye">
                 <section
                 data-transition="slide"
                 data-background-transition="slide"
@@ -970,6 +1028,8 @@ pub fn run() -> Result<(), JsValue> {
         window.onGamePadR1Pressed = () => Reveal.togglePause();
         window.onGamePadL2Pressed = () => Reveal.prev();
         window.onGamePadR2Pressed = () => Reveal.next();
+        window.onGamePadOPressed = () => Reveal.togglePause();
+        window.onGamePadXPressed = () => Reveal.next();
 
     </script>
 
