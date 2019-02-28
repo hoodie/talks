@@ -21,6 +21,12 @@
         }
         load_wasm()
     </script>
+    <script src="./gamepad.js">
+    </script>
+    <script>
+        if (navigator.userAgent.match(/Firefox/)) window.toggleGamePadControls();
+        else console.warn('no gamepad support')
+    </script>
 </head>
 
 <body>
@@ -38,10 +44,10 @@
                 </section>
                 -->
                 <section>
-                    <h5> techtalk </h5>
                     <h2 class="fragment"> WebAssembly </h2>
                     <h3 class="fragment fade-in"> What is it? </h3>
                     <h4 class="fragment"> What is it good for?</h4>
+                    <cite>Hendrik Sollich</cite>
                 </section>
             </section>
 
@@ -955,6 +961,16 @@ pub fn run() -> Result<(), JsValue> {
                  */
             ]
         });
+
+        window.onGamePadUpPressed = () => Reveal.up();
+        window.onGamePadDownPressed = () => Reveal.down();
+        window.onGamePadLeftPressed = () => Reveal.left();
+        window.onGamePadRightPressed = () => Reveal.right();
+        window.onGamePadL1Pressed = () => Reveal.slide(0);
+        window.onGamePadR1Pressed = () => Reveal.togglePause();
+        window.onGamePadL2Pressed = () => Reveal.prev();
+        window.onGamePadR2Pressed = () => Reveal.next();
+
     </script>
 
 </body>
