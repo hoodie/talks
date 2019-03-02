@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
-    <link rel="stylesheet" href="lib/reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="lib/reveal.css">
     <link rel="stylesheet" href="theme/hoodie-solarized.css">
-    <link rel="stylesheet" href="highlight-styles/tomorrow.css">
-    <link rel="stylesheet" href="talk.css">
+    <link rel="stylesheet" href="theme/tomorrow.css">
+    <link rel="stylesheet" href="theme/talk.css">
     <script> delete WebAssembly.instantiateStreaming; </script>
     <script src="./examples/gadgets/gadgets.js"></script>
     <script>
@@ -997,8 +997,8 @@ pub fn run() -> Result<(), JsValue> {
         </div>
     </div>
 
-    <script src="lib/reveal.js/js/reveal.js"></script>
-    <script src="lib/headjs/dist/1.0.0/head.js"></script>
+    <script src="lib/reveal.js"></script>
+    <script src="lib/head.js"></script>
     <script src="lib/highlight.pack.js"></script>
     <script>
 
@@ -1009,10 +1009,10 @@ pub fn run() -> Result<(), JsValue> {
             transition: 'convex', // none/fade/slide/convex/concave/zoom
             // More info https://github.com/hakimel/reveal.js#dependencies
             dependencies: [
-                { src: 'plugin/markdown/marked.js' },
-                { src: 'plugin/markdown/markdown.js' },
-                { src: 'plugin/notes/notes.js', async: true },
-                { src: 'node_modules/reveal.js-menu/menu.js' }
+                { src: './plugin/markdown/marked.js' },
+                { src: './plugin/markdown/markdown.js' },
+                { src: './plugin/notes/notes.js', async: true },
+                { src: './plugin/menu/menu.js' }
                 /*
                 { src: 'socket.io/socket.io.js', async: true },
                 { src: 'plugin/notes-server/client.js', async: true }
