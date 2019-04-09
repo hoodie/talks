@@ -66,7 +66,7 @@
                 <section>
                     <h5>Hintergrund</h5>
                     <span class="fragment"> JavaScript </span>
-                    <span class="fragment"> Performance </span>
+                    <span class="fragment flickering"> Performance </span>
                 </section>
 
                 <section>
@@ -453,7 +453,6 @@
 
             <section id="awsm">
                 <h1>🕺AWSM!💃</h1>
-                <small class="fragment"> jetzt bitte Finger schmutzig machen</small>
             </section>
 
             <section id="wasm-capabilities">
@@ -522,19 +521,27 @@
 
                 <section id="where-is it-already-used">
                     <h3> Und wer macht das schon? </h3>
-                    <ul>
-                        <li class="fragment">
+                    <small>
                             🤷🏼‍♀️ ihr könntet bereits WebAssembly benutzen
                             <a href="https://twitter.com/hoodie_de/status/1096865768258629632">🐦</a>
-                        </li>
-                        <li class="fragment"><a href="https://www.fastly.com/blog/announcing-lucet-fastly-native-webassembly-compiler-runtime">fastly</a></li>
+                    </small>
+                    <ul style="font-size: 0.7em">
+                        <li class="fragment"><a href="https://www.fastly.com/blog/announcing-lucet-fastly-native-webassembly-compiler-runtime">fastlys lucet</a></li>
                         <li class="fragment"><a href="
                             https://duckduckgo.com/?q=cloudflare+wasm&t=ffab&atb=v137-7__&ia=web">Cloudflare Workers</a></li>
                         <li class="fragment"><a href="https://github.com/ethereum"> Etherium</a> </li>
-                        <li class="fragment fade-up"> <a href="https://hacks.mozilla.org/2018/01/oxidizing-source-maps-with-rust-and-webassembly/ "> mozillas source-map library </a></li>
+                        <li class="fragment"> <a href="https://hacks.mozilla.org/2018/01/oxidizing-source-maps-with-rust-and-webassembly/ "> mozillas source-map library </a></li>
                         <li class="fragment"><a href="https://web.autocad.com">web.autocad.com</a></li>
                         <li class="fragment"><a href="https://blogs.unity3d.com/2018/08/15/webassembly-is-here/">Unity Web Target</a></li>
                         <li class="fragment"><a href="https://wiki.qt.io/Qt_for_WebAssembly">Qt for WebAssembly</a></li>
+                        <li class="fragment"><a href="https://twitter.com/eddyb_r/status/1114574977041338369">um flash zu transpilen 🤯</a></li>
+                    
+                        <li class="fragment">
+                            read on my dear:
+                            <a href="http://www.wasmrocks.com/">wasmrocks</a>
+                            <a href="https://wasmweekly.news/">wasm weekly</a>
+                            <a href="https://en.wikipedia.org/wiki/WebAssembly">wikipedia</a>
+                        </li>
                     </ul>
 
                 </section>
@@ -557,52 +564,17 @@
                     <a href="https://picovoice.ai/products/">wake word demo</a>
                 </section>
 
-
-                <!--
-                <section id="why-doesnt-it-have-x" data-markdown>
-                    ### why doesn't it have `$X`?
-                    It's [designed incrementally](https://webassembly.org/docs/rationale/) -> it's an
-                    [MVP](https://webassembly.org/docs/mvp/)
-                    * https://webassembly.org/docs/faq/
-                    * https://webassembly.org/docs/future-features/module
-                    * https://hacks.mozilla.org/2017/02/where-is-webassembly-now-and-whats-next/
-
-                </section>
-                -->
             </section>
 
-
-
-            <section id="conclusion">
-                <section>
-                    <h3>Conclusion</h3>
-                    <ul class="small fragment">
-                        <li class="fragment highlight-current-blue">WebAssembly is a new Powerful tool</li>
-                        <li class="fragment highlight-current-blue">it's a Standard <small class="fragment">(unlike asm.js, Flash, JavaApplets or NaCL)</small></li>
-                        <li class="fragment highlight-current-blue">it's a compliment to JavaScript</li>
-                        <li class="fragment highlight-current-blue">it's still a browser, you will get better performance but no new capabilities</li>
-                        <li class="fragment highlight-current-blue">Everybody is doing it</li>
-                        <li class="fragment highlight-current-blue">it's not just for the Web <small class="fragment">(see e.g. CloudABI)</small></li>
-                    </ul>
-                </section>
-
-            </section>
 
             <section id="hands-on">
                 <section>
                     <h2>😁 Lets start Hacking🔨</h2>
 
                     <h3> 👨‍💻👩‍💻👨🏾‍💻👨🏽‍💻👩🏽‍💻👨🏼‍💻👨🏿‍💻</h3>
-                    <h3> 👨🏿‍💻👩🏿‍💻👩🏼‍💻🙋🏻‍♂️👨🏻‍💻👩🏻‍💻👩🏾‍💻</h3>
+                    <h3> 👨🏿‍💻👩🏿‍💻👩🏼‍💻<span class="wiggle">🙋🏻‍♂</span>🙋🏻‍👨🏻‍💻👩🏻‍💻👩🏾‍💻</h3>
                 </section>
-            </section>
-
-            <section id="compiling-wasm" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
                 <span class="chapter">building WebAssembly</span>
-
-                <section id="compiling">
-                    <h2>compiling</h2>
-                </section>
 
                 <section id="handwritten-wat">
                     <h4>artisan WebAssembly</h4>
@@ -619,27 +591,13 @@
                     <img src=" https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png" class="stretch">
                 </section>
 
-                <section id="compiler-emscripten" data-background-color="#ffffff">
-                    <p>
-                        <img src="images/Emscripten_logo_full.png" alt="emscripten logo">
-                    </p>
-                    <ul>
-                        <li><a href="https://emscripten.org/">compile with emsdk etc</a> </li>
-                    </ul>
-                </section>
-
-                <section id="compiler-llvm" data-background-color="#ffffff">
-                        <img src="images/LLVM_Logo.svg" alt="llvm logo" class="stretch"/>
-                        <a href="https://kripken.github.io/talks/wasm.html#/">*</a>
-
-                </section>
             </section>
 
             <section id="languages" class="white-slide" data-background-color="#ffffff" >
-                <span class="chapter">languages</span>
+                <span class="chapter">Sprachen</span>
 
                 <section id="wasm-languages">
-                    <h2>languages</h2>
+                    <h2>Sprachen</h2>
                 </section>
 
 
@@ -659,7 +617,6 @@
                         <li class="fragment"><a href="https://github.com/aykevl/tinygo">Tiny</a><a href="https://tinygo.org/webassembly/webassembly/">Go</a></li>
                         <li class="fragment"><a href="https://github.com/WebAssembly/proposals/issues/16">GC is one unsolved problem</a></li>
                     </ul>
-
                 </section>
 
                 <section id="assemblyscript">
@@ -690,7 +647,7 @@ memory.free(ptr);
                     <a href="https://rustwasm.github.io/"><img src="images/rustwasm.svg" alt="rust wasm"></a>
                     <h4 class="fragment">Rust for WebAssembly</h4>
                     <ul>
-                        <li class="fragment">great <a href="https://rustwasm.github.io/wasm-bindgen/">documentation</a> and <a href="https://docs.rs/web-sys/">bindings</a></li>
+                        <li class="fragment bounce">great <a href="https://rustwasm.github.io/wasm-bindgen/">documentation</a> and <a href="https://docs.rs/web-sys/">bindings</a></li>
                         <li class="fragment">best language</li>
                     </ul>
                 </section>
@@ -778,11 +735,13 @@ obj.instance.exports.exported_func();</code></pre>
                 </section>
 
                 <section id="ferris-happy">
-                    <img src="images/happy.svg" alt="jumping ferris"/>
+                    <img src="images/happy.svg" alt="jumping ferris" class="jumping"/>
                 </section>
 
                 <section id="raw-rust-example" >
-                    <h4> exposing a c-like interface <img src="images/shy.svg" alt="shy ferris" style="width:2em;vertical-align: bottom;margin-left:-4em;"> </h4>
+                    <h4> exposing a c-like interface
+                        <img src="images/shy.svg" class="pacing" alt="shy ferris" style="width:2em;vertical-align: bottom;margin-left:-4em;">
+                    </h4>
                     <pre><code class="rust">#[no_mangle]
 pub fn add(a: i32, b: i32) -> i32 {
     a + b + 100
@@ -798,7 +757,7 @@ console.dir(add(1,2)); // → 103</code></pre>
 
                 <section>
                     <h4>
-                        FFI safety<img src="images/hang.svg" alt="fallen over ferris" style="width:1em; vertical-align: top; margin-top:0.5em;margin-left:-3em;margin-bottom:-0.5em">
+                        FFI safety<img src="images/hang.svg" class="hanging" alt="fallen over ferris" style="width:1em; vertical-align: top; margin-top:0.5em;margin-left:-3em;margin-bottom:-0.5em">
                     </h4>
                     <pre><code class="JavaScript">const importObject = { env: {
     logger_num: (num) => console.info('logger_num', num),
@@ -819,7 +778,7 @@ pub unsafe fn speak() {
                 </section>
 
                 <section>
-                    <img src="images/jump.svg" alt="jumping ferris"/>
+                    <img src="images/jump.svg" class="jumping2" alt="jumping ferris"/>
                     <p>
                     codegen to  the rescue
                     </p>
@@ -831,7 +790,7 @@ pub unsafe fn speak() {
 
                 <section id="rustwasm">
                     <h4>
-                        <img src="images/hello.svg" alt="hello ferris" style="width:1.8em; vertical-align: middle; margin-right:-1em;">
+                        <img src="images/hello.svg" alt="hello ferris" style="width:1.8em; vertical-align: middle; margin-right:-1em; z-index: -1" class="wiggle">
                         rustwasm toolbox<sup><a href="https://rustwasm.github.io/book/introduction.html">*</a></sup> </h4>
                     <ul>
                         <li class="fragment highlight-current-green">wasm-bindgen</li>
@@ -944,7 +903,7 @@ pub fn run() -> Result<(), JsValue> {
                 data-background-transition="slide"
                 data-background-image="theme/grace-caadiang-58890-unsplash.jpg" class="black-slide">
                     <h2>Have an Awsm day!</h2>
-                    <img src="images/happy.svg" alt="waving ferris" style="margin-left:35%;margin-top:38%;width:30%">
+                    <img src="images/happy.svg" alt="waving ferris" style="margin-left:35%;margin-top:42%;width:20%" class="slowpacing">
                 </section>
             </section>
 
