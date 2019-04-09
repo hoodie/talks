@@ -1,0 +1,15 @@
+{
+  "name": "wasm-talk",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Hendrik Sollich",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "headjs": "^1.0.3",
+    "reveal.js": "^3.7.0"
+  },
+  "dependencies": {
+    "reveal.js-menu": "^1.2.0"
+  }
+}
