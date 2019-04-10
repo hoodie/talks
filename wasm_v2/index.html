@@ -49,14 +49,27 @@
                     <h1 class="fragment fade-in"> AWSM! </h1>
                     <small class="fragment fade-in"> Wie Hendrik einen talk über Rust in ein Javscript Meetup schmuggelt </small>
 
-                <footer>
-                    <cite>
+                <footer class="fragment">
                         Hendrik Sollich
+                        <p>11.04.2019</p>
                         <p> <small> <a href="../wasm_v1/">old version (englisch)</a> </small> </p>
-                    </cite>
                 </footer>
 
                 </section>
+
+            </section>
+
+            <section id="me" data-background-color="#ffffff" data-transition="zoom" data-background-transition="zoom"
+                class="nowhite-slide">
+                <div style="background-image: url(./images/doodles.png); background-repeat: no-repeat">
+                    <h3>Wer bin ich?</h3>
+                        <ul style="list-style-type:none;">
+                            <li>🤓 Hendrik Sollich</li>
+                            <li>👔 LogMeIn <sub>(seit 2016)</sub> </li>
+                            <li><a href="https://github.com/hoodie/"><i class="fab fa-github"></i> hoodie</a> </li>
+                            <li><a href="https://twitter.com/hoodie_de"><i class="fab fa-twitter"></i> hoodie_de</a> </li>
+                        </ul>
+                </div>
 
             </section>
 
@@ -64,21 +77,22 @@
                 <span class="chapter">preface</span>
 
                 <section>
-                    <h5>Hintergrund</h5>
+                    <h5 class="fragment">Hintergrund</h5>
                     <span class="fragment"> JavaScript </span>
                     <span class="fragment flickering"> Performance </span>
                 </section>
 
                 <section>
                     <h3> Warum nutzen wir JavaScript? </h3>
-                    <ol style="list-style-type: none;">
-                        <li class="fragment">✅ es ist schön</li>
-                        <li class="fragment">✅ es ist async </li>
-                        <li class="fragment">✅ es kommt mit jedem browser </li>
-                        <li class="fragment">💔 es schnell<span class="fragment">, nee isses nicht<sup>*</sup></span>
+                    <ol>
+                        <li>es ist schön <span class="fragment">✅️</span></li>
+                        <li>es ist async <span class="fragment">✅</span></li>
+                        <li>is halt schon im browser <span class="fragment">🤦🏻‍♀️</span></li>
+                        <li>es schnell<span class="fragment">💔</span>️<span class="fragment"><sup>*</sup></span>
                             <br> <small class="fragment">* native browser APIs zählen nicht</small>
                         </li>
-                        <li class="fragment">✅ <span class="fragment highlight-current-green">konkurierende Implementatierungen</span></li>
+                        <li class="fragment"><span class="fragment highlight-current-green">konkurierende Implementierungen✅</span>
+                        </li>
                     </ol>
                 </section>
 
@@ -108,7 +122,8 @@
                 </section>
 
                 <section data-background-color="#ffffff" data-transition="none" data-background-transition="none" class="white-slide">
-                    <h3>Warum is es so schwer Javascript schneller zu machen?</h3>
+                    <h4>Warum is es so schwer Javascript schneller zu machen?</h4>
+                    <p class="fragment">"scriptsprache"</p>
                 </section>
 
                 <section data-background-color="#ffffff" data-transition="none" data-background-transition="none" class="white-slide">
@@ -419,9 +434,6 @@
                     * neue Sprachen braucht das Web!
                     * tooling
 
-                </section>
-
-                <section id="discussion-cons" data-markdown class="small">
                     ### Cons
 
                     * [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
@@ -438,7 +450,7 @@
                         <ul>
                             <li>es ist nicht von Firmen geownet</li>
                             <li>es ist ein Teil des Browsers</li>
-                            <li>keine plugins, keine extra Angriffsfl"ache</li>
+                            <li>keine plugins, keine extra Angriffsfläche</li>
                             <li>Sandboxed genau wie JavaScript</li>
                             <li><a href="https://webassembly.github.io/spec/">Standard</a>, ergo ein Teil des Webs</li>
                         </ul>
@@ -473,7 +485,7 @@
                     </p>
                 </section>
 
-                <section id="what-can-it-not-do">
+                <section id="what-can-it-not-do" data-transition="concave" data-background-color="#25323a" class="black-slide" >
                     <h4>und was <span class="fragment highlight-red">nicht</span>?</h4>
                     <dl>
                         <dd class="fragment"> was das Web halt auch nicht kann </dd>
@@ -482,7 +494,7 @@
                     </dl>
                 </section>
 
-                <section id="use-cases">
+                <section id="use-cases" data-transition="concave" data-background-color="#25323a" class="black-slide" >
                     <h4>use cases</h4>
 
                     <dl class="small fragment">
@@ -499,10 +511,15 @@
                     </dl>
 
                     <dl class="small fragment">
-                        <dt>As a VM</dt>
-                        <dd><a href="https://www.wasmjit.org/">wasmjit</a> or <a href="https://wasmer.io/">wasmer</a></dd>
-                        <dd><a href="https://nuxi.nl/">CloudABI</a></dd>
+                        <dt>As a RunTime</dt>
+                        <dd>
+                            <a href="https://github.com/CraneStation/wasmtime">wasmtime</a>, <a href="https://github.com/fastly/lucet">lucet</a>,
+                        </dd>
+                        <dd>
+                             <a href="https://www.wasmjit.org/">wasmjit</a>
+                             or <a href="https://wasmer.io/">wasmer</a></dd>
                         <dd><a href="https://hacks.mozilla.org/2019/03/standardizing-wasi-a-webassembly-system-interface/">WASI</a></dd>
+                        <dd><a href="https://nuxi.nl/">CloudABI</a></dd>
 
                         <dt>in the <span class="emoji">☁️</span>Cloud</dt>
                         <dd><a href="https://blog.cloudflare.com/webassembly-on-cloudflare-workers/">on cloudflare workers</a></dd>
@@ -647,8 +664,8 @@ memory.free(ptr);
                     <a href="https://rustwasm.github.io/"><img src="images/rustwasm.svg" alt="rust wasm"></a>
                     <h4 class="fragment">Rust for WebAssembly</h4>
                     <ul>
-                        <li class="fragment bounce">great <a href="https://rustwasm.github.io/wasm-bindgen/">documentation</a> and <a href="https://docs.rs/web-sys/">bindings</a></li>
-                        <li class="fragment">best language</li>
+                        <li class="fragment bounce">großartige <a href="https://rustwasm.github.io/wasm-bindgen/">Dokumentation</a> und <a href="https://docs.rs/web-sys/">bindings</a></li>
+                        <li class="fragment">beste Sprache</li>
                     </ul>
                 </section>
 
@@ -658,7 +675,7 @@ memory.free(ptr);
             data-transition="concave" data-background-color="#25323a" class="black-slide" >
                 <span class="chapter">browser API</span>
                 <section id="how-does-it-get-into-the-browser">
-                    <h2> How does it get into the browser? </h2>
+                    <h2> Und wie komt das in den Browser? </h2>
 
                 </section>
                 <section>
@@ -733,6 +750,8 @@ obj.instance.exports.exported_func();</code></pre>
 
                     </span>
                 </section>
+            </section>
+            <section>
 
                 <section id="ferris-happy">
                     <img src="images/happy.svg" alt="jumping ferris" class="jumping"/>
@@ -789,8 +808,8 @@ pub unsafe fn speak() {
             <section id="rust">
 
                 <section id="rustwasm">
-                    <h4>
-                        <img src="images/hello.svg" alt="hello ferris" style="width:1.8em; vertical-align: middle; margin-right:-1em; z-index: -1" class="wiggle">
+                    <h3>
+                        <img src="images/hello.svg" alt="hello ferris" style="width:1.2em; vertical-align: middle; margin-right:-0.8em; z-index: -1" class="wiggle">
                         rustwasm toolbox<sup><a href="https://rustwasm.github.io/book/introduction.html">*</a></sup> </h4>
                     <ul>
                         <li class="fragment highlight-current-green">wasm-bindgen</li>
@@ -880,6 +899,12 @@ pub fn run() -> Result<(), JsValue> {
     Ok(())
 }</code></pre>
                 </section>
+                <section>
+<pre><code class="rust">#[wasm_bindgen]
+pub fn left_pad(content: &str, width: usize) -> String {
+    format!("{:👾>w$}", content, w = width)
+}</code></pre>
+                </section>
 
                 <section id="wasm-pack">
                     <h4>wasm-pack<sup><a href="https://rustwasm.github.io/wasm-pack/book/">📕</a></sup></h4>
@@ -931,12 +956,12 @@ pub fn run() -> Result<(), JsValue> {
                         <li class="fragment">Binaries can open Files and NetworkSockets themselves</li>
                         <li class="fragment">VMs or Docker?</li>
                         <li class="fragment">JavaScript/wasm isolation model</li>
-                        <li class="fragment">CloudABI</li>
-                        <li class="fragment">WASMER</li>
-                        <li class="fragment"><a href="https://youtu.be/3N29vrPoDv8?t=979">CloudABI @ 32c3</a></li>
+                        <li class="fragment">WASMER, wasmtime, lucet, nodejs...</li>
+                        <li class="fragment"><s><a href="https://youtu.be/3N29vrPoDv8?t=979">CloudABI @ 32c3</a></s>
+                            <a href="https://wasi.dev/">WASI</a> ( <a href="https://github.com/CraneStation/wasmtime/blob/master/docs/WASI-overview.md">overview</a> )
+                        </li>
                     </ul>
                 </section>
-
             </section>
 
         </div>
