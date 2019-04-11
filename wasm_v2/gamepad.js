@@ -36,8 +36,9 @@ window.toggleGamePadControls= () => {
     window.onGamePadRightPressed = () => console.log('gamepad right')
     window.onGamePadUpPressed = () => console.log('gamepad up')
     window.onGamePadDownPressed = () => console.log('gamepad down')
+    window.onGamePadSqPressed = () => console.log('gamepad square')
     window.onGamePadOPressed = () => console.log('gamepad o')
-    window.onGamePadoPressed = () => console.log('gamepad x')
+    window.onGamePadXPressed = () => console.log('gamepad x')
     window.onGamePadL1Pressed = () => console.log('gamepad l1')
     window.onGamePadR1Pressed = () => console.log('gamepad r1')
     window.onGamePadL2Pressed = () => console.log('gamepad l2')
@@ -73,6 +74,7 @@ window.toggleGamePadControls= () => {
         const btnL2 = gamePad.buttons[6].pressed
         const btnR2 = gamePad.buttons[7].pressed
 
+        if (freeToSq && btnSq   ) { window.onGamePadSqPressed() }
         if (freeToO && btnO   ) { window.onGamePadOPressed() }
         if (freeToX && btnX   ) { window.onGamePadXPressed() }
 
