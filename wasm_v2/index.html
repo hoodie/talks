@@ -36,7 +36,7 @@
     <div class="reveal">
         <div class="slides">
 
-            <section id="title">
+            <section id="title" data-transition="zoom" data-background-transition="zoom">
 
                 <!--
                 <section>
@@ -45,15 +45,17 @@
                     <h2>WebAssembly</h2>
                 </section>
                 -->
-                <section>
-                    <h3> WASM? </h3>
-                    <h1 class="fragment fade-in"> AWSM! </h1>
-                    <small class="fragment fade-in"> Wie Hendrik einen talk über Rust in ein Javscript Meetup schmuggelt </small>
+                <section data-transition="zoom" data-background-transition="zoom">
+                    <h1> WASM? </h1>
+                </section>
+
+                <section data-transition="zoom"  data-background-transition="zoom">
+                    <h1> AWSM! </h1>
 
                 <footer class="fragment">
-                        Hendrik Sollich
+                    <small> Wie Hendrik einen talk über Rust in ein Javscript Meetup schmuggelt </small>
                         <p>11.04.2019</p>
-                        <p> <small> <a href="../wasm_v1/">old version (englisch)</a> </small> </p>
+                        <small> <a href="../wasm_v1/">old version (englisch)</a> </small>
                 </footer>
 
                 </section>
@@ -420,25 +422,32 @@
                 <span class="chapter">discussion</span>
 
                 <section id="discussion-pros" data-markdown class="small">
-                    ### Pros
+                    <h3> Pros </h3>
+                    <ul>
+                        <li><a href='https://webassembly.github.io/spec/core/syntax/types.html'>streng getypt</a> </li>
+                        <li> kleiner Downloads </li>
+                        <li>
+                            performance
+                            <ul>
+                                <li>einfacheres Sprachmodell</li>
+                                <li>precompiled, preoptimized</li>
+                                <li>fewer allocations</li>
+                                <li>kein GC</li>
+                                <li><a href='https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/'>...what makes WASM fast?</a></li>
+                            </ul>
+                        </li>
+                        <li> target für existierenden nativen code </li>
+                        <li> Starkes Isolationsmodel </li>
+                        <li> neue Sprachen braucht das Web! </li>
+                        <li> tooling </li>
+                    </ul>
 
-                    * [streng getypt](https://webassembly.github.io/spec/core/syntax/types.html)
-                    * kleiner Downloads
-                    * performance
-                        * einfacheres Sprachmodell
-                        * precompiled, preoptimized
-                        * fewer allocations
-                        * no GC
-                        * [...what makes WASM fast?](https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/)
-                    * target for existing native code
-                    * strong isolation model
-                    * neue Sprachen braucht das Web!
-                    * tooling
+                    <h3>Cons</h3>
+                    <ul>
+                        <li><a href='https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/'>0 is a valid address</a></li>
+                        <li>Lesbarkeit (nicht mehr alles einfach JavaScript)</li>
+                    </ul>
 
-                    ### Cons
-
-                    * [0 is a valid address](https://00f.net/2018/11/25/webassembly-doesnt-make-unsafe-languages-safe/)
-                    * Lesbarkeit (nicht mehr alles einfach JavaScript)
                 </section>
 
                 <section id="wasm-vs-javaapplets-vs-flash">
@@ -649,10 +658,10 @@
                     <aside class="notes">expect your existing TypeScript code not to work out of the box</aside>
                     <h4>AssemblyScript: Limitations<sup><a href="https://github.com/AssemblyScript/assemblyscript/wiki/Limitations">*</a></sup></h4>
                     <ul>
-                        <li class="fragment">no union types</li>
-                        <li class="fragment">no <code>any</code> or <code>undefined</code></li>
-                        <li class="fragment">Primitive and Reference Types</li>
-                        <li class="fragment">Memory Management</li>
+                        <li class="fragment">keine union types</li>
+                        <li class="fragment">kein <code>any</code> oder <code>undefined</code></li>
+                        <li class="fragment">Primitive und Reference Typen</li>
+                        <li class="fragment">manuelles Memory Management</li>
                     </ul>
                     <pre class="fragment"><code class="typescript">import "allocator/tlsf";
 var ptr = memory.allocate(64);
@@ -676,7 +685,7 @@ memory.free(ptr);
             data-transition="concave" data-background-color="#25323a" class="black-slide" >
                 <span class="chapter">browser API</span>
                 <section id="how-does-it-get-into-the-browser">
-                    <h2> Und wie komt das in den Browser? </h2>
+                    <h2> Und wie kommt das in den Browser? </h2>
 
                 </section>
                 <section>
@@ -685,15 +694,15 @@ memory.free(ptr);
         &lt;script src="example.wasm" type="application/wasm"/&gt;
     &lt;/head&gt;
 &lt;/html&gt;</code></pre>
-                    <div class="fragment">Nope!!! There is no integration with ES Modules yet <cite>28.02.2019</cite> </div>
+                    <div class="fragment">Nope!!! Es gibt noch keine Integration für ES Modules <cite>11.04.2019</cite> </div>
                     <div class="fragment emoji">🙄 sorry</div>
                 </section>
 
                 <section>
                     <ol>
-                        <li>Get the <code>.wasm</code> bytes into a typed array or ArrayBuffer</li>
-                        <li class="fragment fade-up">Compile the bytes into a <code>WebAssembly.Module</code></li>
-                        <li class="fragment fade-up">Instantiate the <code>WebAssembly.Module</code> with imports to get the callable exports</li>
+                        <li>lad die <code>.wasm</code> bytes in einen typed array oder ArrayBuffer</li>
+                        <li class="fragment fade-up">kompiliere es selbst in ein <code>WebAssembly.Module</code></li>
+                        <li class="fragment fade-up">Instantiiere das <code>WebAssembly.Module</code> mit imports und benutze dessen exports</li>
                     </ol>
 
 
@@ -702,7 +711,7 @@ memory.free(ptr);
                 </section>
 
                 <section>
-                    <small><em>modules by hand</em></small>
+                    <small><em>module von Hand</em></small>
                     <pre><code class="JavaScript">fetch('simple.wasm')
     .then(response => response.arrayBuffer())
     .then(bytes => WebAssembly.instantiate(bytes, {}))
@@ -727,7 +736,7 @@ obj.instance.exports.exported_func();</code></pre>
                 </section>
 
                 <section id="importobject">
-                    <h4> what is that <code>importObject</code> ? </h4>
+                    <h4> was ist dieses <code>importObject</code>? </h4>
                     <pre><code class="JavaScript">const importObject = {
     env: {
         logger: (str) => console.info(str)
@@ -737,17 +746,16 @@ obj.instance.exports.exported_func();</code></pre>
                 </section>
 
                 <section id="ffi">
-                    <h4>how do I talk to WebAssembly?</h4>
+                    <h4>wie redet man mit WebAssembly?</h4>
 
                     <span class="fragment">
-                        just do a bunch of FFI 😨 because the you have to tunnel everything 😩through an essentially 😱
-                        C-like interface
+                        schreib einfach in JavaScript FFI 😨 und tunnel 😩 alles durch ein quasi C-isches interface 😱
                         <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-04-memory04.png"
                             alt="ffi" style="width:100%" />
 
 
-                        <div class="fragment"> 🙇 you don't even get strings</div>
-                        <div class="fragment">it's assembly after all 🤷‍♂️ </div>
+                        <div class="fragment"> 🙇 es gibt nicht mal strings</div>
+                        <div class="fragment">ist halt assembly 🤷‍♂️ </div>
 
                     </span>
                 </section>
@@ -799,9 +807,7 @@ pub unsafe fn speak() {
 
                 <section>
                     <img src="images/jump.svg" class="jumping2" alt="jumping ferris"/>
-                    <p>
-                    codegen to  the rescue
-                    </p>
+                    <h3> codegen to  the rescue </h3>
                 </section>
 
             </section>
