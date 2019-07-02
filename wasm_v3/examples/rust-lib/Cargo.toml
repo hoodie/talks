@@ -1,0 +1,19 @@
+[package]
+name = "rust-lib"
+version = "0.1.0"
+authors = ["Hendrik Sollich <hendrik@hoodie.de>"]
+edition = "2018"
+
+[dependencies.wee_alloc]
+version = "0.4.3"
+optional = true
+
+[profile.release]
+lto = true
+opt-level = 'z'
+
+[features]
+default = ["wee_alloc"]
+
+[lib]
+crate-type = ["cdylib"]

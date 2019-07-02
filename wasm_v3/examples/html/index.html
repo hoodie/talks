@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script>
+        // const dec = new TextDecoder('utf-8');
+        // (async () => {
+        //     importObject = {
+        //         env: {
+        //             logger: (str) => console.info(str)
+        //         },
+        //     };
+
+        //     let { exports: { add, speak }, memory }  = await fetch('rust-lib.wasm')
+        //         .then(response => response.arrayBuffer())
+        //         .then(bytes => WebAssembly.instantiate(bytes, importObject))
+        //         .then(result => result.instance);
+
+        //     console.dir(add(1,2));
+        //     speak();
+        // })()
+    </script>
+    <script type="module">
+        import wasm from './pkg/'
+    </script>
+</head>
+
+<body>
+</body>
+</html>
