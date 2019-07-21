@@ -26,21 +26,6 @@
     font-family: "Vollkorn";
 }
 
-.reveal blockquote:before {
-    position: absolute;
-    left: -10px;
-    color: #ccc;
-    font-size: 6em;
-    line-height: 0.1em;
-    margin-right: 0.25em;
-    vertical-align: -0.4em;
-}
-
-.reveal blockquote:before {
-    content: "\"";
-    font-family: Georgia, 'Times New Roman', Times, serif
-}
-
 .reveal blockquote cite {
     font-size: 0.6em;
 }
@@ -130,14 +115,23 @@ pre code {
 
 }
 
-.flickering .fragment{
+.flickering .fragment {
     animation-play-state: initial;
-    color: red;
+    /* // color: red; */
+}
+
+.visible .startglowing  {
+  animation: startglow 4.5s;
 }
 
 .flickering {
-  animation: letter-flicker 3s linear infinite;
+  animation: flicker 3.5s infinite alternate;     
 }
+
+.flickering2 {
+  animation: flicker 2.5s infinite backwards;     
+}
+
 /* thanks to https://codepen.io/KevinOgden/pen/JEwjBB/ */
 @keyframes letter-flicker {
   0% { opacity:1}
@@ -149,6 +143,66 @@ pre code {
   90% { opacity:1; }
   93% { opacity:0.4; }
   95% { opacity:1; }
+}
+
+:root {
+    --neon-text-color: #fff;
+    --neon-border-color: #08f;
+    --neon-border-size: 1;
+  }
+
+.neon {
+        text-shadow:
+            -0.2rem -0.2rem 1rem #fff,
+            0.2rem 0.2rem 1rem #fff,
+            0 0 calc(var(--neon-border-size) * 2rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 4rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 6rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 8rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 10rem) var(--neon-text-color);
+}  
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+      
+        opacity: inherit;
+        text-shadow:
+            -0.2rem -0.2rem 1rem #fff,
+            0.2rem 0.2rem 1rem #fff,
+            0 0 calc(var(--neon-border-size) * 2rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 4rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 6rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 8rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 10rem) var(--neon-text-color);
+   
+    }
+    
+    20%, 24%, 55% {        
+        opacity: 0;
+        text-shadow: none;
+        box-shadow: none;
+    }    
+}
+
+@keyframes startglow {
+    0% {        
+        opacity: 0;
+        text-shadow: none;
+        box-shadow: none;
+    }    
+    
+     100% {
+        opacity: inherit;
+        text-shadow:
+            -0.2rem -0.2rem 1rem #fff,
+            0.2rem 0.2rem 1rem #fff,
+            0 0 calc(var(--neon-border-size) * 2rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 4rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 6rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 8rem) var(--neon-text-color),
+            0 0 calc(var(--neon-border-size) * 10rem) var(--neon-text-color);
+   
+    }
 }
 
 @keyframes wiggle {
@@ -277,8 +331,22 @@ pre code {
   100% { transform: rotate(0deg); }
 }
 
-.hanging{
+.hanging {
   display: inline-block;
   animation: hanging 3.0s infinite;
   transform-origin: 60% 6%;
 }
+.blinking {
+    display: inline-block;
+    margin-left: 1px;
+  
+    animation: blink 2s linear 0s infinite;
+}
+
+@keyframes blink {
+    0%   { opacity: 0 }
+    47%  { opacity: 0 }
+    50%  { opacity: 1 }
+    97%  { opacity: 1 }
+    100% { opacity: 0 }
+  }

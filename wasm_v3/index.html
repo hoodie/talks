@@ -8,10 +8,10 @@
     <meta http-equiv="x-ua-compatible" content="IE=edge">
     <link rel="stylesheet" href="lib/reveal.css">
     <link rel="stylesheet" href="theme/hoodie-solarized.css">
-    <link rel="stylesheet" href="theme/tomorrow.css">
-    <link rel="stylesheet" href="theme/talk.css">
     <link rel="stylesheet" href="theme/fonts/fonts.css">
     <link rel="stylesheet" href="theme/font-awesome/all.min.css">
+    <link rel="stylesheet" href="theme/tomorrow.css">
+    <link rel="stylesheet" href="theme/talk.css">
     <script> delete WebAssembly.instantiateStreaming; </script>
     <script src="./examples/gadgets/gadgets.js"></script>
     <script>
@@ -37,51 +37,93 @@
     <div class="reveal">
         <div class="slides">
 
-            <section id="title" data-transition="zoom" data-background-transition="zoom">
+            <section id="title" class="black-slide" data-background-color="#25323a">
 
-                <!--
-                <section>
-                    <h3>Rust Dresden</h3>
-                    <img src="images/rust-logo-blk.svg" alt="rust logo" class="plain" style="width:30%">
-                    <h2>WebAssembly</h2>
+                <section id="start">
+                    <h4> 22.07.2019</h4>
+                    <h2> WebMontag </h2>
+                    <h6>webassembly</h6>
                 </section>
-                -->
-                <section data-transition="zoom" data-background-transition="zoom">
+
+                <section >
                     <h1> WASM? </h1>
                 </section>
 
-                <section data-transition="zoom"  data-background-transition="zoom">
-                    <h1> AWSM! </h1>
-
-                <footer class="fragment">
-                    <p>WebMontag 22.07.2019</p>
-                </footer>
-
+                <section data-state="visible">
+                    <h1> <span class="neon startglowing"> AWSM! </span> </h1>
                 </section>
 
             </section>
 
-            <section id="me" data-background-color="#ffffff" data-transition="zoom" data-background-transition="zoom"
-                class="nowhite-slide">
-                <div style="background-image: url(./images/doodles.png); background-repeat: no-repeat">
-                    <h3>Wer bin ich?</h3>
-                        <ul style="list-style-type:none;">
-                            <li>🤓 Hendrik Sollich</li>
-                            <li>👔 at LogMeIn </li>
-                            <li><a href="https://github.com/hoodie/"><i class="fab fa-github"></i> hoodie</a> </li>
-                            <li><a href="https://twitter.com/hoodie_de"><i class="fab fa-twitter"></i> hoodie_de</a> </li>
-                        </ul>
+            <section id="me" data-background-color="#ffffff" data-transition="zoom" data-background-transition="zoom">
+                <div class="notes">
+            
                 </div>
+                <h3>
+                    <code>
 
+                    $whoami<span class="blinking">&block;</span>
+                    </code>
+                </h3>
+                <div style="background-image: url(./images/doodles.png); background-repeat: no-repeat">
+                    <ul style="list-style-type:none;">
+                        <li> <a href="https://www.hoodie.de"> 🤓 </a> Hendrik Sollich</li>
+                        <li> <a href="https://www.gotomeeting.com/"> 👔 </a> LogMeIn (GoToMeeting <i
+                                class="fa fa-microphone-alt"></i>)</li>
+                        <li><a href="https://github.com/hoodie/"><i class="fab fa-github"></i></a> hoodie </li>
+                        <li><a href="https://twitter.com/hoodie_de"><i class="fab fa-twitter"></i></a> @hoodie_de </li>
+                        <li><a href="https://akronymisier.bar"><i class="fa fa-headphones"></i></a> akronymisier.bar
+                        </li>
+                    </ul>
+                </div>
+            
             </section>
 
-            <section id="JavaScript-performance" data-transition="concave" data-background-color="#25323a" class="black-slide" >
+            <section>
+                <h3>who heard these terms?</h3>
+
+                <small>
+                    <ul style="list-style: none;">
+                        <li class="fragment">WebAssembly?</li>
+                        <li class="fragment">JavaScript?</li>
+                        <li class="fragment">asm.js?</li>
+                        <li class="fragment">AssemblyScript?</li>
+                        <li class="fragment">Rust?</li>
+                        <li class="fragment">llvm?</li>
+                        <li class="fragment">docker?</li>
+                        <li class="fragment">cloudAbi?</li>
+                        <li class="fragment">WASI?</li>
+                    </ul>
+                
+                </small>
+            </section>
+
+            <section id="toc">
+                <h2>
+                    <i class="fas fa-directions"></i>
+                    what now?</h2>
+                <ul style="list-style: none;">
+                    <li><a href="#history"><i class="fas fa-bookmark"></i> why wasm?</a></li>
+                    <li><a href="#introducing-webassembly"><i class="fas fa-bookmark"></i> what is wasm?</a></li>
+                    <li><a href="#wasm-on-the-web"> <i class="fas fa-bookmark"></i> wasm on the web</a></li>
+                </ul>
+            </section>
+
+            <section id="history">
+                <h1>why wasm?</h1>
+            </section>
+
+            <section id="JavaScript-performance" data-transition="concave" data-background-color="#25323a"
+                class="black-slide">
                 <span class="chapter">preface</span>
 
-                <section>
+                <section data-state="visible" >
                     <h5> Background </h5>
-                    <span class="fragment"> JavaScript </span>
-                    <span class="fragment flickering"> Performance </span>
+                    <h3>
+                        <span class="neon startglowing"> JavaScript </span>
+                        <span class="neon fragment"> P<span class="flickering">e</span>rforma<span
+                                class="flickering2">nce</span></span>
+                    </h3>
                 </section>
 
                 <section>
@@ -90,41 +132,47 @@
                         <li class="fragment">✅ it's convenient </li>
                         <li class="fragment">✅ it's async </li>
                         <li class="fragment">✅ it comes with every browser </li>
-                        <li class="fragment">💔 not because it's fast<span class="fragment">, it's not</span><sup class="fragment">*</sup>
+                        <li class="fragment">💔 not because it's fast<span class="fragment">, it's not</span><sup
+                                class="fragment">*</sup>
                             <br> <small class="fragment">* native browser APIs don't count</small>
                         </li>
-                        <li class="fragment">✅ <span class="fragment highlight-current-green">competing implementations</span></li>
+                        <li class="fragment">✅ <span class="fragment highlight-current-green">competing
+                                implementations</span></li>
                     </ol>
                 </section>
 
-                <section data-background-color="#ffffff"  data-transition=""="zoom" data-background-transition="zoom" class="white-slide">
+                <section data-background-color="#ffffff" data-transition=""="zoom" data-background-transition="zoom"
+                    class="white-slide">
                     <img
-                      src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-01-perf_graph05.png"
-                      />
-                    <br/>
+                        src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-01-perf_graph05.png" />
+                    <br />
                     <small>
-                    <cite>
-                        <a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">Lin Clark "A cartoon intro to WebAssembly"</a>
-                    </cite>
+                        <cite>
+                            <a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">Lin Clark "A
+                                cartoon intro to WebAssembly"</a>
+                        </cite>
                     </small>
                 </section>
 
-                <section data-background-color="#ffffff" data-transition="none" data-background-transition="none" class="white-slide">
+                <section data-background-color="#ffffff" data-transition="none" data-background-transition="none"
+                    class="white-slide">
                     <aside class="notes" data-markdown>
                         * what makes it hard to make JavaScript fast?
                         * it's a very dynamic language
                     </aside>
                     <img
                         src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/01-02-perf_graph10.png" />
-                        <br/>
+                    <br />
                     <small>
-                    <cite>
-                        <a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">Lin Clark "A cartoon intro to WebAssembly"</a>
-                    </cite>
+                        <cite>
+                            <a href="https://hacks.mozilla.org/2017/02/a-cartoon-intro-to-webassembly/">Lin Clark "A
+                                cartoon intro to WebAssembly"</a>
+                        </cite>
                     </small>
                 </section>
 
-                <section data-background-color="#ffffff" data-transition="none" data-background-transition="none" class="white-slide">
+                <section data-background-color="#ffffff" data-transition="none" data-background-transition="none"
+                    class="white-slide">
                     <aside class="notes" data-markdown>
                         * what makes it hard to make JavaScript fast?
                         * it's a very dynamic language
@@ -137,27 +185,26 @@
 
             <section id="history-asmjs">
                 <span class="chapter">history: asm.js</span>
-                <section
-                    data-background-image="theme/toa-heftiba-703461-unsplash.jpg"
-                    data-background-opacity="0.2"
-                >
+                <section data-background-image="theme/toa-heftiba-703461-unsplash.jpg" data-background-opacity="0.2">
 
-                    <h3>doing less
-
+                    <h3>
+                        be less dynamic
                     </h3>
-                    <h4> simplified JavaScript: <span class="fragment">asm.js</span> </h4>
+                    <h1 class="fragment">asm.js</span> </h4>
                 </section>
 
                 <section>
                     <blockquote class="small fragment">
                         <p>
-                        ... can be used as a low-level,<br>
-                        efficient <span class="fragment highlight-red">target language for compilers</span>.
+                            ... can be used as a low-level,<br>
+                            efficient <span class="fragment highlight-red">target language for compilers</span>.
                         </p>
                         <p>
-                        The asm.js language provides an abstraction similar to the C/C++ virtual machine: a large binary
-                        heap with efficient loads and stores, integer and floating-point arithmetic, first-order function definitions, and
-                        function pointers.
+                            The asm.js language provides an abstraction similar to the C/C++ virtual machine: a large
+                            binary
+                            heap with efficient loads and stores, integer and floating-point arithmetic, first-order
+                            function definitions, and
+                            function pointers.
                         </p>
                         <cite> <a href="http://asmjs.org/spec/latest/#introduction">asm.js spec</a> <a
                                 href="http://asmjs.org/faq.html">(faq)</a> </cite>
@@ -173,16 +220,17 @@
 
                     <blockquote class="small fragment">
                         <span>
-                        ... a small, strict subset of JavaScript that only allows things like
-                        <code class="fragment highlight-green">while</code>,
-                        <code class="fragment highlight-green">if</code>,
-                        <code class="fragment highlight-green">numbers</code> and
-                        <code class="fragment highlight-green">top level functions</code>.
+                            ... a small, strict subset of JavaScript that only allows things like
+                            <code class="fragment highlight-green">while</code>,
+                            <code class="fragment highlight-green">if</code>,
+                            <code class="fragment highlight-green">numbers</code> and
+                            <code class="fragment highlight-green">top level functions</code>.
                         </span>
                     </blockquote>
 
                     <blockquote class="small fragment">
-                        [...] It does not allow objects, strings, closures, and basically anything that requires heap allocation.
+                        [...] It does not allow objects, strings, closures, and basically anything that requires heap
+                        allocation.
                         <cite>
                             <a href="https://developer.mozilla.org/en-US/docs/Games/Tools/asm.js">mdn</a>
                         </cite>
@@ -196,7 +244,8 @@
                     <aside class="notes" data-markdown>
                         * `"use asm"` magic string
                         * numbers -> int vs float
-                        * heap [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
+                        * heap
+                        [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
                     </aside>
                     <pre class="fragment"><code class="JavaScript small">function MyAsmModule(stdlib, foreign, heap) {
     "use asm";
@@ -207,12 +256,13 @@
     };
 }</code></pre>
 
-<pre class="fragment"><code class="JavaScript">function add1(x) {
+                    <pre class="fragment"><code class="JavaScript">function add1(x) {
     x = x|0; // x : int
     return (x+1)|0;
 }</code></pre>
 
-                    <pre class="fragment"><code class="JavaScript">var heap = new ArrayBuffer(0x10000);          // 64k heap </code></pre>
+                    <pre
+                        class="fragment"><code class="JavaScript">var heap = new ArrayBuffer(0x10000);          // 64k heap </code></pre>
                     <small><a href="http://asmjs.org/spec/latest/#introduction">asm.js spec</a></small>
 
                 </section>
@@ -223,10 +273,11 @@
                     </aside>
 
                     <p>
-                    so we're compiling some <strong class="fragment highlight-blue">native language</strong>
-                    to <strong class="fragment highlight-blue">JavaScript</strong>
-                    that looks something like <strong class="fragment highlight-blue">C</strong>
-                    so that <br> the <strong class="fragment highlight-blue">JavaScript Engine</strong> can compile it in the Browser
+                        so we're compiling some <strong class="fragment highlight-blue">native language</strong>
+                        to <strong class="fragment highlight-blue">JavaScript</strong>
+                        that looks something like <strong class="fragment highlight-blue">C</strong>
+                        so that <br> the <strong class="fragment highlight-blue">JavaScript Engine</strong> can compile
+                        it in the Browser
                     </p>
 
                     <span class="fragment">
@@ -250,10 +301,9 @@
                         <li class="fragment">it is not assembly</li>
                         <li class="fragment">but it is JavaScript</li>
                         <li class="fragment emoji" style="list-style: none"> 🧐</li>
-                    <!-- <cite class="fragment"><a href="https://brendaneich.com/2015/06/from-asm-js-to-webassembly/">Brendan Eich</a></cite> -->
-                        <li class="fragment">still JavaScript syntax</li>
-                        <li class="fragment">still have to parse</li>
-                        <li class="fragment">larger download size</li>
+                        <!-- <cite class="fragment"><a href="https://brendaneich.com/2015/06/from-asm-js-to-webassembly/">Brendan Eich</a></cite> -->
+                        <li class="fragment">larger download than binary</li>
+                        <li class="fragment">still have to parse JavaScript syntax</li>
                         <li class="fragment">optimizations vary</li>
                         <li class="fragment">but easier to JIT 🤷🏽‍♂️</li>
                     </ul>
@@ -263,7 +313,7 @@
 
             <section id="introducing-webassembly" data-background-color="#ffffff" class="white-slide">
                 <section>
-                    <img src="images/web-assembly-logo.svg" alt="webassembly logo"/>
+                    <img src="images/web-assembly-logo.svg" alt="webassembly logo" />
                 </section>
 
                 <section>
@@ -281,6 +331,7 @@
                         <cite> <a href="https://rustwasm.github.io/book/what-is-webassembly.html"> rust wasm book
                             </a> </cite>
                     </blockquote>
+
                 </section>
 
                 <!--
@@ -298,7 +349,7 @@
             <section id="webassembly-faster" data-background-transition="none">
                 <span class="chapter">WebAssembly</span>
 
-                <section id="how-is-it-faster">
+                <section id="asmjs-vs-wasm">
                     <aside class="notes" data-markdown>
                         #### Startup
                         * download size, 10-20% smaller than gzipped
@@ -309,25 +360,20 @@
                         * asm.js is not really a standard, browsers optimize differently
                     </aside>
 
-                    <h3> consequent step </h3>
-                    <h4>after asm.js</h4>
+                    <h3>
+                        wasm vs asm.js
+                        <small>
+                            <a href="https://hacks.mozilla.org/2017/03/why-webassembly-is-faster-than-asm-js/">*</a><a href="https://kripken.github.io/talks/emwasm.html#/12">*</a>
+                        </small>
+                    </h3>
                     <ol>
-                        <li class="fragment">smaller download size</li>
-                        <li class="fragment">easier to parse</li>
-                        <li class="fragment">real assembly</li>
-                        <li class="fragment">similar vm model</li>
-                        <li class="fragment">even faster</li>
+                        <li>smaller download size</li>
+                        <li>easier to parse</li>
+                        <li>real assembly</li>
+                        <li>similar vm model</li>
+                        <li>even faster</li>
                     </ol>
 
-                    <br>
-                    <cite class="fragment"><a href="https://hacks.mozilla.org/2017/03/why-webassembly-is-faster-than-asm-js/">
-                        Alon Zakai @mozilla hacks</a>
-                        <br/>
-                        <small> "<a href="https://hacks.mozilla.org/2017/03/why-webassembly-is-faster-than-asm-js/">Why WebAssembly is Faster Than asm.js</a>" </small>
-                        <br>
-                        <small> bonus: "<a href="https://kripken.github.io/talks/emwasm.html#/12">A WebAssembly Toolchain Story</a>" </small>
-
-                    </cite>
                 </section>
 
             </section>
@@ -341,7 +387,7 @@
                 </section>
                 <section data-transition="none" data-background-color="#ffffff" data-background-transition="slide">
                     <img src="images/05-03-diagram_future01-768x328.png" alt="" class="stretch">
-                </section>
+                </section> <!--
                 <section data-transition="none" data-background-color="#ffffff" data-background-transition="slide">
                     <img src="images/05-04-diagram_compare02-768x259.png" alt="" class="stretch">
                 </section>
@@ -357,22 +403,805 @@
                 <section data-transition="none" data-background-color="#ffffff" data-background-transition="slide">
                     <img src="images/05-08-diagram_compare06-768x314.png" alt="" class="stretch">
                 </section>
+            -->
+
+                <section id="google-io-talk" data-transition="none" data-background-color="#ffffff" data-background-transition="slide">
+                    <img src="images/compiling the web - youtube 6v4E6oksar0.png" alt="youtube 6v4E6oksar0"
+                        class="stretch">
+                    <h4>#direkteinspritzung</h4>
+                    <cite><a href="https://www.youtube.com/watch?v=6v4E6oksar0">compiling the web - Google
+                            IO'17</a></cite>
+                </section>
+            </section>
 
 
-                <small class="bottom" >
-                    <cite><a href="https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/">Lin Clark "What makes WebAssembly fast?"</a></cite>
-                </small>
 
             </section>
 
-            <section id="google-io-talk">
-                <section id="google-io">
-                    <img src="images/compiling the web - youtube 6v4E6oksar0.png" alt="youtube 6v4E6oksar0" class="stretch">
-                    <h5>#direkteinspritzung</h5>
-                    <cite><a href="https://www.youtube.com/watch?v=6v4E6oksar0">compiling the web - Google IO'17</a></cite>
+            <section id="performance">
+                <span class="chapter">performance</span>
+                <section id="performance-title">
+                    <h2>Performance vs ...</h2>
+                </section>
+                <section id="performance-vs-javascript">
+                    <h3>WASM vs JavaScript</h3>
+                    <span class="fragment">
+                        <p style="margin-top: 10%;">
+                            <blockquote>
+                                it's 30x Faster
+                            </blockquote>
+                            <cite><a
+                                    href="https://medium.com/@mbebenita/webassembly-is-30x-faster-than-javascript-c71ea54d2f96">WebAssembly
+                                    is “30X” Faster than JavaScript</a></cite>
+                        </p>
+                    </span>
+                </section>
+
+                <section id="performance-vs-asmjs">
+                    <h2>WASM vs asm.js</h2>
+                    <span class="fragment">
+
+                        <img src="images/MindTheGap0.png" alt="wasm vs asm.js" class="stretch" />
+                        <cite><a href="https://arxiv.org/abs/1901.09056">Mind the Gap</a></cite>
+                    </span>
+                </section>
+
+                <section id="performance-vs-native">
+                    <h2>WASM vs Native</h2>
+                    <p>...of the 24 benchmarks evaluated, seven run within 10% of native execution and almost all of
+                        them run less than 2× slower.</p>
+                    <cite><a href="https://dl.acm.org/citation.cfm?id=3243858">Bringing the web up to speed</a></cite>
+                </section>
+
+                <section>
+                    <img src="images/MindTheGap1.png" alt="wasm vs native" class="stretch" />
+                    <cite><a href="https://arxiv.org/abs/1901.09056">Mind the Gap</a></cite>
+                </section>
+
+                <section>
+                    <span class="emoji"></span>
+                </section>
+            </section>
+
+            <section id="discussion" class="black-slide" data-background-color="#25323a">
+                <span class="chapter">discussion</span>
+
+                <!--
+                <section id="discussion-pros" data-markdown class="small">
+                    <h3> Pros </h3>
+                    <ul>
+                        <li><a href='https://webassembly.github.io/spec/core/syntax/types.html'>strongly typed</a> </li>
+                        <li>faster loading</li>
+                        <li> better performance <ul>
+                                <li>simpler language model</li>
+                                <li>precompiled, preoptimized</li>
+                                <li>fewer allocations</li>
+                                <li>no GC</li>
+                                <li><a href='https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/'>...what
+                                        makes WASM fast?</a></li>
+                            </ul>
+                        </li>
+                        <li> target for existing native code </li>
+                        <li> strong isolation model </li>
+                        <li>new languages on the web</li>
+                    </ul>
+                </section>
+                -->
+
+                <section id="wasm-vs-javaapplets-vs-flash">
+                    <h3>But, isn't WASM just like <br>
+                        <span class="fragment">JavaApplets</span>
+                        <span class="fragment">or Flash?</span>
+                        <strong class="fragment">no!</strong>
+                    </h3>
+                    <blockquote class="fragment small">
+                        <ol>
+                            <li>It's part of the Browser</li>
+                            <li>No plugins, no extra attack surface</li>
+                            <li>Sandboxed just like JavaScript</li>
+                            <li>Not owned by other companies like Flash or Java</li>
+                            <li><a href="https://webassembly.github.io/spec/">Standard</a> → real web-technology</li>
+                        </ol>
+                        <cite>
+                            <a href="https://words.steveklabnik.com/is-webassembly-the-return-of-java-applets-flash">
+                                kudos steve klabnik
+                            </a>
+                        </cite>
+                    </blockquote>
+                </section>
+
+            </section>
+
+            <section id="awsm" data-state="visible" class="black-slide" data-background-color="#25323a">
+                <h1>🕺<span class="neon startglowing"> AWSM! </span>💃</h1>
+            </section>
+
+            <section id="toc2">
+                <h2>
+                    <i class="fas fa-directions"></i>
+                    what now?</h2>
+                <ul style="list-style: none;">
+                    <li><a href="#history"><i class="fas fa-bookmark"></i> why wasm?</a> ✔</li>
+                    <li><a href="#introducing-webassembly"><i class="fas fa-bookmark"></i> what is wasm?</a> ✔</li>
+                    <li><a href="#wasm-on-the-web"> <i class="fas fa-bookmark"></i> wasm on the web</a></li>
+                    <li><a href="#browser-api"><i class="fas fa-bookmark"></i> wasm browser API?</a></li>
+                    <li><a href="#wasm-everywhere"><i class="fas fa-bookmark"></i> wasm everywhere</a></li>
+                    <li><a href="#how-to-wasm"><i class="fas fa-bookmark"></i> write your own?</a> (<a href="#rust-wasm">rust-wasm</a>)</li>
+                </ul>
+            </section>
+
+            <section id="wasm-on-the-web">
+                <span class="chapter"><strong>Web</strong>Assembly</span>
+                <section>
+                    <h2>WebAssembly on the Web</h2>
+                    <img src="./images/duh.gif" alt="duh" class="fragment">
+                </section>
+
+                <section id="what-can-it-do">
+                    <h2>what can we do with it? 🤔</h2>
+
+                    <p class="fragment"> ... everything <strong class="serif">the Web</strong> has to offer</p>
+                    <p>
+                        <span class="fragment">
+                            DOM Apis</span><span class="fragment">,
+                            WebGL</span><span class="fragment">,
+                            WebAudio</span><span class="fragment">,
+                            Canvas</span><span class="fragment">,
+                            everything you can access from JavaScript</span>
+                    </p>
                 </section>
 
                 <!--
+                <section id="what-can-it-not-do">
+                    <h3>what can we <span class="fragment highlight-red">not</span> do with it?</h3>
+                    <dl>
+                        <dt class="fragment"> ⏳ not yet </dt>
+                        <dd>
+                            <ul>
+                                <li class="fragment">
+                                    <strike>SIMD<sup><a href="https://github.com/WebAssembly/simd">*</a></sup><sup>
+                                            <small><a
+                                                    href="https://twitter.com/DasSurma/status/1098915542608609280">🐦</a></small></sup></strike>
+                                </li>
+                                <li class="fragment"> <strike>threads<sup><a
+                                                href="https://github.com/WebAssembly/threads">*</a></sup><sup><a
+                                                href=" https://www.chromestatus.com/features/5724132452859904">*</a></sup>
+                                    </strike></li>
+                                <li class="fragment"> x64 binaries </li>
+                            </ul>
+                        </dd>
+                    
+                        <dt class="fragment"> 🚫 not ever </dt>
+                        <dd class="fragment">
+                            everything you couldn't do
+                            <sup><a href="#wasm-isolation">*</a></sup>
+                            <br>
+                            <span class="fragment highlight-red">
+                                from within a JavaScript Sandbox
+                            </span>
+                            <ul>
+                                <li class="fragment"> udp<sup><a
+                                            href="https://new.gafferongames.com/post/why_cant_i_send_udp_packets_from_a_browser/">*</a></sup>
+                                </li>
+                                <li class="fragment"> syscalls: fs, clock, etc<sup><a href="https://browsix.org/">*</a></sup>
+                                </li>
+                                <li class="fragment"> more precise timers<a
+                                        href="https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/"><sup>*</sup></a>
+                    
+                                </li>
+                            </ul>
+                        </dd>
+                    </dl>
+                </section>
+                -->
+
+                <section id="use-cases" data-transition="concave" data-background-color="#25323a" class="black-slide">
+                    <h2>use cases</h2>
+                
+                    <dl class="small fragment">
+                        <dt>Web, Binary</dt>
+                        <dd>Binary protocols, parsers </dd>
+                        <dd>Audio<sup><a href="https://people.xiph.org/~jm/demo/rnnoise/">*</a></sup>/Video/Image
+                            Processing</dd>
+                        <dd>Cryptography</dd>
+                        <dd>Computer vision</dd>
+                        <dd>Emulation: e.g. Gameboy or x86 </dd>
+                
+                        <dt>Web, High Performance</dt>
+                        <dd>CAD, Science, Games</dd>
+                        <dd>Low latency apps: VR </dd>
+                    </dl>
+                    <img src="https://media.giphy.com/media/5tbjoR6XTK6NR2CFSg/giphy.gif" alt="of course" class="fragment">
+                
+                    <!--
+                                    <dl class="small fragment">
+                                        <dt>As a RunTime</dt>
+                                        <dd>
+                                            <a href="https://github.com/CraneStation/wasmtime">wasmtime</a>, <a
+                                                href="https://github.com/fastly/lucet">lucet</a>,
+                                        </dd>
+                                        <dd>
+                                            <a href="https://www.wasmjit.org/">wasmjit</a>
+                                            or <a href="https://wasmer.io/">wasmer</a></dd>
+                                        <dd><a
+                                                href="https://hacks.mozilla.org/2019/03/standardizing-wasi-a-webassembly-system-interface/">WASI</a>
+                                        </dd>
+                                        <dd><a href="https://nuxi.nl/">CloudABI</a></dd>
+                
+                                        <dt>in the <span class="emoji">☁️</span>Cloud</dt>
+                                        <dd><a href="https://blog.cloudflare.com/webassembly-on-cloudflare-workers/">on cloudflare
+                                                workers</a></dd>
+                                        <dd><a href="https://blog.scottlogic.com/2018/10/18/serverless-rust.html">in AWS
+                                                Lambda</a><sup><a href="https://crates.io/crates/lambda_runtime"
+                                                    title="official aws rust runtime">*</a></sup></dd>
+                
+                                        <dt>More</dt>
+                                        <dd><a href="https://twitter.com/hoodie_de/status/1096865768258629632 ">even</a> <a
+                                                href="https://webassembly.org/docs/use-cases/">moar</a></dd>
+                                    </dl>
+                                    -->
+                
+                    <p class="fragment">
+                        Port your Desktop code to the Web
+                        <span class="emoji"></span>🐘</span>
+                    </p>
+                </section>
+
+                <section id="where-is-it-already-used">
+                    <h3> already in the wild </h3>
+                    <ul style="font-size: 0.7em">
+                        <li class="fragment">
+                        <a href="https://earth.google.com/web/"> google earth </a>
+                        </li>
+
+                        <!--
+                        <li class="fragment"><a
+                                href="https://www.fastly.com/blog/announcing-lucet-fastly-native-webassembly-compiler-runtime">fastlys
+                                lucet</a></li>
+                        <li class="fragment"><a href="
+                            https://duckduckgo.com/?q=cloudflare+wasm&t=ffab&atb=v137-7__&ia=web">Cloudflare
+                                Workers</a></li>
+                        <li class="fragment"> <a
+                                href="https://hacks.mozilla.org/2018/01/oxidizing-source-maps-with-rust-and-webassembly/ ">
+                                mozillas source-map library </a></li>
+                        -->
+                        <li class="fragment"><a href="https://web.autocad.com">web.autocad.com</a></li>
+                        <li class="fragment"><a href="https://blogs.unity3d.com/2018/08/15/webassembly-is-here/">Unity
+                                Web Target</a></li>
+                        <li class="fragment"><a href="https://wiki.qt.io/Qt_for_WebAssembly">Qt for WebAssembly</a></li>
+                        <li class="fragment"><a href="https://github.com/ethereum"> Etherium (other blockchain)</a> </li>
+                        <!--
+                        <li class="fragment"><a href="https://twitter.com/eddyb_r/status/1114574977041338369">um flash zu transpilen 🤯</a></li>
+
+                            <li class="fragment">
+                            read on my dear:
+                            <a href="http://www.wasmrocks.com/">wasmrocks</a>
+                            <a href="https://wasmweekly.news/">wasm weekly</a>
+                            <a href="https://en.wikipedia.org/wiki/WebAssembly">wikipedia</a>
+                        </li>-->
+                        <li class="fragment"> <strong> <a href="https://people.xiph.org/~jm/demo/rnnoise/"> rnnoise </a> </strong> </li>
+                        <li class="fragment"> <strong> <a href="https://picovoice.ai/products/"> picovoice </a> </strong> </li>
+                    </ul>
+
+                </section>
+
+            </section>
+
+            <section id="toc3">
+
+                <h2>
+                    <i class="fas fa-directions"></i>
+                    what now?</h2>
+                <ul style="list-style: none;">
+                    <li><a href="#history"><i class="fas fa-bookmark"></i> why wasm?</a> ✔</li>
+                    <li><a href="#introducing-webassembly"><i class="fas fa-bookmark"></i> what is wasm?</a> ✔</li>
+                    <li><a href="#wasm-on-the-web"> <i class="fas fa-bookmark"></i> wasm on the web</a> ✔</li>
+                    <li><a href="#browser-api"><i class="fas fa-bookmark"></i> wasm browser API?</a></li>
+                    <li><a href="#wasm-everywhere"><i class="fas fa-bookmark"></i> wasm everywhere</a></li>
+                    <li><a href="#how-to-wasm"><i class="fas fa-bookmark"></i> write your own?</a> (<a href="#rust-wasm">rust-wasm</a>)</li>
+                </ul>
+                <!--
+            
+                * wasm js interface
+                * cloudAbi
+                * wasm outside the web?
+                * hands on
+                * game
+
+                * TOC4 : Wasm as a generalized modern instruction set vs x86/arm etc https://www.youtube.com/watch?v=pq-Pa2Fj4nE
+                    * multi values
+                    * tail calls
+                    * bulk instructions
+                -->
+
+            </section>
+
+
+
+
+            <section id="browser-api" data-transition="concave" data-background-color="#25323a" class="black-slide">
+                <span class="chapter">browser API</span>
+                <section id="how-does-it-get-into-the-browser">
+                    <h2> How does it get into the browser? </h2>
+
+                </section>
+                <section>
+                    <pre><code class="html">&lt;html&gt;
+    &lt;head&gt;
+        &lt;script src="example.wasm" type="application/wasm"/&gt;
+    &lt;/head&gt;
+&lt;/html&gt;</code></pre>
+                    <div class="fragment">Nope!!! sorry <span class="emoji">🙄</span>
+                    </div>
+                </section>
+
+                <!--
+                <section>
+                    <ol>
+                        <li>lad die <code>.wasm</code> bytes in einen typed array oder ArrayBuffer</li>
+                        <li class="fragment fade-up">kompiliere es selbst in ein <code>WebAssembly.Module</code></li>
+                        <li class="fragment fade-up">Instantiiere das <code>WebAssembly.Module</code> mit imports und
+                            benutze dessen exports</li>
+                    </ol>
+
+
+                    <div class="fragment emoji">🤯</div>
+                    <cite> <a href="https://webassembly.org/getting-started/js-api/">webassembly.org</a> </cite>
+                </section>
+                -->
+
+                <section>
+                    <small><em>module von Hand</em></small>
+                    <pre><code class="JavaScript">fetch('simple.wasm')
+    .then(response => response.arrayBuffer())
+    .then(bytes => WebAssembly.instantiate(bytes, {}))
+    .then(results => results.instance.exports);</code></pre>
+                    <cite> <a
+                            href="https://developer.mozilla.org/en-US/docs/WebAssembly/Loading_and_running#Using_Fetch">mdn</a>
+                    </cite>
+                </section>
+
+                <!--
+                <section>
+                    <small><em>await!</em></small>
+                    <pre><code class="JavaScript">const obj = await WebAssembly.instantiateStreaming(
+    fetch('simple.wasm'),
+    importObject
+);
+
+obj.instance.exports.exported_func();</code></pre>
+
+                    <cite> <a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiateStreaming">mdn</a>
+                    </cite>
+                </section>
+                -->
+
+                <section id="importobject">
+                    <h4> was ist dieses <code>importObject</code>? </h4>
+                    <pre><code class="JavaScript">const importObject = {
+    env: {
+        logger: (str) => console.info(str)
+    },
+}; </code></pre>
+                    <small><a href="https://webassembly.org/getting-started/js-api/">📗 Understanding the JS
+                            API</a></small>
+                </section>
+
+                <section id="ffi">
+                    <h4>Integrating WebAssembly?</h4>
+
+                        <h5 class="fragment"> FFI 😨 </h5>
+                    <span class="fragment">
+                        tunnel everything 😩through a 😱 C-like interface
+                        <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-04-memory04.png"
+                            alt="ffi" style="width:100%" />
+
+
+                        <div class="fragment"> 🙇 you don't even get strings</div>
+                        <div class="fragment">it's assembly after all 🤷‍♂️ </div>
+
+                    </span>
+                </section>
+            </section>
+
+            <section id="toc4">
+                <h2>
+                    <i class="fas fa-directions"></i>
+                    what now?</h2>
+                <ul style="list-style: none;">
+                    <li><a href="#history"><i class="fas fa-bookmark"></i> why wasm?</a> ✔</li>
+                    <li><a href="#introducing-webassembly"><i class="fas fa-bookmark"></i> what is wasm?</a> ✔</li>
+                    <li><a href="#wasm-on-the-web"> <i class="fas fa-bookmark"></i> wasm on the web</a> ✔</li>
+                    <li><a href="#browser-api"><i class="fas fa-bookmark"></i> wasm browser API?</a> ✔</li>
+                    <li><a href="#wasm-everywhere"><i class="fas fa-bookmark"></i> wasm everywhere</a></li>
+                    <li><a href="#how-to-wasm"><i class="fas fa-bookmark"></i> write your own?</a> (<a href="#rust-wasm">rust-wasm</a>)</li>
+                </ul>
+             
+            </section>
+
+            <section id="wasi" data-background-color="#25323a" class="black-slide">
+                <span class="chapter">WASI</span>
+
+                <section id="wasm-everywhere"><h1>WebAssembly Everywhere</h1></section>
+                <section id="wasi-scripts">
+                    <h3>Scripting languages are awesome!</h3>
+                    <span class="fragment">your code can just run everywhere,<br></span>
+                    <span class="fragment">you just need a runtime</span>
+                </section>
+
+                <section id="wasi-node-isolation">
+
+                    <h3>npm packages can steal your bitcoin wallets!</h3>
+                    <ul>
+                        <li class="fragment"><code class="json">{postinstall: "./runSomeScript.js",}</code></li>
+                        <li class="fragment">native extensions make this necessary</li>
+                        <li class="fragment">JavaScript's Sandbox is lost</li>
+                        <li class="fragment">node has access to env, fs, and net</li>
+                    </ul>
+                    <pre class="fragment"><code class="javascript">require('http').get(
+    'http://example.com/?' +
+    require('querystring').stringify({
+        ...process.env,
+        mywallet:
+            require('fs').readFileSync('~/bitcoin.wallet')
+              .toString()
+        })
+);</code></pre>
+                </section>
+
+                <section class="wasi-why-docker">
+                    <h4>Why do we use Docker?</h4>
+                    <ul>
+                        <li class="fragment">package applications</li>
+                        <li class="fragment">run everywhere</li>
+                        <li class="fragment">UNIX is unsafe</li>
+                        <li class="fragment" style="list-style: none;">binaries can just open Files and sockets</li>
+                        <li class="fragment">VMs for isolation, too heavy</li>
+                        <li class="fragment"><code>--volume, --env</code></li>
+                        <!--
+                        <li class="fragment">JavaScript/wasm isolation model</li>
+                        <li class="fragment">WASMER, wasmtime, lucet, nodejs...</li>
+                        <li class="fragment"><s><a href="https://youtu.be/3N29vrPoDv8?t=979">CloudABI @ 32c3</a></s>
+                            <a href="https://wasi.dev/">WASI</a> ( <a
+                                href="https://github.com/CraneStation/wasmtime/blob/master/docs/WASI-overview.md">overview</a>
+                            )
+                        </li>
+                        -->
+                    </ul>
+                </section>
+
+                <section>
+                    <h2>Can we just put everything into a docker container?</h2>
+                </section>
+
+                <section>
+                    <h3>WebAssembly for Isolation!</h3>
+                    <ul>
+                        <li class="fragment"><a href="https://github.com/CraneStation/wasmtime">wasmtime</a></li>
+                        <li class="fragment"><a href="https://wasmer.io/">wasmer</a></li>
+                        <li class="fragment"><a href="https://github.com/fastly/lucet/">lucet</a></li>
+                        <li class="fragment"><a href="https://github.com/kenny-ngo/wasmjit">wasmjit</a></li>
+                        <li class="fragment"><a href="https://nodejs.org">node.js</a></li>
+                    </ul>
+                </section>
+
+                <section id="wasi-wasi">
+                    <h3>WASI</h3>
+                    <h4>WebAssembly System Interface</h4>
+                </section>
+
+            </section>
+
+
+
+
+
+            <section id="how-to-wasm">
+                <section>
+                    <h2>😁 Lets start Hacking🔨</h2>
+
+                    <h3> 👨‍💻👩‍💻👨🏾‍💻👨🏽‍💻👩🏽‍💻👨🏼‍💻👨🏿‍💻</h3>
+                    <h3> 👨🏿‍💻👩🏿‍💻👩🏼‍💻<span class="wiggle">🙋🏻‍♂</span>🙋🏻‍👨🏻‍💻👩🏻‍💻👩🏾‍💻</h3>
+                </section>
+                <span class="chapter">building WebAssembly</span>
+                <span class="chapter">write your own WebAssembly</span>
+
+                <section id="write-your-own-wat">
+                    <h4>Write your own WebAssembly</h4>
+                    <h3 class="fragment" data-fragment-index="2">«WAT»</h3>
+                    <pre class="fragment" data-fragment-index="1"><code class="lisp">(module
+  (func $i (import "imports" "i") (param i32))
+  (func (export "e")
+    i32.const 42
+    call $i))</code></pre>
+                </section>
+
+                <section id="compiler-toolchain" data-background-color="#ffffff" data-background-transition="none"
+                    class="white-slide">
+                    <img src=" https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png"
+                        class="stretch">
+                </section>
+
+
+                <section id="webassembly-studio">
+                    <h4>WebAssembly Studio</h4>
+                    <img src="images/WebAssemblyStudio.png" alt="WebAssemblyStudio" class="stretch">
+                    <small>
+                        <a href="https://webassembly.studio">webassembly.studio</a>
+                    </small>
+                </section>
+
+                <section id="tiny-go" class="white-slide" data-background-color="#ffffff">
+                    <img src="images/go.jpeg" alt="go" class="stretch">
+                    <h4>Go</h4>
+                    <ul>
+                        <li class="fragment"><a
+                                href="https://github.com/golang/go/wiki/WebAssembly#reducing-the-size-of-wasm-files">Hefty
+                                Binary Sizes</a></li>
+                        <li class="fragment"><a href="https://github.com/aykevl/tinygo">Tiny</a><a
+                                href="https://tinygo.org/webassembly/webassembly/">Go</a></li>
+                        <li class="fragment"><a href="https://github.com/WebAssembly/proposals/issues/16">GC is one
+                                unsolved problem</a></li>
+                    </ul>
+
+                </section>
+
+                <section id="assemblyscript">
+                    <a href="https://github.com/AssemblyScript">
+                        <img src="images/assemblyscript.svg" alt="AssemblyScript logo" class="stretch">
+                    </a>
+                    <h4>AssemblyScript</h4>
+                    <p class="fragment">almost but not quite entirely unlike <a
+                            href="http://typescriptlang.org/">TypeScript</a></p>
+                </section>
+
+                <section id="assemblyscript-example">
+                    <aside class="notes">expect your existing TypeScript code not to work out of the box</aside>
+                    <h4>AssemblyScript: Limitations<sup><a
+                                href="https://github.com/AssemblyScript/assemblyscript/wiki/Limitations">*</a></sup>
+                    </h4>
+                    <ul>
+                        <li class="fragment">no union types</li>
+                        <li class="fragment">no <code>any</code> or <code>undefined</code></li>
+                        <li class="fragment">Primitive and Reference Types</li>
+                        <li class="fragment">Memory Management</li>
+                    </ul>
+                    <pre class="fragment"><code class="typescript">import "allocator/tlsf";
+var ptr = memory.allocate(64);
+//...
+memory.free(ptr);
+</code></pre>
+                </section>
+            </section>
+            <section>
+
+                <section id="rust-for-webassembly">
+                    <a href="https://rustwasm.github.io/"><img src="images/rustwasm.svg" alt="rust wasm"></a>
+                    <h4 class="fragment">Rust for WebAssembly</h4>
+                    <ul>
+                        <li class="fragment">great <a href="https://rustwasm.github.io/wasm-bindgen/">documentation</a>
+                            and <a href="https://docs.rs/web-sys/">bindings</a></li>
+                        <li class="fragment">best language</li>
+                    </ul>
+                </section>
+
+            </section>
+
+            <section id="rust">
+                <section id="ferris-happy">
+                    <img src="images/happy.svg" alt="jumping ferris" class="jumping" />
+                </section>
+
+                <section id="raw-rust-example">
+                    <h4> exposing a c-like interface
+                        <img src="images/shy.svg" class="pacing" alt="shy ferris"
+                            style="width:2em;vertical-align: bottom;margin-left:-4em;">
+                    </h4>
+                    <pre><code class="rust">#[no_mangle]
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b + 100
+}</code></pre>
+                    <pre><code class="JavaScript">// import { add } from 'rust-lib.wasm';
+const { add } = await fetch('rust-lib.wasm')
+    .then(response => response.arrayBuffer())
+    .then(bytes => WebAssembly.instantiate(bytes))
+    .then(result => result.instance.exports);
+
+console.dir(add(1,2)); // → 103</code></pre>
+                </section>
+
+                <section>
+                    <h4>
+                        FFI safety<img src="images/hang.svg" class="hanging" alt="fallen over ferris"
+                            style="width:1em; vertical-align: top; margin-top:0.5em;margin-left:-3em;margin-bottom:-0.5em">
+                    </h4>
+                    <pre><code class="JavaScript">const importObject = { env: {
+    logger_num: (num) => console.info('logger_num', num),
+    logger_str: (str) => console.warn('logger_str', str),
+}}</code></pre>
+
+                    <pre><code class="rust">extern "C" {
+    fn logger_num(output: i32);
+    fn logger_str(output: &str);
+}
+
+#[no_mangle]
+pub unsafe fn speak() {
+    logger_num(42); // 42
+    logger_str("42"); // 1048576 ????
+}</code></pre>
+
+                </section>
+
+                <section>
+                    <img src="images/jump.svg" class="jumping2" alt="jumping ferris" />
+                    <h3> codegen to the rescue </h3>
+                </section>
+
+            </section>
+
+            <section id="rust">
+
+                <section id="rustwasm">
+                    <h3>
+                        <img src="images/hello.svg" alt="hello ferris"
+                            style="width:1.2em; vertical-align: middle; margin-right:-0.8em; z-index: -1"
+                            class="wiggle">
+                        rustwasm toolbox<sup><a href="https://rustwasm.github.io/book/introduction.html">*</a></sup>
+                        </h4>
+                        <ul>
+                            <li class="fragment highlight-current-green">wasm-bindgen</li>
+                            <li class="fragment highlight-current-green">web-sys & js-sys</li>
+                            <li class="fragment highlight-current-green">wasm-pack</li>
+                            <li class="fragment highlight-current-green">
+                                twiggy,<sup><a href="https://github.com/rustwasm/twiggy">*</a></sup>
+                                wee_alloc,<sup><a href="https://github.com/rustwasm/wee_alloc">*</a></sup>
+                                wasm-snip,<sup><a href="https://github.com/rustwasm/wasm-snip">*</a></sup>
+                            </li>
+
+                            <cite>
+                                <a href="https://rustwasm.github.io/sfhtml5-rust-and-wasm/#1">@fixgen</a>
+                                and
+                                <a href="https://rustwasm.github.io/hello-wasm-bindgen/#1">@ag_dubs</a>
+                            </cite>
+                        </ul>
+                </section>
+
+                <section id="wasm-bindgen">
+                    <h4>wasm-bindgen<sup><a href="https://rustwasm.github.io/book/introduction.html">📕</a></sup></h4>
+                    <pre><code class="rust">use wasm_bindgen::prelude::*;
+
+#[wasm_bindgen]
+extern "C" {
+    fn alert(s: &str);
+}
+
+#[wasm_bindgen]
+pub fn greet(name: &str) {
+    alert(&format!("Hello, {}!", name));
+}</code></pre>
+
+
+
+                    <!--this is so meta right now-->
+                    <button onclick="wasmGadgets.greet('audience')">greet audience</button>
+
+
+
+
+
+                </section>
+
+                <section id="wasm-bindgen-classes">
+                    <h4>wasm-bindgen: exporting classes</h4>
+                    <pre><code class="rust">#[wasm_bindgen]
+pub struct Person {
+    name: String, // UTF-8
+}
+
+#[wasm_bindgen]
+impl Person {
+    #[wasm_bindgen(constructor)]
+    pub fn new(name: String) -> Person {
+        Self { name }
+    }
+
+    pub fn get_name(&self) -> String {
+        self.name.to_owned()
+    }
+}</code></pre>
+                    <pre><code class="rust">import { Foo } from './my_module';
+const p = new Person('hendrik');
+console.log(p.get_name());</code></pre>
+                </section>
+
+                <section id="web-sys">
+                    <aside class="notes" data-markdown>
+                        * DOM Apis and JavaScript builtins
+                    </aside>
+
+                    <h4>web-sys<sup><a href="https://rustwasm.github.io/wasm-bindgen/web-sys/index.html">📕</a></sup>
+                        / js-sys<sup><a
+                                href="https://rustwasm.github.io/wasm-bindgen/contributing/js-sys/index.html">📕</a></sup>
+                    </h4>
+                    <pre><code class="rust">#[wasm_bindgen(start)]
+pub fn run() -> Result<(), JsValue> {
+    let window = web_sys::window().unwrap();
+    let document = window.document().unwrap();
+    let body = document.body().unwrap();
+
+    let val = document.create_element("p")?;
+    val.set_inner_html("Hello from Rust!");
+
+    body.append_child(&val)?;
+
+    Ok(())
+}</code></pre>
+                </section>
+                <section>
+                    <pre><code class="rust">#[wasm_bindgen]
+pub fn left_pad(content: &str, width: usize) -> String {
+    format!("{:👾>w$}", content, w = width)
+}</code></pre>
+                </section>
+
+                <section id="wasm-pack">
+                    <h4>wasm-pack<sup><a href="https://rustwasm.github.io/wasm-pack/book/">📕</a></sup></h4>
+                    <img src="https://raw.githubusercontent.com/rustwasm/wasm-pack/master/demo.gif" alt="wasm-pack demo"
+                        class="stretch">
+                </section>
+
+            </section>
+
+            <section id="demo">
+                <section id="aswm-gorillas">
+                    <h4>AWSM-Gorillas</h4>
+                    <p class="frament"><a href="http://naubino.de/awsm-gorillas/">STOP! Demo Time</a></p>
+                </section>
+
+            </section>
+
+
+            <section id="bye-bye">
+                <section data-transition="slide" data-background-transition="slide"
+                    data-background-image="theme/grace-caadiang-58890-unsplash.jpg" class="black-slide">
+                    <h2>Have an Awsm day!</h2>
+                    <img src="images/happy.svg" alt="waving ferris" style="margin-left:35%;margin-top:42%;width:20%"
+                        class="slowpacing">
+                </section>
+            </section>
+
+            <section id="faq">
+                <dl>
+                    <dt>Q: Isn't it less transparent?</dt>
+                    <dd>A: <a href="https://stackoverflow.com/questions/56766674/how-does-web-assembly-facilitate-less-hackable-more-trustless-in-browser-code-ex/56766887#56766887">not really</a></dd>
+                    <dt>Q: what about exceptions</dt>
+                    <dd>not part of the language, there is a spec though, currently dependes on environment</dd>
+                </dl>
+            </section>
+
+            <section id="bonus">
+                <span class="chapter">bonus</span>
+
+                <section id="rust-wasm-binary-size">
+                    <h4>binary sizes</h4>
+                    <dl>
+                        <dt>binaryen<a href="https://github.com/WebAssembly/binaryen">🔗</a></dt>
+                        <dd>wasm-opt, wasm2js</dd>
+                        <dt>wabt<a href="https://github.com/WebAssembly/wabt">🔗</a></dt>
+                        <dd>wasm-strip, wasm2wat</dd>
+                        <dt>rust wasm</dt>
+                        <dd><a href="https://github.com/rustwasm/wee_alloc">wee_alloc</a></dd>
+                        <dd><a href="https://github.com/rustwasm/twiggy">twiggy</a> wasm size profiler</dd>
+                        <dd><a href="https://github.com/rustwasm/wasm-snip">wasm-snip</a> replace functions with
+                            <code>unreachable</code></dd>
+                    </dl>
+                    ... crates/wasm2es6
+                </section>
+
+                
+
                 <section id="bonus">
                     <ol>
                         <li><a href="https://hacks.mozilla.org/2017/02/a-crash-course-in-just-in-time-jit-compilers/">
@@ -394,606 +1223,7 @@
                     </ul>
 
                 </section>
-                -->
-
             </section>
-
-            <section id="performance">
-                <span class="chapter">performance</span>
-                <section id="performance-title">
-                    <h2>Performance vs ...</h2>
-                </section>
-                <section id="performance-vs-javascript">
-                    <h3>WASM vs JavaScript</h3>
-                    <span class="fragment">
-                        <p style="margin-top: 10%;">
-                            <blockquote>
-                            it's 30x Faster
-                            </blockquote>
-                        <cite><a href="https://medium.com/@mbebenita/webassembly-is-30x-faster-than-javascript-c71ea54d2f96">WebAssembly is “30X” Faster than JavaScript</a></cite>
-                    </p>
-                    </span>
-                    </section>
-
-                <section id="performance-vs-asmjs">
-                    <h2>WASM vs asm.js</h2>
-                    <span class="fragment">
-
-                    <img src="images/MindTheGap0.png" alt="wasm vs asm.js" class="stretch"/>
-                    <cite><a href="https://arxiv.org/abs/1901.09056">Mind the Gap</a></cite>
-                    </span>
-                </section>
-
-                <section id="performance-vs-native">
-                    <h2>WASM vs Native</h2>
-                    <p>...of the 24 benchmarks evaluated, seven run within 10% of native execution and almost all of them run less than 2× slower.</p>
-                    <cite><a href="https://dl.acm.org/citation.cfm?id=3243858">Bringing the web up to speed</a></cite>
-                </section>
-
-                <section>
-                    <img src="images/MindTheGap1.png" alt="wasm vs native" class="stretch"/>
-                    <cite><a href="https://arxiv.org/abs/1901.09056">Mind the Gap</a></cite>
-                </section>
-
-                <section>
-                    <span class="emoji"></span>
-                </section>
-
-            </section>
-
-            <section id="discussion">
-                <span class="chapter">discussion</span>
-
-                <section id="discussion-pros" data-markdown class="small">
-                    <h3> Pros </h3>
-                    <ul>
-                        <li><a href='https://webassembly.github.io/spec/core/syntax/types.html'>strongly typed</a> </li>
-                        <li>faster loading</li>
-                        <li> better performance <ul>
-                                <li>simpler language model</li>
-                                <li>precompiled, preoptimized</li>
-                                <li>fewer allocations</li>
-                                <li>no GC</li>
-                                <li><a href='https://hacks.mozilla.org/2017/02/what-makes-webassembly-fast/'>...what makes WASM fast?</a></li> </ul> </li>
-                        <li> target for existing native code </li>
-                        <li> strong isolation model </li>
-                        <li>new languages on the web</li>
-                    </ul>
-                </section>
-
-                <section id="wasm-vs-javaapplets-vs-flash">
-                    <h3>Isn't WASM just like JavaApplets or Flash? <strong class="fragment">no</strong></h3>
-                    <blockquote class="fragment small">
-                        <ul>
-                            <li>it's part of the browser</li>
-                            <li>no plugins, no extra attack surface</li>
-                            <li>sandboxed just like JavaScript</li>
-                            <li>not owned by other companies like Flash or Java</li>
-                            <li><a href="https://webassembly.github.io/spec/">standard</a>, ergo part of "the web"</li>
-                        </ul>
-                        <cite>
-                            <a href="https://words.steveklabnik.com/is-webassembly-the-return-of-java-applets-flash">kudos steve klabnik
-                            </a>
-                        </cite>
-                    </blockquote>
-                </section>
-
-            </section>
-
-            <section id="awsm">
-                <h1>🕺AWSM!💃</h1>
-            </section>
-
-            <section id="wasm-capabilities">
-                <span class="chapter">capabilities</span>
-
-                <section id="what-can-it-do">
-                    <h2>and now?</h2>
-                    <h4 class="fragment">🤔 what can we do with it?</h4>
-
-                    <p class="fragment"> ... everything <strong class="serif">the Web</strong> has to offer</p>
-                    <p>
-                        <span class="fragment">
-                            DOM Apis</span><span class="fragment">,
-                            WebGL</span><span class="fragment">,
-                            WebAudio</span><span class="fragment">,
-                            Canvas</span><span class="fragment">,
-                            everything you can access from JavaScript</span>
-                    </p>
-                </section>
-
-<section id="what-can-it-not-do">
-                    <h4>what can we <span class="fragment highlight-red">not</span> do with it?</h4>
-                    <dl>
-                        <dt class="fragment"> ⏳ not yet </dt>
-                        <dd class="fragment" > <strike>SIMD<sup><a href="https://github.com/WebAssembly/simd">*</a></sup><sup> <small><a href="https://twitter.com/DasSurma/status/1098915542608609280">🐦</a></small></sup></strike></dd>
-                        <dd class="fragment" > <strike>threads<sup><a href="https://github.com/WebAssembly/threads">*</a></sup><sup><a href=" https://www.chromestatus.com/features/5724132452859904">*</a></sup> </strike></dd>
-                        <dd class="fragment" > x64 binaries </dd>
-
-                        <dt class="fragment"> 🚫 not ever </dt>
-                        <dd class="fragment">
-                            <span class="fragment highlight-red"> everything you couldn't do</span><sup><a href="#wasm-isolation">*</a></sup> in JavaScript
-                        </dd>
-                        <dd class="fragment"> udp<sup><a href="https://new.gafferongames.com/post/why_cant_i_send_udp_packets_from_a_browser/">*</a></sup></dd>
-                        <dd class="fragment"> syscalls: fs, clock, etc<sup><a href="https://browsix.org/">*</a></sup> </dd>
-                        <dd class="fragment"> more precise timers<a href="https://blog.mozilla.org/security/2018/01/03/mitigations-landing-new-class-timing-attack/"><sup>*</sup></a>
-
-                    </dl>
-                </section>
-
-                <section id="use-cases" data-transition="concave" data-background-color="#25323a" class="black-slide" >
-                    <h4>use cases</h4>
-
-                    <dl class="small fragment">
-                        <dt>Web, Binary</dt>
-                        <dd>Binary protocols, parsers </dd>
-                        <dd>Audio<sup><a href="https://people.xiph.org/~jm/demo/rnnoise/">*</a></sup>/Video/Image Processing</dd>
-                        <dd>Cryptography</dd>
-                        <dd>Computer vision</dd>
-                        <dd>Emulation: e.g. Gameboy or x86 </dd>
-
-                        <dt>Web, High Performance</dt>
-                        <dd>CAD, Science, Games</dd>
-                        <dd>Low latency apps: VR </dd>
-                    </dl>
-
-                    <dl class="small fragment">
-                        <dt>As a RunTime</dt>
-                        <dd>
-                            <a href="https://github.com/CraneStation/wasmtime">wasmtime</a>, <a href="https://github.com/fastly/lucet">lucet</a>,
-                        </dd>
-                        <dd>
-                             <a href="https://www.wasmjit.org/">wasmjit</a>
-                             or <a href="https://wasmer.io/">wasmer</a></dd>
-                        <dd><a href="https://hacks.mozilla.org/2019/03/standardizing-wasi-a-webassembly-system-interface/">WASI</a></dd>
-                        <dd><a href="https://nuxi.nl/">CloudABI</a></dd>
-
-                        <dt>in the <span class="emoji">☁️</span>Cloud</dt>
-                        <dd><a href="https://blog.cloudflare.com/webassembly-on-cloudflare-workers/">on cloudflare workers</a></dd>
-                        <dd><a href="https://blog.scottlogic.com/2018/10/18/serverless-rust.html">in AWS Lambda</a><sup><a href="https://crates.io/crates/lambda_runtime" title="official aws rust runtime">*</a></sup></dd>
-
-                        <dt>More</dt>
-                        <dd><a href="https://twitter.com/hoodie_de/status/1096865768258629632 ">even</a> <a href="https://webassembly.org/docs/use-cases/">moar</a></dd>
-                    </dl>
-
-                        <p class="fragment"><span class="emoji">🏘🐘</span>
-                            <span class="fragment">
-                            Port your Desktop code to the Web
-                            </span>
-                        </p>
-                </section>
-
-                <section id="where-is it-already-used">
-                    <h3> Und wer macht das schon? </h3>
-                    <small>
-                            🤷🏼‍♀️ you might be using WebAssembly right now
-                            <a href="https://twitter.com/hoodie_de/status/1096865768258629632">🐦</a>
-                    </small>
-                    <ul style="font-size: 0.7em">
-                   google earth
-                   wasmer
-
-                        <li class="fragment"><a href="https://www.fastly.com/blog/announcing-lucet-fastly-native-webassembly-compiler-runtime">fastlys lucet</a></li>
-                        <li class="fragment"><a href="
-                            https://duckduckgo.com/?q=cloudflare+wasm&t=ffab&atb=v137-7__&ia=web">Cloudflare Workers</a></li>
-                        <li class="fragment"><a href="https://github.com/ethereum"> Etherium</a> </li>
-                        <li class="fragment"> <a href="https://hacks.mozilla.org/2018/01/oxidizing-source-maps-with-rust-and-webassembly/ "> mozillas source-map library </a></li>
-                        <li class="fragment"><a href="https://web.autocad.com">web.autocad.com</a></li>
-                        <li class="fragment"><a href="https://blogs.unity3d.com/2018/08/15/webassembly-is-here/">Unity Web Target</a></li>
-                        <li class="fragment"><a href="https://wiki.qt.io/Qt_for_WebAssembly">Qt for WebAssembly</a></li>
-                        <li class="fragment"><a href="https://twitter.com/eddyb_r/status/1114574977041338369">um flash zu transpilen 🤯</a></li>
-
-                        <li class="fragment">
-                            read on my dear:
-                            <a href="http://www.wasmrocks.com/">wasmrocks</a>
-                            <a href="https://wasmweekly.news/">wasm weekly</a>
-                            <a href="https://en.wikipedia.org/wiki/WebAssembly">wikipedia</a>
-                        </li>
-                    </ul>
-
-                </section>
-
-                <section id="web-dsp">
-                    <h4>web-dsp</h4>
-                    <a href="http://tiny.cc/webdsp">http://tiny.cc/webdsp</a>
-                </section>
-
-                <section id="rnnoise">
-                    <h4>rnnoise<sup>*</sup></h4>
-                    <a href="https://people.xiph.org/~jm/demo/rnnoise/">https://people.xiph.org/~jm/demo/rnnoise/</a>
-                    <p>
-                    <small><sub>*here asm.js</sub></small>
-                    </p>
-                </section>
-
-                <section id="picovoice">
-                    <h4>picovoice</h4>
-                    <a href="https://picovoice.ai/products/">wake word demo</a>
-                </section>
-
-            </section>
-
-
-            <section id="hands-on">
-                <section>
-                    <h2>😁 Lets start Hacking🔨</h2>
-
-                    <h3> 👨‍💻👩‍💻👨🏾‍💻👨🏽‍💻👩🏽‍💻👨🏼‍💻👨🏿‍💻</h3>
-                    <h3> 👨🏿‍💻👩🏿‍💻👩🏼‍💻<span class="wiggle">🙋🏻‍♂</span>🙋🏻‍👨🏻‍💻👩🏻‍💻👩🏾‍💻</h3>
-                </section>
-                <span class="chapter">building WebAssembly</span>
-
-                <section id="handwritten-wat">
-                    <h4>artisan WebAssembly</h4>
-                    <h3 class="fragment" data-fragment-index="2">«WAT»</h3>
-                    <pre class="fragment" data-fragment-index="1"><code class="lisp">(module
-  (func $i (import "imports" "i") (param i32))
-  (func (export "e")
-    i32.const 42
-    call $i))</code></pre>
-
-                </section>
-
-                <section id="compiler-toolchain" data-background-color="#ffffff" data-background-transition="none" class="white-slide">
-                    <img src=" https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-03-toolchain07.png" class="stretch">
-                </section>
-
-            </section>
-
-            <section id="languages" class="white-slide" data-background-color="#ffffff" >
-                <span class="chapter">languages</span>
-
-                <section id="wasm-languages">
-                    <h2>languages</h2>
-                </section>
-
-
-                <section id="webassembly-studio">
-                    <h4>WebAssembly Studio</h4>
-                    <img src="images/WebAssemblyStudio.png" alt="WebAssemblyStudio" class="stretch">
-                    <small>
-                    <a href="https://webassembly.studio">webassembly.studio</a>
-                    </small>
-                </section>
-
-                <section>
-                    <img src="images/go.jpeg" alt="go" class="stretch">
-                    <h4>Go</h4>
-                    <ul>
-                        <li class="fragment"><a href="https://github.com/golang/go/wiki/WebAssembly#reducing-the-size-of-wasm-files">Hefty Binary Sizes</a></li>
-                        <li class="fragment"><a href="https://github.com/aykevl/tinygo">Tiny</a><a href="https://tinygo.org/webassembly/webassembly/">Go</a></li>
-                        <li class="fragment"><a href="https://github.com/WebAssembly/proposals/issues/16">GC is one unsolved problem</a></li>
-                    </ul>
-
-                </section>
-
-                <section id="assemblyscript">
-                    <a href="https://github.com/AssemblyScript">
-                        <img src="images/assemblyscript.svg" alt="AssemblyScript logo" class="stretch">
-                    </a>
-                    <h4>AssemblyScript</h4>
-                    <p class="fragment">almost but not quite entirely unlike <a href="http://typescriptlang.org/">TypeScript</a></p>
-                </section>
-
-                <section id="assemblyscript-example">
-                    <aside class="notes">expect your existing TypeScript code not to work out of the box</aside>
-                    <h4>AssemblyScript: Limitations<sup><a href="https://github.com/AssemblyScript/assemblyscript/wiki/Limitations">*</a></sup></h4>
-                    <ul>
-                        <li class="fragment">no union types</li>
-                        <li class="fragment">no <code>any</code> or <code>undefined</code></li>
-                        <li class="fragment">Primitive and Reference Types</li>
-                        <li class="fragment">Memory Management</li>
-                    </ul>
-                    <pre class="fragment"><code class="typescript">import "allocator/tlsf";
-var ptr = memory.allocate(64);
-//...
-memory.free(ptr);
-</code></pre>
-                </section>
-
-                <section id="rust-for-webassembly">
-                    <a href="https://rustwasm.github.io/"><img src="images/rustwasm.svg" alt="rust wasm"></a>
-                    <h4 class="fragment">Rust for WebAssembly</h4>
-                    <ul>
-                        <li class="fragment">great <a href="https://rustwasm.github.io/wasm-bindgen/">documentation</a> and <a href="https://docs.rs/web-sys/">bindings</a></li>
-                        <li class="fragment">best language</li>
-                    </ul>
-                </section>
-
-            </section>
-
-            <section id="browser-api"
-            data-transition="concave" data-background-color="#25323a" class="black-slide" >
-                <span class="chapter">browser API</span>
-                <section id="how-does-it-get-into-the-browser">
-                    <h2> How does it get into the browser? </h2>
-
-                </section>
-                <section>
-                        <pre><code class="html">&lt;html&gt;
-    &lt;head&gt;
-        &lt;script src="example.wasm" type="application/wasm"/&gt;
-    &lt;/head&gt;
-&lt;/html&gt;</code></pre>
-                    <div class="fragment">Nope!!! Es gibt noch keine Integration für ES Modules <cite>11.04.2019</cite> </div>
-                    <div class="fragment emoji">🙄 sorry</div>
-                </section>
-
-                <section>
-                    <ol>
-                        <li>lad die <code>.wasm</code> bytes in einen typed array oder ArrayBuffer</li>
-                        <li class="fragment fade-up">kompiliere es selbst in ein <code>WebAssembly.Module</code></li>
-                        <li class="fragment fade-up">Instantiiere das <code>WebAssembly.Module</code> mit imports und benutze dessen exports</li>
-                    </ol>
-
-
-                    <div class="fragment emoji">🤯</div>
-                    <cite > <a href="https://webassembly.org/getting-started/js-api/">webassembly.org</a> </cite>
-                </section>
-
-                <section>
-                    <small><em>module von Hand</em></small>
-                    <pre><code class="JavaScript">fetch('simple.wasm')
-    .then(response => response.arrayBuffer())
-    .then(bytes => WebAssembly.instantiate(bytes, {}))
-    .then(results => results.instance.exports);</code></pre>
-                    <cite> <a
-                            href="https://developer.mozilla.org/en-US/docs/WebAssembly/Loading_and_running#Using_Fetch">mdn</a>
-                    </cite>
-                </section>
-
-                <section>
-                    <small><em>await!</em></small>
-                    <pre><code class="JavaScript">const obj = await WebAssembly.instantiateStreaming(
-    fetch('simple.wasm'),
-    importObject
-);
-
-obj.instance.exports.exported_func();</code></pre>
-
-                    <cite> <a
-                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiateStreaming">mdn</a>
-                    </cite>
-                </section>
-
-                <section id="importobject">
-                    <h4> was ist dieses <code>importObject</code>? </h4>
-                    <pre><code class="JavaScript">const importObject = {
-    env: {
-        logger: (str) => console.info(str)
-    },
-}; </code></pre>
-<small><a href="https://webassembly.org/getting-started/js-api/">📗 Understanding the JS API</a></small>
-                </section>
-
-                <section id="ffi">
-                    <h4>wie redet man mit WebAssembly?</h4>
-
-                    <span class="fragment">
-                        just do a bunch of FFI 😨 because the you have to tunnel everything 😩through an essentially 😱
-                        C-like interface
-                        <img src="https://2r4s9p1yi1fa2jd7j43zph8r-wpengine.netdna-ssl.com/files/2017/02/04-04-memory04.png"
-                            alt="ffi" style="width:100%" />
-
-
-                        <div class="fragment"> 🙇 you don't even get strings</div>
-                        <div class="fragment">it's assembly after all 🤷‍♂️ </div>
-
-                    </span>
-                </section>
-            </section>
-
-            <section>
-                <section id="ferris-happy">
-                    <img src="images/happy.svg" alt="jumping ferris" class="jumping"/>
-                </section>
-
-                <section id="raw-rust-example" >
-                    <h4> exposing a c-like interface
-                        <img src="images/shy.svg" class="pacing" alt="shy ferris" style="width:2em;vertical-align: bottom;margin-left:-4em;">
-                    </h4>
-                    <pre><code class="rust">#[no_mangle]
-pub fn add(a: i32, b: i32) -> i32 {
-    a + b + 100
-}</code></pre>
-<pre><code class="JavaScript">// import { add } from 'rust-lib.wasm';
-const { add } = await fetch('rust-lib.wasm')
-    .then(response => response.arrayBuffer())
-    .then(bytes => WebAssembly.instantiate(bytes))
-    .then(result => result.instance.exports);
-
-console.dir(add(1,2)); // → 103</code></pre>
-                </section>
-
-                <section>
-                    <h4>
-                        FFI safety<img src="images/hang.svg" class="hanging" alt="fallen over ferris" style="width:1em; vertical-align: top; margin-top:0.5em;margin-left:-3em;margin-bottom:-0.5em">
-                    </h4>
-                    <pre><code class="JavaScript">const importObject = { env: {
-    logger_num: (num) => console.info('logger_num', num),
-    logger_str: (str) => console.warn('logger_str', str),
-}}</code></pre>
-
-                    <pre><code class="rust">extern "C" {
-    fn logger_num(output: i32);
-    fn logger_str(output: &str);
-}
-
-#[no_mangle]
-pub unsafe fn speak() {
-    logger_num(42); // 42
-    logger_str("42"); // 1048576 ????
-}</code></pre>
-
-                </section>
-
-                <section>
-                    <img src="images/jump.svg" class="jumping2" alt="jumping ferris"/>
-                    <h3> codegen to  the rescue </h3>
-                </section>
-
-            </section>
-
-            <section id="rust">
-
-                <section id="rustwasm">
-                    <h3>
-                        <img src="images/hello.svg" alt="hello ferris" style="width:1.2em; vertical-align: middle; margin-right:-0.8em; z-index: -1" class="wiggle">
-                        rustwasm toolbox<sup><a href="https://rustwasm.github.io/book/introduction.html">*</a></sup> </h4>
-                    <ul>
-                        <li class="fragment highlight-current-green">wasm-bindgen</li>
-                        <li class="fragment highlight-current-green">web-sys & js-sys</li>
-                        <li class="fragment highlight-current-green">wasm-pack</li>
-                        <li class="fragment highlight-current-green">
-                            twiggy,<sup><a href="https://github.com/rustwasm/twiggy">*</a></sup>
-                            wee_alloc,<sup><a href="https://github.com/rustwasm/wee_alloc">*</a></sup>
-                            wasm-snip,<sup><a href="https://github.com/rustwasm/wasm-snip">*</a></sup>
-                        </li>
-
-                    <cite>
-                        <a href="https://rustwasm.github.io/sfhtml5-rust-and-wasm/#1">@fixgen</a>
-                        and
-                        <a href="https://rustwasm.github.io/hello-wasm-bindgen/#1">@ag_dubs</a>
-                    </cite>
-                    </ul>
-                </section>
-
-                <section id="wasm-bindgen">
-                    <h4>wasm-bindgen<sup><a href="https://rustwasm.github.io/book/introduction.html">📕</a></sup></h4>
-                    <pre><code class="rust">use wasm_bindgen::prelude::*;
-
-#[wasm_bindgen]
-extern "C" {
-    fn alert(s: &str);
-}
-
-#[wasm_bindgen]
-pub fn greet(name: &str) {
-    alert(&format!("Hello, {}!", name));
-}</code></pre>
-
-
-
-<!--this is so meta right now-->
-<button onclick="wasmGadgets.greet('audience')">greet audience</button>
-
-
-
-
-
-                </section>
-
-                <section id="wasm-bindgen-classes">
-                    <h4>wasm-bindgen: exporting classes</h4>
-<pre><code class="rust">#[wasm_bindgen]
-pub struct Person {
-    name: String, // UTF-8
-}
-
-#[wasm_bindgen]
-impl Person {
-    #[wasm_bindgen(constructor)]
-    pub fn new(name: String) -> Person {
-        Self { name }
-    }
-
-    pub fn get_name(&self) -> String {
-        self.name.to_owned()
-    }
-}</code></pre>
-<pre><code class="rust">import { Foo } from './my_module';
-const p = new Person('hendrik');
-console.log(p.get_name());</code></pre>
-                </section>
-
-                <section id="web-sys">
-                    <aside class="notes" data-markdown>
-                        * DOM Apis and JavaScript builtins
-                    </aside>
-
-                    <h4>web-sys<sup><a href="https://rustwasm.github.io/wasm-bindgen/web-sys/index.html">📕</a></sup>
-                        / js-sys<sup><a href="https://rustwasm.github.io/wasm-bindgen/contributing/js-sys/index.html">📕</a></sup>
-                    </h4>
-                    <pre><code class="rust">#[wasm_bindgen(start)]
-pub fn run() -> Result<(), JsValue> {
-    let window = web_sys::window().unwrap();
-    let document = window.document().unwrap();
-    let body = document.body().unwrap();
-
-    let val = document.create_element("p")?;
-    val.set_inner_html("Hello from Rust!");
-
-    body.append_child(&val)?;
-
-    Ok(())
-}</code></pre>
-                </section>
-                <section>
-<pre><code class="rust">#[wasm_bindgen]
-pub fn left_pad(content: &str, width: usize) -> String {
-    format!("{:👾>w$}", content, w = width)
-}</code></pre>
-                </section>
-
-                <section id="wasm-pack">
-                    <h4>wasm-pack<sup><a href="https://rustwasm.github.io/wasm-pack/book/">📕</a></sup></h4>
-                    <img src="https://raw.githubusercontent.com/rustwasm/wasm-pack/master/demo.gif" alt="wasm-pack demo" class="stretch">
-                </section>
-
-            </section>
-
-            <section id="demo">
-                <section id="aswm-gorillas">
-                    <h4>AWSM-Gorillas</h4>
-                    <p class="frament"><a href="http://naubino.de/awsm-gorillas/">STOP! Demo Time</a></p>
-                </section>
-
-            </section>
-
-
-            <section id="bye-bye">
-                <section
-                data-transition="slide"
-                data-background-transition="slide"
-                data-background-image="theme/grace-caadiang-58890-unsplash.jpg" class="black-slide">
-                    <h2>Have an Awsm day!</h2>
-                    <img src="images/happy.svg" alt="waving ferris" style="margin-left:35%;margin-top:42%;width:20%" class="slowpacing">
-                </section>
-            </section>
-
-            <section id="bonus">
-                <span class="chapter">bonus</span>
-
-                <section id="rust-wasm-binary-size">
-                    <h4>binary sizes</h4>
-                    <dl>
-                        <dt>binaryen<a href="https://github.com/WebAssembly/binaryen">🔗</a></dt>
-                        <dd>wasm-opt</dd>
-                        <dt>wabt<a href="https://github.com/WebAssembly/wabt">🔗</a></dt>
-                        <dd>wasm-strip</dd>
-                        <dt>rust wasm</dt>
-                        <dd><a href="https://github.com/rustwasm/wee_alloc">wee_alloc</a></dd>
-                        <dd><a href="https://github.com/rustwasm/j">twiggy</a> wasm size profiler</dd>
-                        <dd><a href="https://github.com/rustwasm/wasm-snip">wasm-snip</a> replace functions with <code>unreachable</code></dd>
-                    </dl>
-                </section>
-
-                <section id="wasm-isolation">
-                    <h4>WebAssembly for Isolation</h4>
-                    <ul>
-                        <li class="fragment">UNIX is unsafe</li>
-                        <li class="fragment">Binaries can open Files and NetworkSockets themselves</li>
-                        <li class="fragment">VMs or Docker?</li>
-                        <li class="fragment">JavaScript/wasm isolation model</li>
-                        <li class="fragment">WASMER, wasmtime, lucet, nodejs...</li>
-                        <li class="fragment"><s><a href="https://youtu.be/3N29vrPoDv8?t=979">CloudABI @ 32c3</a></s>
-                            <a href="https://wasi.dev/">WASI</a> ( <a href="https://github.com/CraneStation/wasmtime/blob/master/docs/WASI-overview.md">overview</a> )
-                        </li>
-                    </ul>
-                </section>
-
-            </section>
-
         </div>
     </div>
 
