@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Rust for C++ Developers</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <link rel="stylesheet" href="lib/reveal.css">
+    <link rel="stylesheet" href="theme/hoodie-solarized.css">
+    <link rel="stylesheet" href="theme/fonts/fonts.css">
+    <link rel="stylesheet" href="theme/font-awesome/all.min.css">
+    <link rel="stylesheet" href="theme/tomorrow.css">
+    <link rel="stylesheet" href="theme/talk.css">
+
+    <script src="./gamepad.js">
+    </script>
+    <script>
+        if (navigator.userAgent.match(/Firefox/)) window.toggleGamePadControls();
+        else console.warn('no gamepad support')
+    </script>
+</head>
+
+<body>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <section id="title" class="black-slide" data-background-color="var(--background-color-dark)">
+
+                <section id="start">
+                    <h4> 07.04.2020</h4>
+                    <h2> Rust </h2>
+                    <h6> for C++ Developers </h6>
+                </section>
+
+                <section>
+                    <h2> 🧂</h2>
+                </section>
+
+            </section>
+
+            <section>
+
+                <section data-markdown>
+                    <h3> familiar concepts </h3>
+
+                    <textarea>
+  | C++               | Rust                 |             |
+  | ----------------- | -------------------- | ----------- |
+  | primitive types   | primitive types      |  `= + ≠ `   |
+  | `struct`/` class` | `struct`             |  `=`        |
+  | methods           | associated function  |  `≠`        |
+  | `enum`            | `enum`               |  `=`        |
+  | `union`           | `enum` (algrebraic)  |  `≠`        |
+  | interface `class` | `trait`              |  `≠`        |
+  | Inheritance       | Composition          |  `≠`        |
+  | `#include`        | modules              |  `= / ≠`    |
+  | Attributes        | traits / proc macros |  `≠`        |
+  | Templates         | generics             |  `≠`        |
+  | Concepts          | trait bounds         |  `≠`        |
+
+                    </textarea>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Alternative 3: Rust<h3>
+                </section>
+
+                <section>
+                    <h4>Rust vs C++</h4>
+                    <ul>
+                        <li>Fine grained control</li>
+                        <li>memory safety without a gc</li>
+                        <li>inheritance free high level abstractions</li>
+                        <li>modules, functional programming, "concepts", optionals</li>
+                        <li>exception free error handling</li>
+                        <li><a href="https://godbolt.org/z/a-vhLU">ranges v3</a> vs <a href="https://godbolt.org/z/vgJpuq">Rust iterators</a></li>
+                        <li>very beginner friendly, great documentation</li>
+                        <li>much more explicit than C++</li>
+                        <li>*<a href="https://msrc-blog.microsoft.com/2019/07/22/why-rust-for-safe-systems-programming/">why rust for safe systems programming</a></li>
+                    </ul>
+                </section>
+
+                <section>
+                    <ul>
+                        <li>Dropbox: storage backend</li>
+                        <li>CloudFlare: DNS, QUIC</li>
+                        <li>Wire</li>
+                        <li> <a href="https://www.rust-lang.org/production/users">other happy production users</a> </li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h4>Rust ecosystem</h4>
+                    <ul>
+                        <li>cargo: package manager + build system</li>
+                        <li>most crates are MIT/Apache licensed</li>
+                        <li>browser-grade libraries</li>
+                        <li>HTTP/3, QUIC:<a href="https://github.com/cloudflare/quiche">quiche</a>, <a href="https://github.com/djc/quinn/">quinn</a>, <a href="https://github.com/mozilla/neqo/">neqo</a></li>
+                        <li>Codecs: <a href="https://github.com/xiph/rav1e">Xiph AV1 encoder</a></li>
+                        <li>Rendering: <a href="https://github.com/servo/webrender">WebRender</a></li>
+                        <li>Parsing: <a href="https://github.com/servo/html5ever">HTML5Ever</a></li>
+                        <li>Benchmarks: <a href="https://www.techempower.com/benchmarks/#section=data-r18&hw=ph&test=plaintext">techempower</a></li>
+                    </ul>
+                </section>
+
+                <section data-markdown>
+                    #### main problems
+                    * consistent protocol
+                    * message representation
+                </section>
+
+                <section data-markdown>
+                    #### Rust for WebServices
+                    * Serde
+                    * Actors Systems
+                    * 
+                </section>
+
+            </section>
+
+
+            <section>
+                <section>
+                    <h2>serde</h2>
+                    <ul>
+                        <li>generic (de)serialization framework</li>
+                    </ul>
+                </section>
+
+                <section data-markdown>
+                    #### Interlude: Rust Enums
+                    ```rs
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}                    ```
+                </section>
+
+                <section>
+                    <h4> Command Type (rust) </h4>
+                   <pre><code class="rust">
+/// Command sent to the server
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase", tag = "kind")]
+pub enum SessionCommand {
+    Join { room: RoomId },
+    Message { message: String, room: RoomId },
+    ListRooms,
+    ListMyRooms,
+    ListParticipants { room: RoomId },
+    Authenticate { credentials: UsernamePassword }
+}
+
+                   </code></pre>
+
+                </section>
+
+                <section>
+                    <h4> Command Type (typescript) </h4>
+
+                   <pre><code class="typescript">interface Join {
+    kind: 'join',
+    room: string
+}
+interface Command {
+    kind: 'message',
+    room: string,
+    message: string,
+}
+interface ListRooms { kind: 'listRooms' }
+interface ListMyRooms { kind: 'listMyRooms' }
+interface Shutdown { kind: 'shutDown' };</code></pre>
+<pre><code class="typescript">type Command =
+    | Authenticate
+    | Join
+    | Message
+    | ListRooms
+    | ListMyRooms;</code></pre>
+
+                </section>
+
+                <section>
+                    <h4> Dispatching </h4>
+                    <small>
+                    <pre><code class="rust">/// react to client command
+fn dispatch_incoming_message(&self, msg: SessionCommand, ctx: &mut WebsocketContext<Self>) {
+    trace!("received {:?}", msg);
+    use SessionCommand::*;
+    match msg {
+        Authenticate { credentials } => self.authenticate(credentials, ctx),
+        ListRooms => self.list_rooms(ctx),
+        Join{ room } =>  self.join(&room, ctx),
+        ListMyRooms => self.list_my_rooms(ctx),
+        ListParticipants { room } => self.request_room_update(&room, ctx),
+        Message{ message, room } => self.forward_message( message, &room, ctx),
+        ShutDown => System::current().stop()
+    }
+}</code></pre>
+                    </small>
+                </section>
+
+            </section>
+            <section>
+                <section>
+                    <h2>actix</h2>
+                    <ul>
+                        <li>actor runtime</li>
+                        <li>HTTP/2 Stack</li>
+                    </ul>
+                </section>
+
+                <section data-markdown>
+                    #### Actors
+                    ```rs
+pub struct DefaultRoom {
+    id: RoomId,
+    history: Vec<protocol::ChatMessage>,
+    participants: HashMap<SessionId, Participant>,
+}
+
+#[derive(Message)]
+pub struct AddParticipant {
+    pub participant: Participant,
+}
+
+                    ```
+                    ```rs
+impl Actor for DefaultRoom {
+}
+
+impl Handler<AddParticipant> for DefaultRoom {
+    type Result = ();
+
+    fn handle(
+        &mut self,
+        command: AddParticipant,
+        ctx: &mut Self::Context,
+    )  {
+        // ...
+    }
+}
+                    ```
+                </section>
+                <section data-markdown>
+                    #### Actor Runtimes
+
+                </section>
+
+            </section>
+
+            <section>
+
+                <section>
+                    <h2>tokio</h2>
+                    <ul>
+                        <li>async runtime</li>
+                    </ul>
+                </section>
+
+            </section>
+
+            <section>
+                <section>
+                    ## Rust Examples
+
+                    ## Strategy going
+                    https://locka99.gitbooks.io/a-guide-to-porting-c-to-rust/
+                    https://www.apriorit.com/dev-blog/520-rust-vs-c-comparison
+                    * build the next thing in Rust
+                    * reintegrate RTCVS components
+
+                </section>
+            </section>
+
+            <section>
+                bonus: why is is so hard to replace c++?
+
+            </section>
+
+            <section id="toc"></section>
+
+        </div>
+    </div>
+
+    <script src="lib/reveal.js"></script>
+    <script src="lib/head.js"></script>
+    <script src="lib/highlight.pack.js"></script>
+    <script>
+
+        hljs.initHighlightingOnLoad();
+        Reveal.initialize({
+            history: true,
+            slideNumber: true,
+            transition: 'convex', // none/fade/slide/convex/concave/zoom
+            // More info https://github.com/hakimel/reveal.js#dependencies
+            dependencies: [
+                { src: './plugin/markdown/marked.js' },
+                { src: './plugin/markdown/markdown.js' },
+                { src: './plugin/notes/notes.js', async: true },
+                /*
+                { src: './plugin/menu/menu.js' }
+                { src: 'socket.io/socket.io.js', async: true },
+                { src: 'plugin/notes-server/client.js', async: true }
+                 */
+            ]
+        });
+
+        window.onGamePadUpPressed = () => Reveal.up();
+        window.onGamePadDownPressed = () => Reveal.down();
+        window.onGamePadLeftPressed = () => Reveal.left();
+        window.onGamePadRightPressed = () => Reveal.right();
+        window.onGamePadL1Pressed = () => Reveal.slide(0);
+        window.onGamePadR1Pressed = () => Reveal.togglePause();
+        window.onGamePadL2Pressed = () => Reveal.prev();
+        window.onGamePadR2Pressed = () => Reveal.next();
+        window.onGamePadOPressed = () => Reveal.togglePause();
+        window.onGamePadXPressed = () => Reveal.next();
+        window.onGamePadSqPressed = () => Reveal.prev();
+
+    </script>
+
+</body>
+
+</html>

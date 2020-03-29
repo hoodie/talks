@@ -1,0 +1,125 @@
+.reveal section img {
+    border: 0;
+    box-shadow: 0px 0px #000;
+    width: 40%;
+    background: none;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4 {
+    text-transform: none;
+}
+
+.reveal blockquote {
+    box-shadow: 0px 0px #000;
+    display: block;
+    margin-top: 50px;
+}
+
+.reveal .small {
+    font-size: 0.7em;
+}
+
+.reveal .serif {
+    font-family: "Vollkorn";
+}
+
+.reveal blockquote cite {
+    font-size: 0.6em;
+}
+
+.reveal blockquote cite,
+.reveal cite {
+    font-size: 0.7em;
+    display: block;
+    float: right;
+    padding-top: 60px;
+    color: #d33682;
+}
+
+.reveal cite a {
+    color: #d33682;
+}
+
+.reveal cite:before {
+    content: "\2014 \2009";
+}
+
+.reveal .black-slide,
+.reveal .black-slide cite,
+.reveal .black-slide cite a,
+.reveal .black-slide h1 ,
+.reveal .black-slide h2 ,
+.reveal .black-slide h3 ,
+.reveal .black-slide h4 ,
+.reveal .black-slide h5 ,
+.reveal .black-slide h6 {
+    color: #fff !important;
+}
+
+.reveal .white-slide,
+.reveal .white-slide cite,
+.reveal .white-slide cite a,
+.reveal .white-slide h1 ,
+.reveal .white-slide h2 ,
+.reveal .white-slide h3 ,
+.reveal .white-slide h4 ,
+.reveal .white-slide h5 ,
+.reveal .white-slide h6 {
+    color: #222 !important;
+}
+
+.emoji {
+    font-size: 2em !important;
+    text-align: center;
+}
+
+.todo {
+    display: block
+}
+
+.todo::before {
+    content: "TODO: ";
+    font-weight: bold;
+    color: black;
+    background-color: #d33682;
+}
+
+.reveal .chapter {
+    font-size: 0.5em;
+    opacity: 0.2;
+    position: fixed;
+    top:0;
+    right:0;
+}
+
+pre {
+    border-radius: 15px;
+    font-size: 0.9em;
+}
+
+pre code {
+    border-radius: 15px;
+    padding: 25px 35px !important;
+}
+
+.reveal .bottom {
+    margin-top: 59%;
+}
+
+.reveal img.logo {
+   width: 2em;
+   vertical-align: bottom;
+
+}
+
+.reveal table {
+    font-size: 0.7em;
+    width: 100%
+}
+
+:root {
+    --bright-bg-color: ;
+  }
