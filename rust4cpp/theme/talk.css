@@ -105,6 +105,13 @@ pre code {
     padding: 25px 35px !important;
 }
 
+pre.output {
+    width:100%;
+    border-radius: 3px; 
+    font-size: 0.7em;
+    padding: 1em;
+}
+
 .reveal .bottom {
     margin-top: 59%;
 }
@@ -120,6 +127,19 @@ pre code {
     width: 100%
 }
 
-:root {
-    --bright-bg-color: ;
+.blinking {
+    display: inline-block;
+    margin-left: 1px;
+  
+    animation: blink 2s linear 0s infinite;
+}
+
+@keyframes blink {
+    0%   { opacity: 1 }
+    47%  { opacity: 1 }
+    50%  { opacity: 0.3 }
+    60%  { opacity: 0.2 }
+    70%  { opacity: 0.1 }
+    97%  { opacity: 0 }
+    100% { opacity: 0 }
   }

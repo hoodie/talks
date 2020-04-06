@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <link rel="stylesheet" href="theme/fonts/fonts.css">
     <link rel="stylesheet" href="lib/reveal.css">
     <link rel="stylesheet" href="theme/hoodie-solarized.css">
-    <link rel="stylesheet" href="theme/fonts/fonts.css">
     <link rel="stylesheet" href="theme/font-awesome/all.min.css">
     <link rel="stylesheet" href="theme/tomorrow.css">
     <link rel="stylesheet" href="theme/talk.css">
@@ -34,96 +34,512 @@
                     <h6> for C++ Developers </h6>
                 </section>
 
-                <section>
-                    <h2> 🧂</h2>
-                </section>
+            </section>
+
+            <section id="me" data-background-color="#ffffff" data-transition="zoom" data-background-transition="zoom">
+                <div class="notes">
+
+                </div>
+                <h3>
+                    <code>
+
+                    $whoami<span class="blinking">&block;</span>
+                    </code>
+                </h3>
+                <div style="background-image: url(./images/doodles.png); background-repeat: no-repeat">
+                    <ul style="list-style-type:none;">
+                        <li> <a href="https://www.hoodie.de"> 🤓 </a> Hendrik Sollich</li>
+                        <li> <a href="https://www.gotomeeting.com/"> 👔 </a> LogMeIn (GoToMeeting <i
+                                class="fa fa-microphone-alt"></i>)</li>
+                        <li><a href="https://github.com/hoodie/"><i class="fab fa-github"></i></a> hoodie </li>
+                        <li><a href="https://twitter.com/hoodie_de"><i class="fab fa-twitter"></i></a> @hoodie_de </li>
+                        <li><a href="https://akronymisier.bar"><i class="fa fa-headphones"></i></a> akronymisier.bar
+                        </li>
+                    </ul>
+                </div>
 
             </section>
 
+            <section data-markdown>
+                ### Disclaimer
+                * no Rust prior knowledge assumed
+                * not a tutorial
+                * put it in context
+                * learning references at the end
+            </section>
+
+            <section data-markdown>
+                ## What is Rust?
+
+                <textarea>
+                > Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety
+                </textarea>
+                or
+                <textarea>
+                > A language empowering everyone to build reliable and efficient software.
+                </textarea>
+
+            </section>
+
+            <!--
             <section>
+                <h4>TODO Rust vs C++</h4>
+                <ul>
+                    <li>Fine grained control</li>
+                    <li>memory safety without a gc</li>
+                    <li>inheritance free high level abstractions</li>
+                    <li>modules, functional programming, "concepts", optionals</li>
+                    <li>exception free error handling</li>
+                    <li><a href="https://godbolt.org/z/a-vhLU">ranges v3</a> vs <a href="https://godbolt.org/z/vgJpuq">Rust iterators</a></li>
+                    <li>very beginner friendly, great documentation</li>
+                    <li>much more explicit than C++</li>
+                    <li>*<a href="https://msrc-blog.microsoft.com/2019/07/22/why-rust-for-safe-systems-programming/">why rust for safe systems programming</a></li>
+                </ul>
+            </section>
+            -->
+
+            <section id="history">
+                <section>
+                    <h4>History</h4>
+
+                    <ul>
+                        <li> 2006 started by Graydon Hoare </li>
+                        <li> 2009 mozilla research project </li>
+                        <li class="fragment">"safer language for building browsers" </li>
+                        <li class="fragment"> 2012 servo </li>
+                        <li class="fragment"> 2015 🎉 *1.0* 🥳 </li>
+                        <li class="fragment"> 2009 Go</li>
+                    </ul>
+
+                </section>
+            </section>
+
+            <section id="quick-facts">
+                <section>
+                    <h3>What Kind of Language is it?<h3>
+                </section>
 
                 <section data-markdown>
-                    <h3> familiar concepts </h3>
+                    #### Today it fills the same niche as C++:
+                    1. High-level
+                    1. Zero Cost abstractions
+                    1. no performance compromise
+                </section>
 
-                    <textarea>
-  | C++               | Rust                 |             |
-  | ----------------- | -------------------- | ----------- |
-  | primitive types   | primitive types      |  `= + ≠ `   |
-  | `struct`/` class` | `struct`             |  `=`        |
-  | methods           | associated function  |  `≠`        |
-  | `enum`            | `enum`               |  `=`        |
-  | `union`           | `enum` (algrebraic)  |  `≠`        |
-  | interface `class` | `trait`              |  `≠`        |
-  | Inheritance       | Composition          |  `≠`        |
-  | `#include`        | modules              |  `= / ≠`    |
-  | Attributes        | traits / proc macros |  `≠`        |
-  | Templates         | generics             |  `≠`        |
-  | Concepts          | trait bounds         |  `≠`        |
-
-                    </textarea>
+                <section data-markdown>
+                    1. it's like C++
+                    1. it's very much NOT like C++
                 </section>
             </section>
 
-            <section>
-                <section>
-                    <h3>Alternative 3: Rust<h3>
+
+            <section id="quick-facts">
+                <section data-markdown>
+                    1. Performant
+                    1. Safe
+                    1. Productive / Ergonomic
                 </section>
 
-                <section>
-                    <h4>Rust vs C++</h4>
-                    <ul>
-                        <li>Fine grained control</li>
-                        <li>memory safety without a gc</li>
-                        <li>inheritance free high level abstractions</li>
-                        <li>modules, functional programming, "concepts", optionals</li>
-                        <li>exception free error handling</li>
-                        <li><a href="https://godbolt.org/z/a-vhLU">ranges v3</a> vs <a href="https://godbolt.org/z/vgJpuq">Rust iterators</a></li>
-                        <li>very beginner friendly, great documentation</li>
-                        <li>much more explicit than C++</li>
-                        <li>*<a href="https://msrc-blog.microsoft.com/2019/07/22/why-rust-for-safe-systems-programming/">why rust for safe systems programming</a></li>
-                    </ul>
+                <section data-markdown>
+                    ### Performant
+                    * zero cost abstractions
+                    * close to the hardware
+                    * memory safety without GC
+                    * system threads
+                    * no runtime
+                    * async/await
+                    * C FFI (bindgen both directions)
                 </section>
 
-                <section>
-                    <ul>
-                        <li>Dropbox: storage backend</li>
-                        <li>CloudFlare: DNS, QUIC</li>
-                        <li>Wire</li>
-                        <li> <a href="https://www.rust-lang.org/production/users">other happy production users</a> </li>
-                    </ul>
+                <section data-markdown>
+                    ### Safe
+                    * no unintialized variables
+                    * no UB
+                    * strong types that guarantee
+                        * no race conditions
+                        * clear ownership/lifetimes
+                        * when to copy/move
+                        * immutability
+                        * mutexes are containers
                 </section>
 
+                <section data-markdown>
+                    ### Ergonomic
+                    * cargo: build test doc bench publish
+                    * modules
+                    * pattern matching
+                    * optionals
+                    * friendly compiler
+                    * great 3rd party crates
+                </section>
+
+                <!--
                 <section>
                     <h4>Rust ecosystem</h4>
                     <ul>
                         <li>cargo: package manager + build system</li>
                         <li>most crates are MIT/Apache licensed</li>
                         <li>browser-grade libraries</li>
-                        <li>HTTP/3, QUIC:<a href="https://github.com/cloudflare/quiche">quiche</a>, <a href="https://github.com/djc/quinn/">quinn</a>, <a href="https://github.com/mozilla/neqo/">neqo</a></li>
+                        <li>HTTP/3, QUIC:<a href="https://github.com/cloudflare/quiche">quiche</a>, <a
+                                href="https://github.com/djc/quinn/">quinn</a>, <a
+                                href="https://github.com/mozilla/neqo/">neqo</a></li>
                         <li>Codecs: <a href="https://github.com/xiph/rav1e">Xiph AV1 encoder</a></li>
                         <li>Rendering: <a href="https://github.com/servo/webrender">WebRender</a></li>
                         <li>Parsing: <a href="https://github.com/servo/html5ever">HTML5Ever</a></li>
-                        <li>Benchmarks: <a href="https://www.techempower.com/benchmarks/#section=data-r18&hw=ph&test=plaintext">techempower</a></li>
+                        <li>Benchmarks: <a
+                                href="https://www.techempower.com/benchmarks/#section=data-r18&hw=ph&test=plaintext">techempower</a>
+                        </li>
                     </ul>
                 </section>
+            -->
 
-                <section data-markdown>
-                    #### main problems
-                    * consistent protocol
-                    * message representation
+            </section>
+
+            <section id="familiar-concepts">
+
+                <section data-markdown id="familiar-concepts-1">
+                    #### familiar concepts 1/2
+
+                    <textarea>
+  | C++               | Rust                 |             |
+  | ----------------- | -------------------- | ----------- |
+  | primitive types   | primitive types      |  `= + ≠ `   |
+  | RAII / DRES       | RAII / DRES          |  `=`        |
+  | `struct`/` class` | `struct`             |  `=`        |
+  | `enum`            | `enum`               |  `=`        |
+  | methods           | associated function  |  `≠`        |
+  | `union`           | `enum` (algrebraic)  |  `≠`        |
+  | `namespace`       | modules              |  `= / ≠`    |
+  | `#include`        | modules              |  `= / ≠`    |
+  | Templates         | generics             |  `≠`        |
+  | interface `class` | `trait`              |  `≠`        |
+  | Concepts          | trait bounds         |  `≠`        |
+  | Attributes        | traits / proc macros |  `≠`        |
+  | Inheritance       | Composition          |  `≠`        |
+
+                    </textarea>
                 </section>
 
-                <section data-markdown>
-                    #### Rust for WebServices
-                    * Serde
-                    * Actors Systems
-                    * 
+                <section data-markdown id="familiar-concepts-1">
+                    #### familiar concepts 2/2
+
+                    <textarea>
+  | C++               | Rust                 |             |
+  | ----------------- | -------------------- | ----------- |
+  | `unique_ptr<T>`         | `Box<T>`               |  `=`        |
+  | `shared_ptr<T>`         | `Rc<T>`, `Arc<T>`      |  `= + ≠ `   |
+  | default copy semantics  | default move semantics |  `≠ `       |
+  | text replacement macros | hygenic AST functions  |  `= + ≠ `   |
+  | `auto`, `decl-type`     | hinley-millner types   |  `= + ≠ `   |
+  | `std::text_view`        | `&str`                 |  `≠`        |
+  | `exceptions`            | `panic!()`             |  `≠`        |
+  | `42i64`                 | `INT64_C`              |             |
+  | `42i64`                 | `42i64`                | C++23       |
+  | `1_000_000`             | `1'000'000'`           |             |
+  |                         |                        |             |
+
+                    </textarea>
                 </section>
 
             </section>
 
+            <section>
+                <section>
+                    <h4> move semantics & ownership </h4>
+
+                    <pre class="rust execute fragment"><code>fn main() {
+    let v = vec![1, 2, 3];
+    print_vec(v);
+    print_vec(v);
+}
+
+fn print_vec(v: Vec&lt;i32&gt;) {
+    println!("v is {:?}", v);
+}</code></pre>
+                </section>
+                <section>
+                    <pre class="rust execute "><code>
+let v = vec![1, 2, 3];
+print_vec(&v);
+print_vec(&v);
+
+fn print_vec(v: &Vec&lt;i32&gt;) {
+    println!("v is {:?}", v);
+}</code></pre>
+                </section>
+            </section>
 
             <section>
+                <section>
+                    <h4>structs</h4>
+
+                    <pre class="rust fragment"><code> // named-field struct
+struct Person<T> {
+    name: String,
+    age: u16,
+    hobby: T,
+}
+
+// tuple struct
+struct Coordinate(u32, u32);
+struct Some<T>(T);
+
+// union
+struct None;
+</code></pre>
+                </section>
+
+                <section>
+                    <h4>enums</h4>
+
+                    <pre class="rust"><code>enum TrafficLight {
+    Red,
+    Yellow,
+    Green,
+}
+let light = TrafficLight::Green;
+match light {
+    TrafficLight::Red => println!("STOP!"),
+    TrafficLight::Yellow => println!("Slow down!"),
+    TrafficLight::Green => println!("Go go go!"),
+}</code></pre>
+                </section>
+
+                <section>
+                    <h4>methods</h4>
+                    <pre class="rust execute"><code>struct Person {
+    name: String;
+}
+impl Person {
+    pub fn new() -> Person {
+        Person {
+            name: String::from("Hendrik")
+        }
+    }
+}</code></pre>
+                </section>
+
+                <section>
+                    <h4>Default Constructor?</h4>
+                    <pre class="rust execute"><code></code></pre>
+                </section>
+
+                <section>
+                    <h4>Copy Constructor?</h4>
+                    <pre class="rust execute"><code></code></pre>
+                </section>
+
+                <section>
+                    <h4>Operator Overloading?</h4>
+                    <pre class="rust execute"><code></code></pre>
+                </section>
+
+                <section>
+                    <h4>Destructor</h4>
+                    <pre class="rust execute"><code></code></pre>
+                </section>
+
+                <section>
+                    <h4></h4>
+                    <pre class="rust execute"><code></code></pre>
+                </section>
+
+                <section>
+                    <h4></h4>
+                    <pre class="rust execute"><code></code></pre>
+                </section>
+
+
+
+
+            </section>
+            <section>
+                <section data-markdown> ### strings </section>
+                <section>
+                    <h4>string</h4>
+                    <pre class="cpp"><code>template<
+    class CharT,
+    class Traits = std::char_traits&lt;CharT&gt;,
+    class Allocator = std::allocator&lt;CharT&gt;
+> class basic_string;
+
+std::string    // std::basic_string&lt;char&gt;
+std::wstring   // std::basic_string&lt;wchar_t&gt;
+std::u8string  // (since C++20) std::basic_string&lt;char8_t&gt;</code></pre>
+
+                    <h4>string_view</h4>
+                    <pre class="cpp"><code>template<
+    class CharT,
+    class Traits = std::char_traits&lt;CharT&gt;
+> class basic_string_view;</code></pre>
+                </section>
+
+                <section>
+                    <h4>String, &str etc</h4>
+                    <pre class="rust"><code>// owned strings
+let hello_owned: String = String::from("hello world");
+
+/// string slices
+let hello_slice = "hello world" // &'static str;
+let hello_slice = &hello_owned // &str;</code></pre>
+
+                    <pre class="rust"><code>// CStrings (C-compatible, nul-terminated string)
+std::ffi::CString;
+std::ffi::CStr;
+
+// OsString https://doc.rust-lang.org/stable/std/ffi/struct.OsString.html
+std::ffi::OsString;
+std::ffi::OsStr; </code></pre>
+                </section>
+            </section>
+
+            <section>
+                <section>
+                    <h3>Modules</h3>
+                    <ul>
+                        <li class="fragment">componentization</li>
+                        <li class="fragment">explicit exports</li>
+                        <li class="fragment">compilation unit</li>
+                        <li class="fragment">file layout</li>
+                        <li class="fragment">namespacing</li>
+                        <li class="fragment">afterthought vs design principle</li>
+                    </ul>
+                </section>
+                <section>
+                    <h4>C++ modules</h4>
+                    <span class="fragment">
+                        <pre class="cpp"><code>// ModuleA.ixx
+export module ModuleA;
+
+namespace Bar
+{
+   export int f();
+   export double d();
+   double internal_f(); // not exported
+}</code></pre>
+                        <pre class="cpp"><code>//MyProgram.cpp
+import module ModuleA;
+
+int main() {
+  Bar::f(); // OK
+  Bar::d(); // OK
+  Bar::internal_f(); // Ill-formed: error C2065: 'internal_f': undeclared identifier
+}
+</code></pre>
+                        <a href="https://docs.microsoft.com/en-us/cpp/cpp/import-export-module?view=vs-2019">*</a>
+                    </span>
+                </section>
+
+                <section>
+                    <h4>Rust Modules ½</h4>
+                    <pre class="rust execute"><code>// main.rs
+mod bar {
+   pub fn f() -> i32 { internal_f() }
+   pub fn d() -> f64 { 13.37 }
+
+   // not exported
+   fn internal_f() -> i32 { 13 }
+}
+
+fn main() {
+  bar::f(); // OK
+  bar::d(); // OK
+  // bar::internal_f(); wouldn't compile
+}
+</code></pre>
+                </section>
+
+                <section>
+                    <h4>Rust Modules</h4>
+                    <pre class="rust"><code>// bar.rs
+pub fn f() -> i32 { internal_f() }
+pub fn d() -> f64 { 13.37 }
+
+// not exported
+fn internal_f() -> i32 { 13 }</code></pre>
+                    <pre class="rust"><code>// main.rs
+mod bar;
+fn main() {
+  bar::f(); // OK
+  bar::d(); // OK
+  // bar::internal_f(); wouldn't compile
+}</code></pre>
+                </section>
+
+<section data-markdown id="modules-cpp-vs-rust">
+                    #### familiar concepts 2/2
+
+                    <textarea>
+  | C++               | Rust                 |             |
+  | ----------------- | -------------------- | ----------- |
+  | modules + namespaces    | modules = namespace    |             |
+  | `.ixx`                  | `*.rs`                 |             |
+
+                    </textarea>
+                </section>
+            </section>
+
+            <section>
+                <section data-markdown> ### Option/Result </section>
+            </section>
+
+            <section>
+                <section>
+                    <h4>Iterators</h4>
+                    <ul>
+                        <li>all via <code>Iterator</code> Trait <sup><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">*</a></sup></li>
+                        <li>Lazy</li>
+                        <li></li>
+                    </ul>
+                    <pre class="rust execute"><code>(0..100_000)
+    .map(|x: u32| x * 3) 
+    .filter(|x| x.count_zeros() > 5)
+    .map(|x| format!("{:b}", x))
+    .take(3)
+    .collect::&lt;Vec&lt;String&gt;&gt;();</code></pre>
+                </section>
+
+                <section>
+                    <img data-src="./img/ranges-cpp.jpg" style="width: 80%" />
+                    <blockquote>
+                        Hold my beer.
+                        <cite>
+                            <a href="https://twitter.com/ericniebler/status/1167172402184216576">@ericniebler</a>
+                        </cite>
+                    </blockquote>
+                </section>
+
+                <section>
+                    <img data-src="./img/ranges-rust.jpg" style="width: 100%" />
+                    <blockquote>
+                        not too shabby in rust either
+                        <cite>
+                            <a href="https://twitter.com/steveklabnik/status/1167204430401495040">@steveklabnik</a>
+                        </cite>
+                    </blockquote>
+                </section>
+
+            </section>
+
+            <section>
+                <section data-markdown> ### channels </section>
+            </section>
+
+            <section>
+                <section data-markdown> ### async/await</section>
+            </section>
+
+            <section>
+                <section data-markdown> ### pointers </section>
+            </section>
+
+            <section>
+                <section data-markdown> ### lifetime semantics </section>
+            </section>
+
+
+            <!--vs protobuf-->
+            <section id="serde">
                 <section>
                     <h2>serde</h2>
                     <ul>
@@ -131,20 +547,9 @@
                     </ul>
                 </section>
 
-                <section data-markdown>
-                    #### Interlude: Rust Enums
-                    ```rs
-enum Message {
-    Quit,
-    Move { x: i32, y: i32 },
-    Write(String),
-    ChangeColor(i32, i32, i32),
-}                    ```
-                </section>
-
                 <section>
                     <h4> Command Type (rust) </h4>
-                   <pre><code class="rust">
+                    <pre><code class="rust">
 /// Command sent to the server
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", tag = "kind")]
@@ -156,39 +561,17 @@ pub enum SessionCommand {
     ListParticipants { room: RoomId },
     Authenticate { credentials: UsernamePassword }
 }
-
                    </code></pre>
-
-                </section>
-
-                <section>
-                    <h4> Command Type (typescript) </h4>
-
-                   <pre><code class="typescript">interface Join {
-    kind: 'join',
-    room: string
-}
-interface Command {
-    kind: 'message',
-    room: string,
-    message: string,
-}
-interface ListRooms { kind: 'listRooms' }
-interface ListMyRooms { kind: 'listMyRooms' }
-interface Shutdown { kind: 'shutDown' };</code></pre>
-<pre><code class="typescript">type Command =
-    | Authenticate
-    | Join
-    | Message
-    | ListRooms
-    | ListMyRooms;</code></pre>
+                    <pre><code class="json">
+{ "type": "join", "room": "rustaceans", "message": "hello there"},
+                   </code></pre>
 
                 </section>
 
                 <section>
                     <h4> Dispatching </h4>
                     <small>
-                    <pre><code class="rust">/// react to client command
+                        <pre><code class="rust">/// react to client command
 fn dispatch_incoming_message(&self, msg: SessionCommand, ctx: &mut WebsocketContext<Self>) {
     trace!("received {:?}", msg);
     use SessionCommand::*;
@@ -206,64 +589,6 @@ fn dispatch_incoming_message(&self, msg: SessionCommand, ctx: &mut WebsocketCont
                 </section>
 
             </section>
-            <section>
-                <section>
-                    <h2>actix</h2>
-                    <ul>
-                        <li>actor runtime</li>
-                        <li>HTTP/2 Stack</li>
-                    </ul>
-                </section>
-
-                <section data-markdown>
-                    #### Actors
-                    ```rs
-pub struct DefaultRoom {
-    id: RoomId,
-    history: Vec<protocol::ChatMessage>,
-    participants: HashMap<SessionId, Participant>,
-}
-
-#[derive(Message)]
-pub struct AddParticipant {
-    pub participant: Participant,
-}
-
-                    ```
-                    ```rs
-impl Actor for DefaultRoom {
-}
-
-impl Handler<AddParticipant> for DefaultRoom {
-    type Result = ();
-
-    fn handle(
-        &mut self,
-        command: AddParticipant,
-        ctx: &mut Self::Context,
-    )  {
-        // ...
-    }
-}
-                    ```
-                </section>
-                <section data-markdown>
-                    #### Actor Runtimes
-
-                </section>
-
-            </section>
-
-            <section>
-
-                <section>
-                    <h2>tokio</h2>
-                    <ul>
-                        <li>async runtime</li>
-                    </ul>
-                </section>
-
-            </section>
 
             <section>
                 <section>
@@ -278,19 +603,36 @@ impl Handler<AddParticipant> for DefaultRoom {
                 </section>
             </section>
 
-            <section>
-                bonus: why is is so hard to replace c++?
+            <section id="what-to-use-it-for" data-markdown>
+                ## what to use it for?
+
+                * components
+                * everywhere you would have reached for C/C++ as a last resort
+                * where you need more typesafety
+                * don't RIIR - but if you start fresh any?
+                * parsers, network services
+                * WebAssembly
+                * where you would have reached for python
 
             </section>
 
-            <section id="toc"></section>
+            <section id="how-to-start" data-markdown>
+                * rust by example
+                * book
+                * std.rs
+                * rust dresden
+                * play.rustlang.org
+                * https://github.com/rust-lang/rustlings
+            </section>
 
         </div>
     </div>
 
     <script src="lib/reveal.js"></script>
     <script src="lib/head.js"></script>
+    <script src="lib/head.js"></script>
     <script src="lib/highlight.pack.js"></script>
+    <script src="add_playpen.js"></script>
     <script>
 
         hljs.initHighlightingOnLoad();
