@@ -30,8 +30,8 @@
 
                 <section id="start">
                     <h4> 07.04.2020</h4>
-                    <h2> Rust </h2>
-                    <h6> for C++ Developers </h6>
+                    <h2><img src="img/rust-logo-wht.svg" alt="rust logo white" class="titleimage">Rust </h2>
+                    <h4> for C++ Developers </h4>
                 </section>
 
             </section>
@@ -62,7 +62,7 @@
 
             <section data-markdown>
                 ### Disclaimer
-                * no Rust prior knowledge assumed
+                * no rust knowledge assumed
                 * not a tutorial
                 * put it in context
                 * learning references at the end
@@ -159,7 +159,8 @@
                     <small>
                         <ul>
                             <li class="fragment">Errare humanum est</li>
-                            <li class="fragment">Cognitive bandwidth is limited <span class="fragment">☀🕖 or 🕑🌙</span></li>
+                            <li class="fragment">Cognitive bandwidth is limited <span class="fragment">☀🕖 or
+                                    🕑🌙</span></li>
                             <li class="fragment">Compiler is your friend</li>
                             <li class="fragment">Error Messages are helpers</li>
                             <li class="fragment">You write the safe code</li>
@@ -169,8 +170,7 @@
 
             </section>
 
-
-            <section id="quick-facts">
+            <section id="main-goals">
                 <section data-markdown>
                     ### Main Goals
 
@@ -179,7 +179,7 @@
                     1. Productive / Ergonomic
                 </section>
 
-                <section data-markdown>
+                <section data-markdown id="performant">
                     ### Performant
                     * zero cost abstractions
                     * close to the hardware
@@ -190,7 +190,7 @@
                     * C FFI (bindgen both directions)
                 </section>
 
-                <section data-markdown>
+                <section data-markdown id="safe">
                     ### Safe
 
                     <textarea>
@@ -205,7 +205,7 @@
                     </textarea>
                 </section>
 
-                <section data-markdown>
+                <section data-markdown id="ergonomic">
                     ### Ergonomic
                     * cargo: build test doc bench publish
                     * modules
@@ -265,11 +265,11 @@
 
             </section>
 
-            <section>
-                <section>
+            <section id="ownership">
+                <section id="ownership-1">
                     <h4> move semantics & ownership </h4>
 
-                    <pre class="rust execute fragment"><code>fn main() {
+                    <pre class="rust noMain fragment"><code>fn main() {
     let v = vec![1, 2, 3];
     print_vec(v);
     print_vec(v);
@@ -279,11 +279,12 @@ fn print_vec(v: Vec&lt;i32&gt;) {
     println!("v is {:?}", v);
 }</code></pre>
                 </section>
-                <section>
-                    <pre class="rust execute "><code>
-let v = vec![1, 2, 3];
-print_vec(&v);
-print_vec(&v);
+                <section id="ownership-2">
+                    <pre class="rust noMain "><code>fn main() {
+    let v = vec![1, 2, 3];
+    print_vec(&v);
+    print_vec(&v);
+}
 
 fn print_vec(v: &Vec&lt;i32&gt;) {
     println!("v is {:?}", v);
@@ -291,12 +292,17 @@ fn print_vec(v: &Vec&lt;i32&gt;) {
                 </section>
             </section>
 
-            <section>
-                <section>
-                    <h4>structs</h4>
+            <section name="oo">
+                <section id="oo">
+                    <h3>object orientation?</h3>
+                </section>
+
+                <section id="structs">
+                    <h4>Classes?</h4>
+                    <h4 class="fragment">no! structs and enums!</h4>
 
                     <pre class="rust fragment"><code> // named-field struct
-struct Person<T> {
+struct Person&lt;T&gt; {
     name: String,
     age: u16,
     hobby: T,
@@ -304,14 +310,14 @@ struct Person<T> {
 
 // tuple struct
 struct Coordinate(u32, u32);
-struct Some<T>(T);
+struct Some&lt;T&gt;(T);
 
 // union
 struct None;
 </code></pre>
                 </section>
 
-                <section>
+                <section id="enums">
                     <h4>enums</h4>
 
                     <pre class="rust"><code>enum TrafficLight {
@@ -319,7 +325,9 @@ struct None;
     Yellow,
     Green,
 }
+
 let light = TrafficLight::Green;
+
 match light {
     TrafficLight::Red => println!("STOP!"),
     TrafficLight::Yellow => println!("Slow down!"),
@@ -327,11 +335,13 @@ match light {
 }</code></pre>
                 </section>
 
-                <section>
-                    <h4>methods</h4>
-                    <pre class="rust execute"><code>struct Person {
+                <section id="methods">
+                    <h4>Constructors? Methods?</h4>
+                    <h4 class="fragment">no! associated functions</h4>
+                    <pre class="rust execute fragment"><code>struct Person {
     name: String,
 }
+
 impl Person {
     pub fn new() -> Person {
         Person {
@@ -341,9 +351,10 @@ impl Person {
 }</code></pre>
                 </section>
 
-                <section>
+                <section id="default-constructor">
                     <h4>Default Constructor?</h4>
-                    <pre class="rust execute"><code>struct Person {
+                    <h4 class="fragment"><code>trait Default</code></h4>
+                    <pre class="rust execute fragment"><code>struct Person {
     name: String,
 }
 
@@ -354,21 +365,25 @@ impl Default for Person {
         }
     }
 }
+
+let hendrik: Person = Default::default();
 </code></pre>
                 </section>
 
-                <section>
+                <section id="copy-constructor">
                     <h4>Copy Constructor?</h4>
+                    <h4 class="fragment">trait <code>Copy</code>/<code>Clone</code> </h4>
 
-                    <pre class="rust execute"><code>#[derive(Copy, Clone)]
+                    <pre class="rust execute fragment"><code>#[derive(Copy, Clone)]
 struct Person {
     name: String,
 } </code></pre>
                 </section>
 
-                <section>
+                <section id="operator-overloading?">
                     <h4>Operator Overloading?</h4>
-                    <pre class="rust execute"><code>struct Number(i32);
+                    <pre class="rust execute fragment"><code>#[derive(PartEq, Eq)]
+struct Number(i32);
 
 impl std::ops::Add for Number {
     type Output = Self;
@@ -379,12 +394,42 @@ impl std::ops::Add for Number {
 }</code></pre>
                 </section>
 
+                <section id="traits">
+                    <h4>interfaces?</h4>
+                    <h4 class="nofragment">traits!</h4>
+                    <pre class="rust execute nofragment"><code><small>pub struct NewsArticle {
+    pub headline: String,
+    pub date: String,
+    pub author: String,
+}
+
+fn printSummary(s: &dyn Summary) {
+    println!("{}", s.summarize());
+}
+
+pub trait Summary {
+    fn summarize(&self) -> String;
+}
+
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.date)
+    }
+} 
+
+printSummary(&NewsArticle {
+    headline: "Bicycle breaks sound barrier".into(),
+    date: "07.04.2020".into(),
+    author: "Hendrik".into(),
+})</small></code></pre>
+                </section>
+
             </section>
 
 
-            <section>
-                <section data-markdown> ### strings </section>
-                <section>
+            <section name="strings">
+                <section data-markdown id="strings"> ### strings </section>
+                <section id="strings-cpp">
                     <h4>string</h4>
                     <pre class="cpp"><code>template<
     class CharT,
@@ -403,7 +448,7 @@ std::u8string  // (since C++20) std::basic_string&lt;char8_t&gt;</code></pre>
 > class basic_string_view;</code></pre>
                 </section>
 
-                <section>
+                <section id="strings-rust">
                     <h4>String, &str etc</h4>
                     <pre class="rust"><code>// owned strings
 let hello_owned: String = String::from("hello world");
@@ -422,8 +467,8 @@ std::ffi::OsStr; </code></pre>
                 </section>
             </section>
 
-            <section>
-                <section>
+            <section name="modules">
+                <section id="modules">
                     <h3>Modules</h3>
                     <ul>
                         <li class="fragment">componentization</li>
@@ -434,7 +479,7 @@ std::ffi::OsStr; </code></pre>
                     </ul>
                 </section>
 
-                <section>
+                <section id="modules-cpp">
                     <h4>C++ modules</h4>
                     <span class="fragment">
                         <pre class="cpp"><code>// ModuleA.ixx
@@ -459,7 +504,7 @@ int main() {
                     </span>
                 </section>
 
-                <section>
+                <section id="modules-rust-1">
                     <h4>Rust Modules ½</h4>
                     <pre class="rust execute"><code>// main.rs
 mod bar {
@@ -478,7 +523,7 @@ fn main() {
 </code></pre>
                 </section>
 
-                <section>
+                <section id="modules-rust-2">
                     <h4>Rust Modules</h4>
                     <pre class="rust"><code>// bar.rs
 pub fn f() -> i32 { internal_f() }
@@ -498,20 +543,24 @@ fn main() {
 
             </section>
 
-            <section id="iterators">
-                <section>
+            <section name="iterators">
+                <section id="iterators">
                     <h4>Iterators</h4>
-                    <ul>
-                        <li>all via <code>Iterator</code> Trait <sup><a
-                                    href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">*</a></sup></li>
-                        <li>Lazy</li>
-                    </ul>
+
                     <pre class="rust execute"><code>(0..100_000)
     .map(|x: u32| x * 3) 
     .filter(|x| x.count_zeros() > 5)
     .map(|x| format!("{:b}", x))
     .take(3)
     .collect::&lt;Vec&lt;String&gt;&gt;();</code></pre>
+                    <small>
+                        <ul>
+                            <li>all via <code>Iterator</code> Trait <sup><a
+                                        href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">*</a></sup></li>
+                            <li>Lazy</li>
+                        </ul>
+
+                    </small>
                 </section>
 
                 <section>
@@ -536,13 +585,13 @@ fn main() {
 
             </section>
 
-            <section>
+            <section name="synchronization">
 
-                <section>
+                <section id="synchronization">
                     <h3>synchronization</h3>
                 </section>
 
-                <section>
+                <section id="mutexes">
                     <h4>Mutexes</h4>
                     <pre class="rust execute"><code>use std::sync::{Arc, Mutex};
 use std::thread;
@@ -559,7 +608,7 @@ let mutex = Arc::new(Mutex::new(0));
 }</code></pre>
                 </section>
 
-                <section>
+                <section id="channels">
                     <h4>Channels</h4>
                     <pre class="rust execute"><code>use std::sync::mpsc::channel;
 use std::thread;
@@ -573,7 +622,7 @@ thread::spawn(move|| {
 </code></pre>
                 </section>
 
-                <section>
+                <section id="async">
                     <h3>Async Rust</h3>
                     <ul>
                         <li> <a href="https://async.rs/">async-std</a> </li>
@@ -617,19 +666,17 @@ println!("{}", serde_json::to_string(&message).unwrap())
 
             </section>
 
-            <section>
-                <section id="what-to-use-it-for" data-markdown>
-                    ## what to use it for?
+            <section id="what-to-use-it-for" data-markdown>
+                ## what to use it for?
 
-                    * components
-                    * everywhere you would have reached for C/C++ as a last resort
-                    * where you need more typesafety
-                    * don't RIIR - but if you start fresh any?
-                    * parsers, network services
-                    * WebAssembly
-                    * where you would have reached for python
+                * components
+                * everywhere you would have reached for C/C++ as a last resort
+                * where you need more typesafety
+                * don't RIIR - but if you start fresh any?
+                * parsers, network services
+                * WebAssembly
+                * where you would have reached for python
 
-                </section>
             </section>
 
             <section id="how-to-start" data-markdown>
