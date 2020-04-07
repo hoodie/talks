@@ -105,12 +105,21 @@
                     <ul>
                         <li> 2006 started by Graydon Hoare </li>
                         <li> 2009 mozilla research project </li>
-                        <li class="fragment">"safer language for building browsers" </li>
+                        <li class="fragment">"safer language for building browsers" <sup><a
+                                    href="https://www.mozilla.org/en-US/security/advisories/mfsa2020-11/">*</a></sup>
+                        </li>
                         <li class="fragment"> 2012 servo </li>
                         <li class="fragment"> 2015 🎉 *1.0* 🥳 </li>
                         <li class="fragment"> 2009 Go</li>
                     </ul>
+                </section>
 
+                <section>
+                    <aside class="notes">
+                        why should you work with rust?
+                        should you rewrite things in rust?
+                    </aside>
+                    <h3>But what does that mean for you?<h3>
                 </section>
             </section>
 
@@ -130,11 +139,41 @@
                     1. it's like C++
                     1. it's very much NOT like C++
                 </section>
+
+                <section>
+                    <h4>Highlighted Differences <cite><a href="https://www.youtube.com/watch?v=7dkL4xv9HbE">Michal Vaner
+                                2019</a></cite></h4>
+                    <small>
+                        <ul>
+                            <li class="fragment">Drops 47years of baggage</li>
+                            <li class="fragment">Drops Complexity</li>
+                            <li class="fragment">ML Parentage</li>
+                            <li class="fragment">Attitude towards Developer</li>
+                        </ul>
+                    </small>
+                </section>
+
+                <section>
+                    <h4>Attitude towards Developer
+                        <cite><a href="https://www.youtube.com/watch?v=7dkL4xv9HbE">Michal Vaner 2019</a></cite></h4>
+                    <small>
+                        <ul>
+                            <li class="fragment">Errare humanum est</li>
+                            <li class="fragment">Cognitive bandwidth is limited <span class="fragment">☀🕖 or 🕑🌙</span></li>
+                            <li class="fragment">Compiler is your friend</li>
+                            <li class="fragment">Error Messages are helpers</li>
+                            <li class="fragment">You write the safe code</li>
+                        </ul>
+                    </small>
+                </section>
+
             </section>
 
 
             <section id="quick-facts">
                 <section data-markdown>
+                    ### Main Goals
+
                     1. Performant
                     1. Safe
                     1. Productive / Ergonomic
@@ -144,23 +183,26 @@
                     ### Performant
                     * zero cost abstractions
                     * close to the hardware
-                    * memory safety without GC
-                    * system threads
+                    * no GC
                     * no runtime
+                    * system threads
                     * async/await
                     * C FFI (bindgen both directions)
                 </section>
 
                 <section data-markdown>
                     ### Safe
+
+                    <textarea>
                     * no unintialized variables
                     * no UB
                     * strong types that guarantee
                         * no race conditions
                         * clear ownership/lifetimes
                         * when to copy/move
-                        * immutability
-                        * mutexes are containers
+                    * immutability
+                    * mutexes are containers
+                    </textarea>
                 </section>
 
                 <section data-markdown>
@@ -173,39 +215,19 @@
                     * great 3rd party crates
                 </section>
 
-                <!--
-                <section>
-                    <h4>Rust ecosystem</h4>
-                    <ul>
-                        <li>cargo: package manager + build system</li>
-                        <li>most crates are MIT/Apache licensed</li>
-                        <li>browser-grade libraries</li>
-                        <li>HTTP/3, QUIC:<a href="https://github.com/cloudflare/quiche">quiche</a>, <a
-                                href="https://github.com/djc/quinn/">quinn</a>, <a
-                                href="https://github.com/mozilla/neqo/">neqo</a></li>
-                        <li>Codecs: <a href="https://github.com/xiph/rav1e">Xiph AV1 encoder</a></li>
-                        <li>Rendering: <a href="https://github.com/servo/webrender">WebRender</a></li>
-                        <li>Parsing: <a href="https://github.com/servo/html5ever">HTML5Ever</a></li>
-                        <li>Benchmarks: <a
-                                href="https://www.techempower.com/benchmarks/#section=data-r18&hw=ph&test=plaintext">techempower</a>
-                        </li>
-                    </ul>
-                </section>
-            -->
-
             </section>
 
             <section id="familiar-concepts">
 
                 <section data-markdown id="familiar-concepts-1">
-                    #### familiar concepts 1/2
+                    #### Familiar concepts 1/2
 
                     <textarea>
   | C++               | Rust                 |             |
   | ----------------- | -------------------- | ----------- |
   | primitive types   | primitive types      |  `= + ≠ `   |
-  | RAII / DRES       | RAII / DRES          |  `=`        |
-  | `struct`/` class` | `struct`             |  `=`        |
+  | RAII / DRES       | RAII / <abbr title="destructors run on exit scope">DRES</abbr>          |  `=`        |
+  | `struct`/` class` | `struct`/`enum`      |  `=`        |
   | `enum`            | `enum`               |  `=`        |
   | methods           | associated function  |  `≠`        |
   | `union`           | `enum` (algrebraic)  |  `≠`        |
@@ -308,7 +330,7 @@ match light {
                 <section>
                     <h4>methods</h4>
                     <pre class="rust execute"><code>struct Person {
-    name: String;
+    name: String,
 }
 impl Person {
     pub fn new() -> Person {
@@ -321,38 +343,45 @@ impl Person {
 
                 <section>
                     <h4>Default Constructor?</h4>
-                    <pre class="rust execute"><code></code></pre>
+                    <pre class="rust execute"><code>struct Person {
+    name: String,
+}
+
+impl Default for Person {
+    pub fn default() -> Person {
+        Person {
+            name: String::from("Hendrik")
+        }
+    }
+}
+</code></pre>
                 </section>
 
                 <section>
                     <h4>Copy Constructor?</h4>
-                    <pre class="rust execute"><code></code></pre>
+
+                    <pre class="rust execute"><code>#[derive(Copy, Clone)]
+struct Person {
+    name: String,
+} </code></pre>
                 </section>
 
                 <section>
                     <h4>Operator Overloading?</h4>
-                    <pre class="rust execute"><code></code></pre>
+                    <pre class="rust execute"><code>struct Number(i32);
+
+impl std::ops::Add for Number {
+    type Output = Self;
+
+    fn add(self, other: Self) -> Self {
+        Self (self.0 + other.0)
+    }
+}</code></pre>
                 </section>
-
-                <section>
-                    <h4>Destructor</h4>
-                    <pre class="rust execute"><code></code></pre>
-                </section>
-
-                <section>
-                    <h4></h4>
-                    <pre class="rust execute"><code></code></pre>
-                </section>
-
-                <section>
-                    <h4></h4>
-                    <pre class="rust execute"><code></code></pre>
-                </section>
-
-
-
 
             </section>
+
+
             <section>
                 <section data-markdown> ### strings </section>
                 <section>
@@ -402,9 +431,9 @@ std::ffi::OsStr; </code></pre>
                         <li class="fragment">compilation unit</li>
                         <li class="fragment">file layout</li>
                         <li class="fragment">namespacing</li>
-                        <li class="fragment">afterthought vs design principle</li>
                     </ul>
                 </section>
+
                 <section>
                     <h4>C++ modules</h4>
                     <span class="fragment">
@@ -459,6 +488,7 @@ pub fn d() -> f64 { 13.37 }
 fn internal_f() -> i32 { 13 }</code></pre>
                     <pre class="rust"><code>// main.rs
 mod bar;
+
 fn main() {
   bar::f(); // OK
   bar::d(); // OK
@@ -466,30 +496,15 @@ fn main() {
 }</code></pre>
                 </section>
 
-<section data-markdown id="modules-cpp-vs-rust">
-                    #### familiar concepts 2/2
-
-                    <textarea>
-  | C++               | Rust                 |             |
-  | ----------------- | -------------------- | ----------- |
-  | modules + namespaces    | modules = namespace    |             |
-  | `.ixx`                  | `*.rs`                 |             |
-
-                    </textarea>
-                </section>
             </section>
 
-            <section>
-                <section data-markdown> ### Option/Result </section>
-            </section>
-
-            <section>
+            <section id="iterators">
                 <section>
                     <h4>Iterators</h4>
                     <ul>
-                        <li>all via <code>Iterator</code> Trait <sup><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">*</a></sup></li>
+                        <li>all via <code>Iterator</code> Trait <sup><a
+                                    href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">*</a></sup></li>
                         <li>Lazy</li>
-                        <li></li>
                     </ul>
                     <pre class="rust execute"><code>(0..100_000)
     .map(|x: u32| x * 3) 
@@ -522,21 +537,51 @@ fn main() {
             </section>
 
             <section>
-                <section data-markdown> ### channels </section>
-            </section>
 
-            <section>
-                <section data-markdown> ### async/await</section>
-            </section>
+                <section>
+                    <h3>synchronization</h3>
+                </section>
 
-            <section>
-                <section data-markdown> ### pointers </section>
-            </section>
+                <section>
+                    <h4>Mutexes</h4>
+                    <pre class="rust execute"><code>use std::sync::{Arc, Mutex};
+use std::thread;
 
-            <section>
-                <section data-markdown> ### lifetime semantics </section>
-            </section>
+let mutex = Arc::new(Mutex::new(0));
 
+{
+    let mutex = mutex.clone();
+    
+    thread::spawn(move || {
+        let mut target = mutex.lock().unwrap();
+        *target = 10;
+    }).join().unwrap()
+}</code></pre>
+                </section>
+
+                <section>
+                    <h4>Channels</h4>
+                    <pre class="rust execute"><code>use std::sync::mpsc::channel;
+use std::thread;
+
+let (sender, receiver) = channel();
+
+// Spawn off an expensive computation
+thread::spawn(move|| {
+    sender.send(expensive_computation()).unwrap();
+});
+</code></pre>
+                </section>
+
+                <section>
+                    <h3>Async Rust</h3>
+                    <ul>
+                        <li> <a href="https://async.rs/">async-std</a> </li>
+                        <li> <a href="https://tokio.rs/">tokio</a> </li>
+                    </ul>
+                </section>
+
+            </section>
 
             <!--vs protobuf-->
             <section id="serde">
@@ -549,71 +594,42 @@ fn main() {
 
                 <section>
                     <h4> Command Type (rust) </h4>
-                    <pre><code class="rust">
-/// Command sent to the server
-#[derive(Debug, Serialize, Deserialize)]
+                    <pre class="rust execute"><code>#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase", tag = "kind")]
 pub enum SessionCommand {
-    Join { room: RoomId },
-    Message { message: String, room: RoomId },
+    Join { room: String },
+    Message { message: String, room: usize },
     ListRooms,
-    ListMyRooms,
-    ListParticipants { room: RoomId },
-    Authenticate { credentials: UsernamePassword }
 }
-                   </code></pre>
+
+let message = SessionCommand::Message{
+    message: String::from("hello there"),
+    room: 5,
+};
+
+println!("{}", serde_json::to_string(&message).unwrap())
+</code></pre>
                     <pre><code class="json">
-{ "type": "join", "room": "rustaceans", "message": "hello there"},
+{ "type": "join", "room": 5, "message": "hello there"},
                    </code></pre>
 
-                </section>
-
-                <section>
-                    <h4> Dispatching </h4>
-                    <small>
-                        <pre><code class="rust">/// react to client command
-fn dispatch_incoming_message(&self, msg: SessionCommand, ctx: &mut WebsocketContext<Self>) {
-    trace!("received {:?}", msg);
-    use SessionCommand::*;
-    match msg {
-        Authenticate { credentials } => self.authenticate(credentials, ctx),
-        ListRooms => self.list_rooms(ctx),
-        Join{ room } =>  self.join(&room, ctx),
-        ListMyRooms => self.list_my_rooms(ctx),
-        ListParticipants { room } => self.request_room_update(&room, ctx),
-        Message{ message, room } => self.forward_message( message, &room, ctx),
-        ShutDown => System::current().stop()
-    }
-}</code></pre>
-                    </small>
                 </section>
 
             </section>
 
             <section>
-                <section>
-                    ## Rust Examples
+                <section id="what-to-use-it-for" data-markdown>
+                    ## what to use it for?
 
-                    ## Strategy going
-                    https://locka99.gitbooks.io/a-guide-to-porting-c-to-rust/
-                    https://www.apriorit.com/dev-blog/520-rust-vs-c-comparison
-                    * build the next thing in Rust
-                    * reintegrate RTCVS components
+                    * components
+                    * everywhere you would have reached for C/C++ as a last resort
+                    * where you need more typesafety
+                    * don't RIIR - but if you start fresh any?
+                    * parsers, network services
+                    * WebAssembly
+                    * where you would have reached for python
 
                 </section>
-            </section>
-
-            <section id="what-to-use-it-for" data-markdown>
-                ## what to use it for?
-
-                * components
-                * everywhere you would have reached for C/C++ as a last resort
-                * where you need more typesafety
-                * don't RIIR - but if you start fresh any?
-                * parsers, network services
-                * WebAssembly
-                * where you would have reached for python
-
             </section>
 
             <section id="how-to-start" data-markdown>
@@ -630,15 +646,16 @@ fn dispatch_incoming_message(&self, msg: SessionCommand, ctx: &mut WebsocketCont
 
     <script src="lib/reveal.js"></script>
     <script src="lib/head.js"></script>
-    <script src="lib/head.js"></script>
     <script src="lib/highlight.pack.js"></script>
     <script src="add_playpen.js"></script>
     <script>
 
         hljs.initHighlightingOnLoad();
         Reveal.initialize({
+            controlsTutorial: true,
             history: true,
             slideNumber: true,
+            progress: true,
             transition: 'convex', // none/fade/slide/convex/concave/zoom
             // More info https://github.com/hakimel/reveal.js#dependencies
             dependencies: [

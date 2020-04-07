@@ -44,7 +44,7 @@ document.querySelectorAll('pre.rust.execute code').forEach((el) => {
   const playgroundUrl = "https://play.rust-lang.org/";
   const a = link({}, {
     class: 'test-arrow',
-    textContent: 'play',
+    textContent: 'edit',
     href: playgroundUrl + '?code=' + encodeURIComponent(wrapInMain(code)),
     target: '_blank',
     class: 'runlink',
@@ -53,7 +53,7 @@ document.querySelectorAll('pre.rust.execute code').forEach((el) => {
 
 
   const executeButton = button({
-    innerHTML: 'execute'
+    innerHTML: 'Run'
   }, {
     onclick: (event) => {
       console.info('running', event)
