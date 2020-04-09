@@ -26,27 +26,25 @@
     <div class="reveal">
         <div class="slides">
 
-            <section id="title" class="black-slide" data-background-color="var(--background-color-dark)">
+            <section id="title" class="black-slide" data-background-color="var(--background-color-dark)"
+                data-transition="zoom" data-background-transition="zoom">
 
                 <section id="start">
-                    <h4> 07.04.2020</h4>
-                    <h2><img src="img/rust-logo-wht.svg" alt="rust logo white" class="titleimage">Rust </h2>
-                    <h4> for C++ Developers </h4>
+                    <h4>C++ UserGroup Dresden</h4>
+                    <h5>07.04.2020</h5>
+                    <h1><img src="img/rust-logo-wht.svg" alt="rust logo white" class="titleimage" />Rust </h1>
+                    <h3> for C++ Developers </h3>
                 </section>
 
             </section>
 
-            <section id="me" data-background-color="#ffffff" data-transition="zoom" data-background-transition="zoom">
-                <div class="notes">
-
-                </div>
+            <section id="me" data-background-color="#ffffff"
+                data-transition="zoom" >
+                <aside class="notes" data-markdown></aside>
                 <h3>
-                    <code>
-
-                    $whoami<span class="blinking">&block;</span>
-                    </code>
+                    <code> $whoami<span class="blinking">&block;</span> </code>
                 </h3>
-                <div style="background-image: url(./images/doodles.png); background-repeat: no-repeat">
+                <div style="background-image: url(./img/doodles.png); background-repeat: no-repeat">
                     <ul style="list-style-type:none;">
                         <li> <a href="https://www.hoodie.de"> 🤓 </a> Hendrik Sollich</li>
                         <li> <a href="https://www.gotomeeting.com/"> 👔 </a> LogMeIn (GoToMeeting <i
@@ -68,16 +66,16 @@
                 * learning references at the end
             </section>
 
-            <section data-markdown>
-                ## What is Rust?
+            <section>
+                <h2> What is Rust? </h2>
 
-                <textarea>
-                > Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety
-                </textarea>
+                <blockquote>
+                Rust is a systems programming language that runs blazingly fast, prevents segfaults, and guarantees thread safety
+                </blockquote>
                 or
-                <textarea>
-                > A language empowering everyone to build reliable and efficient software.
-                </textarea>
+                <blockquote>
+                A language empowering everyone to build reliable and efficient software.
+                </blockquote>
 
             </section>
 
@@ -98,26 +96,28 @@
             </section>
             -->
 
-            <section id="history">
+            <section id="history" class="black-slide" data-background-color="var(--background-color-dark)">
                 <section>
-                    <h4>History</h4>
+                    <h2>History</h3>
 
-                    <ul>
-                        <li> 2006 started by Graydon Hoare </li>
-                        <li> 2009 mozilla research project </li>
-                        <li class="fragment">"safer language for building browsers" <sup><a
-                                    href="https://www.mozilla.org/en-US/security/advisories/mfsa2020-11/">*</a></sup>
-                        </li>
-                        <li class="fragment"> 2012 servo </li>
-                        <li class="fragment"> 2015 🎉 *1.0* 🥳 </li>
-                        <li class="fragment"> 2009 Go</li>
-                    </ul>
+                        <ul>
+                            <li class="fragment"> 2006 started by Graydon Hoare </li>
+
+                            <li class="fragment"> 2009 mozilla research project </li>
+                            <li class="fragment">"safer language for building browsers" <sup><a
+                                        href="https://www.mozilla.org/en-US/security/advisories/mfsa2020-11/">*</a></sup>
+                            </li>
+                            <li class="fragment"> 2012 servo </li>
+                            <li class="fragment"> 2015 🎉 *1.0* 🥳 <img src="img/happy.svg" alt="rust logo white"
+                                    class="titleimage" /></li>
+                            <li class="fragment"> 2009 Go</li>
+                        </ul>
                 </section>
 
                 <section>
                     <aside class="notes">
-                        why should you work with rust?
-                        should you rewrite things in rust?
+                        why should you work with Rust?
+                        should you rewrite things in Rust?
                     </aside>
                     <h3>But what does that mean for you?<h3>
                 </section>
@@ -129,20 +129,34 @@
                 </section>
 
                 <section data-markdown>
-                    #### Today it fills the same niche as C++:
+                    ### Today it fills the same niche as C++:
                     1. High-level
                     1. Zero Cost abstractions
                     1. no performance compromise
                 </section>
 
-                <section data-markdown>
-                    1. it's like C++
-                    1. it's very much NOT like C++
+                <section>
+                    <h3>
+                        <img src="img/cpp_logo.svg" class="titleimage" /> vs
+                        <img src="img/rust-logo-blk.svg" alt="rust logo black" class="titleimage" />
+                    </h3>
+
+                    <ol>
+                        <li>it's like C++</li>
+                        <li>it's very much NOT like C++ </li>
+                    </ol>
                 </section>
 
                 <section>
-                    <h4>Highlighted Differences <cite><a href="https://www.youtube.com/watch?v=7dkL4xv9HbE">Michal Vaner
-                                2019</a></cite></h4>
+                    <h3>Highlighted Differences
+                        <img src="img/happy.svg" alt="happy" class="titleimage" />
+                        <cite>
+                            <small>
+                                <a href="https://www.youtube.com/watch?v=7dkL4xv9HbE">Michal Vaner
+                                    2019</a>
+                            </small>
+                        </cite>
+                    </h3>
                     <small>
                         <ul>
                             <li class="fragment">Drops 47years of baggage</li>
@@ -154,8 +168,11 @@
                 </section>
 
                 <section>
-                    <h4>Attitude towards Developer
-                        <cite><a href="https://www.youtube.com/watch?v=7dkL4xv9HbE">Michal Vaner 2019</a></cite></h4>
+                    <h3>Attitude towards Developer
+                        <img src="img/hang.svg" class="hanging" alt="fallen over ferris"
+                            style="width:1em; vertical-align: top; margin-top:0.6em; margin-left:-5.1em;" />
+                        <cite> <small> <a href="https://www.youtube.com/watch?v=7dkL4xv9HbE">Michal Vaner 2019</a>
+                            </small> </cite></h3>
                     <small>
                         <ul>
                             <li class="fragment">Errare humanum est</li>
@@ -168,51 +185,68 @@
                     </small>
                 </section>
 
+                <section>
+                    <iframe src="https://doc.rust-lang.org/error-index.html#E0308" frameborder="0" width="100%"
+                        height="600"></iframe>
+                </section>
+
             </section>
 
-            <section id="main-goals">
-                <section data-markdown>
-                    ### Main Goals
-
-                    1. Performant
-                    1. Safe
-                    1. Productive / Ergonomic
+            <section id="main-goals" class="black-slide" data-background-color="var(--background-color-dark)">
+                <section>
+                    <h3><img src="img/rust-logo-wht.svg" alt="rust logo white" class="titleimage" />Main Goals </h3>
+                    <ol>
+                        <li>Performant</li>
+                        <li>Safe</li>
+                        <li>Productive / Ergonomic</li>
+                    </ol>
                 </section>
 
-                <section data-markdown id="performant">
-                    ### Performant
-                    * zero cost abstractions
-                    * close to the hardware
-                    * no GC
-                    * no runtime
-                    * system threads
-                    * async/await
-                    * C FFI (bindgen both directions)
+                <section id="performant">
+                    <h3>Performant <img src="img/happy.svg" alt="happy" class="titleimage" /> </h3>
+                    <small>
+                        <ul>
+                            <li>zero cost abstractions</li>
+                            <li>close to the hardware</li>
+                            <li>no GC</li>
+                            <li>no runtime</li>
+                            <li>system threads</li>
+                            <li>async/await</li>
+                            <li>C FFI (bindgen both directions)</li>
+                        </ul>
+                    </small>
                 </section>
 
-                <section data-markdown id="safe">
-                    ### Safe
-
-                    <textarea>
-                    * no unintialized variables
-                    * no UB
-                    * strong types that guarantee
-                        * no race conditions
-                        * clear ownership/lifetimes
-                        * when to copy/move
-                    * immutability
-                    * mutexes are containers
-                    </textarea>
+                <section id="safe">
+                    <h3>Safe <img src="img/fallover.svg" alt="fallover" class="titleimage" /> </h3>
+                    <small>
+                        <ul>
+                            <li>no unintialized variables</li>
+                            <li>no UB</li>
+                            <li>strong types that guarantee<ul>
+                                    <li>no race conditions</li>
+                                    <li>clear ownership/lifetimes</li>
+                                    <li>when to copy/move</li>
+                                </ul>
+                            </li>
+                            <li>immutability</li>
+                            <li>mutexes are containers</li>
+                        </ul>
+                    </small>
                 </section>
 
-                <section data-markdown id="ergonomic">
-                    ### Ergonomic
-                    * cargo: build test doc bench publish
-                    * modules
-                    * pattern matching
-                    * optionals
-                    * friendly compiler
-                    * great 3rd party crates
+                <section id="ergonomic">
+                    <h3>Ergonomic<img src="img/jump.svg" alt="jump" class="titleimage" /></h3>
+                    <small>
+                        <ul>
+                            <li>cargo: build test doc bench publish</li>
+                            <li>modules</li>
+                            <li>pattern matching</li>
+                            <li>optionals</li>
+                            <li>friendly compiler</li>
+                            <li>great 3rd party crates</li>
+                        </ul>
+                    </small>
                 </section>
 
             </section>
@@ -223,7 +257,7 @@
                     #### Familiar concepts 1/2
 
                     <textarea>
-  | C++               | Rust                 |             |
+  | <img src="img/cpp_logo.svg" class="titleimage" /> C++               | <img src="img/rust-logo-blk.svg" class="titleimage" /> Rust                 |             |
   | ----------------- | -------------------- | ----------- |
   | primitive types   | primitive types      |  `= + ≠ `   |
   | RAII / DRES       | RAII / <abbr title="destructors run on exit scope">DRES</abbr>          |  `=`        |
@@ -246,7 +280,7 @@
                     #### familiar concepts 2/2
 
                     <textarea>
-  | C++               | Rust                 |             |
+  | <img src="img/cpp_logo.svg" class="titleimage" /> C++               | <img src="img/rust-logo-blk.svg" class="titleimage" /> Rust                 |             |
   | ----------------- | -------------------- | ----------- |
   | `unique_ptr<T>`         | `Box<T>`               |  `=`        |
   | `shared_ptr<T>`         | `Rc<T>`, `Arc<T>`      |  `= + ≠ `   |
@@ -267,7 +301,7 @@
 
             <section id="ownership">
                 <section id="ownership-1">
-                    <h4> move semantics & ownership </h4>
+                    <h3><img src="img/hello.svg" alt="hello" class="titleimage" /> move semantics & ownership </h3>
 
                     <pre class="rust noMain fragment"><code>fn main() {
     let v = vec![1, 2, 3];
@@ -280,6 +314,7 @@ fn print_vec(v: Vec&lt;i32&gt;) {
 }</code></pre>
                 </section>
                 <section id="ownership-2">
+                    <h4><img src="img/hello.svg" alt="hello" class="titleimage" /> correct </h4>
                     <pre class="rust noMain "><code>fn main() {
     let v = vec![1, 2, 3];
     print_vec(&v);
@@ -294,7 +329,7 @@ fn print_vec(v: &Vec&lt;i32&gt;) {
 
             <section name="oo">
                 <section id="oo">
-                    <h3>object orientation?</h3>
+                    <h3>object orientation?<img src="img/shy.svg" alt="shy" class="titleimage" /></h3>
                 </section>
 
                 <section id="structs">
@@ -471,16 +506,16 @@ std::ffi::OsStr; </code></pre>
                 <section id="modules">
                     <h3>Modules</h3>
                     <ul>
-                        <li class="fragment">componentization</li>
-                        <li class="fragment">explicit exports</li>
-                        <li class="fragment">compilation unit</li>
-                        <li class="fragment">file layout</li>
-                        <li class="fragment">namespacing</li>
+                        <li class="fragment">componentization?</li>
+                        <li class="fragment">explicit exports?</li>
+                        <li class="fragment">compilation unit?</li>
+                        <li class="fragment">file layout?</li>
+                        <li class="fragment">namespacing?</li>
                     </ul>
                 </section>
 
                 <section id="modules-cpp">
-                    <h4>C++ modules</h4>
+                    <h4><img src="img/cpp_logo.svg" class="titleimage" />Modules</h4>
                     <span class="fragment">
                         <pre class="cpp"><code>// ModuleA.ixx
 export module ModuleA;
@@ -505,7 +540,7 @@ int main() {
                 </section>
 
                 <section id="modules-rust-1">
-                    <h4>Rust Modules ½</h4>
+                    <h4><img src="img/rust-logo-blk.svg" class="titleimage" />Rust Modules ½</h4>
                     <pre class="rust execute"><code>// main.rs
 mod bar {
    pub fn f() -> i32 { internal_f() }
@@ -524,7 +559,7 @@ fn main() {
                 </section>
 
                 <section id="modules-rust-2">
-                    <h4>Rust Modules</h4>
+                    <h4><img src="img/rust-logo-blk.svg" class="titleimage" />Rust Modules</h4>
                     <pre class="rust"><code>// bar.rs
 pub fn f() -> i32 { internal_f() }
 pub fn d() -> f64 { 13.37 }
@@ -545,7 +580,7 @@ fn main() {
 
             <section name="iterators">
                 <section id="iterators">
-                    <h4>Iterators</h4>
+                    <h4>Iterators<img src="img/jump.svg" alt="jump" class="titleimage" /></h4>
 
                     <pre class="rust execute"><code>(0..100_000)
     .map(|x: u32| x * 3) 
@@ -564,19 +599,21 @@ fn main() {
                 </section>
 
                 <section>
-                    <img data-src="./img/ranges-cpp.jpg" style="width: 80%" />
                     <blockquote>
-                        Hold my beer.
+                        <img src="img/cpp_logo.svg" class="titleimage" />
+                        "Hold my beer."
                         <cite>
                             <a href="https://twitter.com/ericniebler/status/1167172402184216576">@ericniebler</a>
                         </cite>
                     </blockquote>
+                    <img data-src="./img/ranges-cpp.jpg" style="width: 80%" />
                 </section>
 
                 <section>
                     <img data-src="./img/ranges-rust.jpg" style="width: 100%" />
                     <blockquote>
-                        not too shabby in rust either
+                        <img src="img/rust-logo-blk.svg" class="titleimage" />
+                        "not too shabby in rust either"
                         <cite>
                             <a href="https://twitter.com/steveklabnik/status/1167204430401495040">@steveklabnik</a>
                         </cite>
@@ -588,7 +625,13 @@ fn main() {
             <section name="synchronization">
 
                 <section id="synchronization">
-                    <h3>synchronization</h3>
+                    <h3>synchronization </h3>
+                    <h1>
+                        <img src="img/jump.svg" alt="jump" class="titleimage"
+                            style="margin-right:-1.0em; margin-left: -.5em" />
+                        <img src="img/jump.svg" alt="jump" class="titleimage" style="margin-right:-1.0em" />
+                        <img src="img/jump.svg" alt="jump" class="titleimage" style="margin-right:-1.0em" />
+                    </h1>
                 </section>
 
                 <section id="mutexes">
@@ -623,11 +666,19 @@ thread::spawn(move|| {
                 </section>
 
                 <section id="async">
-                    <h3>Async Rust</h3>
-                    <ul>
-                        <li> <a href="https://async.rs/">async-std</a> </li>
-                        <li> <a href="https://tokio.rs/">tokio</a> </li>
-                    </ul>
+                    <h3> Async Rust</h3>
+
+                    <p>
+                        <div style="float:right">
+                            <a href="https://tokio.rs/"> <img src="img/Tokio_Mark_Large.png"
+                                    style="width: 8em" /><br>tokio.rs</a>
+                        </div>
+
+                        <div style="float:left">
+                            <a href="https://async.rs/"> <img src="img/async-std.svg"
+                                    style="width: 10em" /><br />async.rs</a>
+                        </div>
+                    </p>
                 </section>
 
             </section>
@@ -680,12 +731,13 @@ println!("{}", serde_json::to_string(&message).unwrap())
             </section>
 
             <section id="how-to-start" data-markdown>
-                * rust by example
-                * book
-                * std.rs
-                * rust dresden
-                * play.rustlang.org
-                * https://github.com/rust-lang/rustlings
+                * overview: [doc.rust-lang.org/](https://doc.rust-lang.org/)
+                * by example: [doc.rust-lang.org/rust-by-example](https://doc.rust-lang.org/rust-by-example/)
+                * the book: [doc.rust-lang.org/book](https://doc.rust-lang.org/book/)
+                * standard lib: [doc.rust-lang.org/std](https://doc.rust-lang.org/std/) [std.rs](https://std.rs/)
+                * meetup: [meetup.com/Mozilla-Community-Dresden/](https://www.meetup.com/Mozilla-Community-Dresden/)
+                * [play.rustlang.org](https://play.rustlang.org)
+                * [github.com/rust-lang/rustlings](https://github.com/rust-lang/rustlings)
             </section>
 
         </div>
@@ -703,7 +755,7 @@ println!("{}", serde_json::to_string(&message).unwrap())
             history: true,
             slideNumber: true,
             progress: true,
-            transition: 'convex', // none/fade/slide/convex/concave/zoom
+            transition: 'slide', // none/fade/slide/convex/concave/zoom
             // More info https://github.com/hakimel/reveal.js#dependencies
             dependencies: [
                 { src: './plugin/markdown/marked.js' },

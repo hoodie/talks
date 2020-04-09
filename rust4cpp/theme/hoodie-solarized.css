@@ -21,7 +21,7 @@ html * {
   --heading-color-dark: #fff;
   --background-color-dark: #25323a;
 
-  --code-color-bright: #d33682;
+  --code-color-dark: #d33682;
   --code-color-bright: #97d336;
 
   --link-color: #268bd2;
@@ -168,7 +168,7 @@ body {
 
 .reveal code {
   font-family: var(--font-family-code);
-  color: var(--code-color-bright);
+  color: var(--code-color-dark);
   text-transform: none;
 }
 
