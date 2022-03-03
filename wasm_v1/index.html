@@ -1008,16 +1008,6 @@ pub fn run() -> Result<(), JsValue> {
             slideNumber: true,
             transition: 'convex', // none/fade/slide/convex/concave/zoom
             // More info https://github.com/hakimel/reveal.js#dependencies
-            dependencies: [
-                { src: './plugin/markdown/marked.js' },
-                { src: './plugin/markdown/markdown.js' },
-                { src: './plugin/notes/notes.js', async: true },
-                { src: './plugin/menu/menu.js' }
-                /*
-                { src: 'socket.io/socket.io.js', async: true },
-                { src: 'plugin/notes-server/client.js', async: true }
-                 */
-            ]
         });
 
         window.onGamePadUpPressed = () => Reveal.up();
