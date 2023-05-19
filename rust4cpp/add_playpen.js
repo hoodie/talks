@@ -1,3 +1,7 @@
+import hljs_module from "./lib/plugin/highlight/highlight.esm.js"
+
+const hljs = hljs_module();
+
 const element = (tagName) => ({ className, children, innerHTML } = {}, attrs = {}) => {
   const _element = document.createElement(tagName);
   if (innerHTML) {
@@ -28,21 +32,24 @@ const codeblock = content => small(small(pre({
 })));
 
 const buttonDefaults = { withMain: false, justBuild: false };
-const appendExecuteButtons = ({ withMain, justBuild } = buttonDefaults) => (el) => {
 
-  const append = (node) => el.parentNode.append(node)
+const appendExecuteButtons = ({ withMain, justBuild } = buttonDefaults) => (codeTag) => {
+
+  const preTag = codeTag.parentNode;
+  const preParent= preTag.parentNode;
+  const append = (node) => preTag.append(node)
 
   const addRunResult = (status, output) => {
-    el.parentNode.parentNode.append(status === STATUS.SUCCESS ? '✅' : '❌');
-    el.parentNode.parentNode.append(codeblock(output));
+    preParent.append(status === STATUS.SUCCESS ? '✅' : '❌');
+    preParent.append(codeblock(output));
   }
 
   // highlight
-  hljs.highlightBlock(el);
+  // hljs.highlightBlock(codeTag);
 
-  const code = el.textContent;
+  const codeContent = codeTag.textContent;
 
-  const wrappedCode = withMain ? wrapInMain(code) : code;
+  const wrappedCode = withMain ? wrapInMain(codeContent) : codeContent;
 
   const playgroundUrl = "https://play.rust-lang.org/";
   const a = link({}, {
@@ -123,6 +130,8 @@ function runProgram(program, callback) {
   req.send(data);
 }
 
-document.querySelectorAll('pre.rust.execute code').forEach(appendExecuteButtons({ withMain: true }));
-document.querySelectorAll('pre.rust.build code').forEach(appendExecuteButtons({ withMain: false, justBuild: true }));
-document.querySelectorAll('pre.rust.noMain code').forEach(appendExecuteButtons({ withMain: false }));
+document.querySelectorAll('pre.rust.execute code:first-child').forEach(appendExecuteButtons({ withMain: true }));
+document.querySelectorAll('pre.rust.build code:first-child').forEach(appendExecuteButtons({ withMain: false, justBuild: true }));
+document.querySelectorAll('pre.rust.noMain code:first-child').forEach(appendExecuteButtons({ withMain: false }));
+
+console.info("playpen added", hljs)
