@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>logging anti-patterns</title>
+	<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+
+    <link rel="stylesheet" href="lib/reset.css" />
+    <link rel="stylesheet" href="lib/reveal.css" />
+    <!-- <link rel="stylesheet" href="lib/theme/black.css"> -->
+
+    <link rel="stylesheet" href="theme/hoodie-solarized.css" />
+    <link rel="stylesheet" href="theme/font-awesome/all.min.css" />
+    <link rel="stylesheet" href="theme/tomorrow.css" />
+    <link rel="stylesheet" href="theme/talk.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="lib/plugin/highlight/monokai.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section
+          id="title"
+          class="black-slide"
+          data-background-color="var(--background-color-dark)"
+          data-transition="zoom"
+          data-background-transition="zoom"
+        >
+          <section>🪵 Logging AntiPatterns</section>
+          <section>
+            🤔 AntiPattern Logging?
+            <p>
+              <small class="fragment">🧂 may contain hot takes</small>
+            </p>
+          </section>
+        </section>
+
+        <section data-markdown>
+			* do you have an app?
+			* do you run services in production?
+			* do you produce a lot of logs?
+			* do you read them regularly?
+			* when do you have to read them?
+			* who reads them? (devs/admins/ops/analysts/product/sales?)
+		</section>
+        <section data-markdown>
+		## we need to structure our logs better!!!
+		</section>
+
+        <section>Slide 1.1</section>
+
+        <section>Slide 2</section>
+
+        <section>Slide 3</section>
+      </div>
+    </div>
+
+    <script src="lib/reveal.js"></script>
+    <script src="lib/plugin/notes/notes.js"></script>
+    <script src="lib/plugin/markdown/markdown.js"></script>
+    <script src="lib/plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
