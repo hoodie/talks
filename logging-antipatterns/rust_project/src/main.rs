@@ -21,44 +21,44 @@ fn main() {
     }
 
     head("basic unstructured logs");
-    log::debug!(target: "backend_service::service", "everything fine");
-    log::info!(target: "backend_service::main", "listening on {ip:?} with https enabled {https_enabled}");
-    log::trace!(target: "backend_service::worker", "started {worker_count} workers");
-    log::warn!(target: "backend_service::worker::thread", "session disconnected {user_id:?}");
-    log::error!(target: "backend_service::worker::thread", "failure occurred");
+    log::debug!(target: "service::service", "everything fine");
+    log::info!(target: "service::main", "listening on {ip:?} with https enabled {https_enabled}");
+    log::trace!(target: "service::worker", "started {worker_count} workers");
+    log::warn!(target: "service::worker::thread", "session disconnected {user_id:?}");
+    log::error!(target: "service::worker::thread", "failure occurred");
     food();
 
     head("do not inline variables");
-    log::debug!(target: "backend_service::service", "everything fine");
-    log::info!(target: "backend_service::main", "listening {{https: {https_enabled}, ip:{ip:?}}}");
-    log::trace!(target: "backend_service::worker", "started {worker_count} workers");
-    log::warn!(target: "backend_service::worker::thread", "session disconnected {user_id:?}");
-    log::error!(target: "backend_service::worker::thread", "failure occurred");
+    log::debug!(target: "service::service", "everything fine");
+    log::info!(target: "service::main", "listening {{https: {https_enabled}, ip:{ip:?}}}");
+    log::trace!(target: "service::worker", "started {worker_count} workers");
+    log::warn!(target: "service::worker::thread", "session disconnected {user_id:?}");
+    log::error!(target: "service::worker::thread", "failure occurred");
     food();
 
     head("be specific");
-    log::debug!(target: "backend_service::service::init", "config loaded");
-    log::debug!(target: "backend_service::service::transport", "address available");
-    log::info!(target: "backend_service::main", "listening {{https: {https_enabled}, ip:{ip:?}}}");
-    log::trace!(target: "backend_service::worker", "started {worker_count} workers");
-    log::warn!(target: "backend_service::worker::thread", "session disconnected {user_id:?}");
-    log::error!(target: "backend_service::worker::thread", "failure occurred");
+    log::debug!(target: "service::service::init", "config loaded");
+    log::debug!(target: "service::service::transport", "address available");
+    log::info!(target: "service::main", "listening {{https: {https_enabled}, ip:{ip:?}}}");
+    log::trace!(target: "service::worker", "started {worker_count} workers");
+    log::warn!(target: "service::worker::thread", "session disconnected {user_id:?}");
+    log::error!(target: "service::worker::thread", "failure occurred");
     food();
 
     head("give context");
-    log::debug!(target: "backend_service::service::init", "config loaded");
-    log::debug!(target: "backend_service::service::transport", "address available");
-    log::info!(target: "backend_service::main", "listening {{https: {https_enabled}, ip:{ip:?}}}");
-    log::trace!(target: "backend_service::worker", "started {worker_count} workers");
-    log::warn!(target: "backend_service::worker::thread", "session disconnected {{user_id:{user_id:?}}}");
-    log::error!(target: "backend_service::worker::thread", "failure occurred {{msg: \"failed to parse input\", user_id: {user_id:?}, worker_id: 4}}");
+    log::debug!(target: "service::service::init", "config loaded");
+    log::debug!(target: "service::service::transport", "address available");
+    log::info!(target: "service::main", "listening {{https: {https_enabled}, ip:{ip:?}}}");
+    log::trace!(target: "service::worker", "started {worker_count} workers");
+    log::warn!(target: "service::worker::thread", "session disconnected {{user_id:{user_id:?}}}");
+    log::error!(target: "service::worker::thread", "failure occurred {{msg: \"failed to parse input\", user_id: {user_id:?}, worker_id: 4}}");
     food();
 
     head("do not reveal PII");
-    log::debug!(target: "backend_service::service::init", "config loaded");
-    log::debug!(target: "backend_service::service::transport", "address available");
-    log::info!(target: "backend_service::main", "listening {{https: {https_enabled}, ip:{ip:?}}}");
-    log::warn!(target: "backend_service::worker::thread", "session disconnected {{session_id:{session_id:?}}}");
-    log::error!(target: "backend_service::worker::thread", "failure occurred {{msg: \"failed to parse input\", session_id: {session_id:?}, worker_id: 4}}");
+    log::debug!(target: "service::service::init", "config loaded");
+    log::debug!(target: "service::service::transport", "address available");
+    log::info!(target: "service::main", "listening {{https: {https_enabled}, ip:{ip:?}}}");
+    log::warn!(target: "service::worker::thread", "session disconnected {{session_id:{session_id:?}}}");
+    log::error!(target: "service::worker::thread", "failure occurred {{msg: \"failed to parse input\", session_id: {session_id:?}, worker_id: 4}}");
     food();
 }

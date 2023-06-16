@@ -22,6 +22,7 @@
     <!-- Theme used for syntax highlighted code -->
     <link rel="stylesheet" href="lib/plugin/highlight/idea.css" />
   </head>
+
   <body>
     <div class="reveal">
       <div class="slides">
@@ -41,28 +42,42 @@
           </section>
         </section>
 
+        <section id="me" data-background-color="#ffffff"
+        data-transition="zoom" >
+        <aside class="notes" data-markdown></aside>
+        <h3>
+            <code> $whoami<span class="blinking">&block;</span> </code>
+        </h3>
+        <div style="background-image: url(./img/doodles.png); background-repeat: no-repeat">
+            <ul style="list-style-type:none;">
+                <li> <a href="https://www.hoodie.de"> 🤓 </a> Hendrik Sollich</li>
+                <li> <a href="https://www.gotomeeting.com/"> 👔 </a> GoTo (GoToMeeting <i
+                        class="fa fa-microphone-alt"></i>)</li>
+                <li><a href="https://github.com/hoodie/"><i class="fab fa-github"></i></a> hoodie </li>
+                <li><a href="https://chaos.social/@hoodie"><i class="fab fa-mastodon"></i></a> chaos.social/@hoodie </li>
+                <li><a href="https://twitter.com/hoodie_de"><i class="fab fa-twitter"></i></a> @hoodie_de </li>
+                <!-- <li class="fragment"><a href="https://akronymisier.bar"><i class="fa fa-headphones"></i></a> akronymisier.bar -->
+                </li>
+            </ul>
+        </div>
+
+    </section>
+
+
+
+
         <section>
+          <h4>Fragerunde</h4>
           <aside class="notes">question round</aside>
           <ul>
-            <li class="fragment fade-up" data-fragment-index="1">
-              Do you have an app?
-            </li>
-            <li class="fragment fade-up" data-fragment-index="2">
-              Do you run services in production?
-            </li>
-            <li class="fragment fade-up" data-fragment-index="3">
-              Do you produce a lot of logs?
-            </li>
-            <!-- Do you log from clients? -->
-            <li class="fragment fade-up" data-fragment-index="4">
-              Do you read them regularly?
-            </li>
-            <li class="fragment fade-up" data-fragment-index="5">
-              When do you have to read them?
-            </li>
-            <!-- <li class="fragment fade-up" data-fragment-index="6">
+            <li class="fragment fade-up"> Habt ihr ne App?</li>
+            <li class="fragment fade-up"> Habt ihr services in production?  </li>
+            <li class="fragment fade-up"> Produziert ihr viele Logs?  </li>
+            <li class="fragment fade-up"> Lest ihr eure Logs?  </li>
+            <li class="fragment fade-up"> Wann lest ihr eure Logs?  </li>
+            <!-- <li class="fragment fade-up" >
               Who reads them? <br />
-              <span class="fragment fade-up" data-fragment-index="7">
+              <span class="fragment fade-up" >
                 (devs/admins/ops/analysts/product/sales?)
               </span>
             </li> -->
@@ -74,8 +89,8 @@
             class="black-slide"
             data-background-color="var(--background-color-dark)"
           >
-            <h4>Beginning of the story</h4>
-            <h3 class="fragment">we need to structure our logs better!!!</h3>
+            <h4>es war einmal...</h4>
+            <h3 class="fragment">👨🏼‍💻 wir brauchen besseres Logging!!!</h3>
 
             <ul>
               <li class="fragment">
@@ -98,75 +113,113 @@
 
           <!-- copy goes here -->
           <section data-transition="fade-in none-outjjj">
-            <h4>basic unstructured logs</h4>
+            <h4>klassische unstrukturierte Logs</h4>
             <pre><code class="rust-log small">
-[2023-06-16T15:20:53Z DEBUG backend_service::service] everything fine
-[2023-06-16T15:20:53Z INFO  backend_service::main] listening on 127.0.0.1 with https enabled true
-[2023-06-16T15:20:53Z WARN  backend_service::worker::thread] session disconnected "honeybear1998"
-[2023-06-16T15:20:53Z ERROR backend_service::worker::thread] failure occurred
+[2023-06-16T15:20:53Z DEBUG app::service] everything fine
+[2023-06-16T15:20:53Z INFO  app::main] listening on 127.0.0.1 with https enabled true
+[2023-06-16T15:20:53Z WARN  app::worker::thread] session disconnected "honeybear1998"
+[2023-06-16T15:20:53Z ERROR app::worker::thread] failure occurred
 </code></pre>
           </section>
 
           <section data-transition="none">
-            <h4>do not inline variables</h4>
+            <h4>Variablen nicht inlinen</h4>
             <pre><code class="rust-log small">
-[2023-06-16T15:20:53Z DEBUG backend_service::service] everything fine
-[2023-06-16T15:20:53Z INFO  backend_service::main] listening {https: true, ip:127.0.0.1}
-[2023-06-16T15:20:53Z WARN  backend_service::worker::thread] session disconnected "honeybear1998"
-[2023-06-16T15:20:53Z ERROR backend_service::worker::thread] failure occurred
+[2023-06-16T15:20:53Z DEBUG app::service] everything fine
+[2023-06-16T15:20:53Z INFO  app::main] listening {https: true, ip:127.0.0.1}
+[2023-06-16T15:20:53Z WARN  app::worker::thread] session disconnected "honeybear1998"
+[2023-06-16T15:20:53Z ERROR app::worker::thread] failure occurred
 </code></pre>
           </section>
 
           <section data-transition="none">
-            <h4>be specific</h4>
+            <h4>spezifischere Zeilen</h4>
             <pre><code class="rust-log small">
-[2023-06-16T15:20:53Z DEBUG backend_service::service::init] config loaded
-[2023-06-16T15:20:53Z DEBUG backend_service::service::transport] address available
-[2023-06-16T15:20:53Z INFO  backend_service::main] listening {https: true, ip:127.0.0.1}
-[2023-06-16T15:20:53Z WARN  backend_service::worker::thread] session disconnected "honeybear1998"
-[2023-06-16T15:20:53Z ERROR backend_service::worker::thread] failure occurred
+[2023-06-16T15:20:53Z DEBUG app::service::init] config loaded
+[2023-06-16T15:20:53Z DEBUG app::service::transport] address available
+[2023-06-16T15:20:53Z INFO  app::main] listening {https: true, ip:127.0.0.1}
+[2023-06-16T15:20:53Z WARN  app::worker::thread] session disconnected "honeybear1998"
+[2023-06-16T15:20:53Z ERROR app::worker::thread] failure occurred
 </code></pre>
           </section>
 
           <section data-transition="none">
-            <h4>give context</h4>
+            <h4>gebt Kontext</h4>
             <pre><code class="rust-log small">
-[2023-06-16T15:20:53Z DEBUG backend_service::service::init] config loaded
-[2023-06-16T15:20:53Z DEBUG backend_service::service::transport] address available
-[2023-06-16T15:20:53Z INFO  backend_service::main] listening {https: true, ip:127.0.0.1}
-[2023-06-16T15:20:53Z WARN  backend_service::worker::thread] session disconnected {user_id:"honeybear1998"}
-[2023-06-16T15:20:53Z ERROR backend_service::worker::thread] failure occurred {msg: "failed to parse input", user_id: "honeybear1998", worker_id: 4}
+[2023-06-16T15:20:53Z DEBUG app::service::init] config loaded
+[2023-06-16T15:20:53Z DEBUG app::service::transport] address available
+[2023-06-16T15:20:53Z INFO  app::main] listening {https: true, ip:127.0.0.1}
+[2023-06-16T15:20:53Z WARN  app::worker::thread] session disconnected {user_id:"honeybear1998"}
+[2023-06-16T15:20:53Z ERROR app::worker::thread] failure occurred {msg: "failed to parse input", user_id: "honeybear1998", worker_id: 4}
 </code></pre>
           </section>
 
           <section data-transition="none">
-            <h4>do not reveal PII</h4>
+            <h4>keine PII loggen!!!</h4>
             <pre><code class="rust-log small">
-[2023-06-16T15:20:53Z DEBUG backend_service::service::init] config loaded
-[2023-06-16T15:20:53Z DEBUG backend_service::service::transport] address available
-[2023-06-16T15:20:53Z INFO  backend_service::main] listening {https: true, ip:127.0.0.1}
-[2023-06-16T15:20:53Z WARN  backend_service::worker::thread] session disconnected {session_id:"D321D003-0083-484A-98F4-9153CD7409E0"}
-[2023-06-16T15:20:53Z ERROR backend_service::worker::thread] failure occurred {msg: "failed to parse input", session_id: "D321D003-0083-484A-98F4-9153CD7409E0", worker_id: 4}
+[2023-06-16T15:20:53Z DEBUG app::service::init] config loaded
+[2023-06-16T15:20:53Z DEBUG app::service::transport] address available
+[2023-06-16T15:20:53Z INFO  app::main] listening {https: true, ip:127.0.0.1}
+[2023-06-16T15:20:53Z WARN  app::worker::thread] session disconnected {session_id:"D321D003-0083-484A-98F4-9153CD7409E0"}
+[2023-06-16T15:20:53Z ERROR app::worker::thread] failure occurred {msg: "failed to parse input", session_id: "D321D003-0083-484A-98F4-9153CD7409E0", worker_id: 4}
 </code></pre>
           </section>
 
           <!-- copy goes here -->
 
           <section>
+            <h2>Weitere AntiPatterns</h2>
+            <ul>
+              <li class="fragment">Bezug auf vorherige LogZeilen</li>
+              <li class="fragment">keine log-level, kein scope</li>
+              <li class="fragment">eigener Logger</li>
+              <li class="fragment">non-standard log-levels (<a href="https://datatracker.ietf.org/doc/html/rfc5424" class="fragment">RFC5424</a>)</li>
+            </ul>
+
+          </section>
+
+
+          <section data-markdown>
+            <textarea>
+
+|  code | Severity            | [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424) |
+| ----: | :------------------ | -------------------------------- |
+| **0** | **`Emergency`**     | system is unusable               |
+| **1** | **`Alert`**         | action must be taken immediately |
+| **2** | **`Critical`**      | critical conditions              |
+| **3** | **`Error`**         | error conditions               |
+| **4** | **`Warning`**       | warning conditions               |
+| **5** | **`Notice`**        | normal but significant condition |
+| **6** | **`Informational`** | informational messages           |
+| **7** | **`Debug`**         | debug-level messages             |
+            </textarea>
+          </section>
+
+          <section>
+            <h2>Patterns</h2>
+            <ul class="fragment">
+              <li>Timestamps, Sequence Numbers</li>
+              <li>LogLevel aus <code>.env</code></li>
+              <li>im <code>else</code>-Block</li>
+            </ul>
+          </section>
+
+          <section>
             <h2>Perfekt</h2>
             <p class="fragment">wir haben super strukturierte logs!</p>
             <strong class="fragment">TALK VORBEI!</strong>
           </section>
+
         </section>
 
         <section id="too-much-logging">
           <section>
             <h4>moment mal!</h4>
             <h3 class="fragment">
-              we can't investigate, we don't have enough logs 🤷‍♂ ️
+              wir können nicht investigieren, da sind nicht genug logs 🤷‍♂ ️
             </h3>
             <p class="fragment">
-              lets just add more logs where we expect the error and wait
+              🧑‍💻 Ich für mal noch'n paar Logs hinzu, dann sehen wir mehr.
             </p>
 
             <aside class="notes">
@@ -178,36 +231,35 @@
 
           <section>
             <h4>moment mal!!</h4>
-            <h3 class="fragment">please remove your logs from the code 🫣</h3>
+            <h3 class="fragment">Wir loggen zu viel das ist teuer 🫣</h3>
 
             <p class="fragment">
               <strong> 💵 💶 💸 </strong>
               <br />
-              we are paying way too much for <code>$[LOGGING_PROVIDER]</code>
+              wir zahlen zu viel für <code>$[LOGGING_PROVIDER]</code>
             </p>
-            <p class="fragment">lets remove some logs again</p>
+            <p class="fragment">🧑‍💻dann löschen wir'n paar Logs!</p>
+            <p class="fragment">aber welche?</p>
 
             <aside class="notes">
               <li>
-                often add logs to a system and wait for the error to occur
+                🧑‍💻 often add logs to a system and wait for the error to occur
               </li>
             </aside>
           </section>
 
-          <section>
+          <section id="moment-mal">
             <h4>moment mal!!!</h4>
-            <h3 class="fragment">you broke our dashboard 😡</h3>
+            <h3 class="fragment">Jetzt ist unser Dashboard kaputt 😡</h3>
             <p class="fragment">
-              by removing/rephrasing these logs our monitoring dashboard broke
+              die Logs hat irgendwer gelesen und ein Monitoring-/Product-Dashboard draus gemacht
             </p>
             <aside class="notes">
               <li>
-                the logs were machine readable so somebody wrote code that read
-                them
+                Die Logs waren ja Maschinenlesbar, also hat's ne Maschine gelesen.
               </li>
               <li>
-                now there is an unspoken contract between your log lines and
-                other teams
+                Jetzt gibt's unausgesprochene Contracts zwischen deinen Logs und anderen Teams
               </li>
             </aside>
           </section>
@@ -292,7 +344,7 @@
                   <td>log</td>
                   <td>
                     <code>error</code>, <code>warn</code>, <code>info</code>,
-                    <code>log</code>, <code>debug</code>, <code>trace</code>,
+                    <code>debug</code>, <code>trace</code>,
                     <code>silly</code>
                   </td>
                   <td>development, debugging</td>
@@ -302,9 +354,15 @@
                 <tr>
                   <td>log</td>
                   <td>
-                    <code>error</code>, <code>warn</code>, <code>info</code>,
-                    (vielleicht <code>log</code>),
+                    <code>error</code>, <code>warn</code>, <code>info</code>
                   </td>
+                  <td>post-mortem analysis</td>
+                  <td>developer</td>
+                </tr>
+
+                <tr class="fragment">
+                  <td><strong>kein&nbsp;logging</strong></td>
+                  <td> <a href="https://www.chromium.org/developers/how-tos/trace-event-profiling-tool/">tracing</a> , sentry, etc</td>
                   <td>post-mortem analysis</td>
                   <td>developer</td>
                 </tr>
@@ -325,27 +383,11 @@
               </tbody>
             </table>
           </section>
-
-          <!-- <section data-markdown>
-            <textarea>
-
-|  code | Severity            | [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424) |
-| ----: | :------------------ | -------------------------------- |
-| **0** | **`Emergency`**     | system is unusable               |
-| **1** | **`Alert`**         | action must be taken immediately |
-| **2** | **`Critical`**      | critical conditions              |
-| **3** | **`Error`**         | error conditions               |
-| **4** | **`Warning`**       | warning conditions               |
-| **5** | **`Notice`**        | normal but significant condition |
-| **6** | **`Informational`** | informational messages           |
-| **7** | **`Debug`**         | debug-level messages             |
-            </textarea>
-          </section> -->
         </section>
 
         <!--  -->
 
-        <section>
+        <section id="conclusion">
           <section>
             <h4>Zusammenfassung</h4>
             <h3 class="fragment">Logging IST das AntiPattern</h3>
@@ -356,31 +398,14 @@
         </section>
         <!--  -->
 
-        <section>
-          <section>
-            <h4></h4>
-            <h3 class="fragment"></h3>
-            <aside class="notes"></aside>
-          </section>
-        </section>
-        <!--  -->
 
-        <section>
+        <!-- <section>
           <section>
             <h4></h4>
             <h3 class="fragment"></h3>
             <aside class="notes"></aside>
           </section>
-        </section>
-        <!--  -->
-
-        <section>
-          <section>
-            <h4></h4>
-            <h3 class="fragment"></h3>
-            <aside class="notes"></aside>
-          </section>
-        </section>
+        </section> -->
         <!--  -->
       </div>
     </div>
