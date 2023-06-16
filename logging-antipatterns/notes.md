@@ -30,6 +30,7 @@
     * if there is enough training data to identify bad behavior (unhappy path) you are already in a bad situation
     * ideally every single warn/error log should be handled by a dev
     * TODO: ask olga about Harness+Learning
+
 * invisible contracts between log-lines and unexpected users
 
 ## better alternatives

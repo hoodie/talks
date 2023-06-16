@@ -8,7 +8,7 @@
     />
 
     <title>logging anti-patterns</title>
-	<link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
 
     <link rel="stylesheet" href="lib/reset.css" />
     <link rel="stylesheet" href="lib/reveal.css" />
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="theme/talk.css" />
 
     <!-- Theme used for syntax highlighted code -->
-    <link rel="stylesheet" href="lib/plugin/highlight/monokai.css" />
+    <link rel="stylesheet" href="lib/plugin/highlight/idea.css" />
   </head>
   <body>
     <div class="reveal">
@@ -41,23 +41,271 @@
           </section>
         </section>
 
-        <section data-markdown>
-			* do you have an app?
-			* do you run services in production?
-			* do you produce a lot of logs?
-			* do you read them regularly?
-			* when do you have to read them?
-			* who reads them? (devs/admins/ops/analysts/product/sales?)
-		</section>
-        <section data-markdown>
-		## we need to structure our logs better!!!
-		</section>
+        <section>
+          <aside class="notes">question round</aside>
+          <ul>
+            <li class="fragment fade-up" data-fragment-index="1">
+              Do you have an app?
+            </li>
+            <li class="fragment fade-up" data-fragment-index="2">
+              Do you run services in production?
+            </li>
+            <li class="fragment fade-up" data-fragment-index="3">
+              Do you produce a lot of logs?
+            </li>
+            <!-- Do you log from clients? -->
+            <li class="fragment fade-up" data-fragment-index="4">
+              Do you read them regularly?
+            </li>
+            <li class="fragment fade-up" data-fragment-index="5">
+              When do you have to read them?
+            </li>
+            <!-- <li class="fragment fade-up" data-fragment-index="6">
+              Who reads them? <br />
+              <span class="fragment fade-up" data-fragment-index="7">
+                (devs/admins/ops/analysts/product/sales?)
+              </span>
+            </li> -->
+          </ul>
+        </section>
 
-        <section>Slide 1.1</section>
+        <section id="unstructured-logging">
+          <section>
+            <h4>Beginning of the story</h4>
+            <h3 class="fragment">we need to structure our logs better!!!</h3>
 
-        <section>Slide 2</section>
+            <aside class="notes">
+              <li>we had a session between different teams</li>
+              <li>"logs are not structured"</li>
+              <li>cannot be parsed correctly</li>
+            </aside>
+          </section>
 
-        <section>Slide 3</section>
+          <section>
+            <pre><code class="rust-log small">
+[2023-06-16T12:35:41Z INFO  backend_service::main] listening on 127.0.0.1 with https enabled true
+[2023-06-16T12:35:41Z DEBUG backend_service::service] everything fine
+[2023-06-16T12:35:41Z WARN  backend_service::worker::thread] user "honeybear1998"
+[2023-06-16T12:35:41Z ERROR backend_service::worker::thread] failure occurred
+          </code></pre>
+
+            <aside class="notes">
+              <ol>
+                <li>data is inlined (ip)</li>
+                <li>lines have no context</li>
+                <li></li>
+              </ol>
+            </aside>
+          </section>
+
+          <section>
+            <h2>perfect</h2>
+            <p class="fragment">now we have well structured logs!</p>
+            <strong class="fragment">TALK OVER</strong>
+          </section>
+        </section>
+
+        <section id="too-much-logging">
+          <section>
+            <h4>but wait!</h4>
+            <h3 class="fragment">
+              we can't investigate, we don't have enough logs
+            </h3>
+
+            <aside class="notes">
+              <li>
+                often add logs to a system and wait for the error to occur
+              </li>
+            </aside>
+          </section>
+
+          <section>
+            <h4>but wait!!</h4>
+            <h3 class="fragment">please remove your logs from the code</h3>
+
+            <p class="fragment">
+              we are paying way too much for <code>$[LOGGING_PROVIDER]</code>
+            </p>
+            <strong> 💵 💶 💸 </strong>
+
+            <aside class="notes">
+              <li>
+                often add logs to a system and wait for the error to occur
+              </li>
+            </aside>
+          </section>
+
+          <section>
+            <h4>but wait!!!</h4>
+            <h3 class="fragment">you broke our dashboard</h3>
+            <p class="fragment">
+              by removing/rephrasing these logs our monitoring dashboard broke
+            </p>
+            <aside class="notes">
+              <li>
+                the logs were machine readable so somebody wrote code that read
+                them
+              </li>
+              <li>
+                now there is an unspoken contract between your log lines and
+                other teams
+              </li>
+            </aside>
+          </section>
+        </section>
+
+        <!--  -->
+
+        <section id="who-reads the logs">
+          <section>
+            <h4>who</h4>
+            <h3 class="fragment">who will read the logs that your write?</h3>
+            <aside class="notes"></aside>
+          </section>
+
+          <section>
+            <ul>
+              <li class="fragment">Developers: while developing</li>
+              <li class="fragment">Developers: while debugging</li>
+              <li class="fragment">Developers: post mortem analysis</li>
+              <li class="fragment">DevOps: monitoring (counting)</li>
+              <li class="fragment">
+                Product MGMT: "is the feature being used?"
+              </li>
+              <li class="fragment">Product: "is the feature being used?"</li>
+            </ul>
+          </section>
+
+          <section>
+            <h5>Bonus</h5>
+            <ul>
+              <li class="fragment">
+                Students: the 5th Machine Learning Thesis
+              </li>
+              <li class="fragment">
+                The <strong>User</strong> of the program (audit logs)
+              </li>
+              <li class="fragment">
+                The <strong>Supervisor</strong> of the user of the program
+              </li>
+              <li class="fragment">
+                The <strong>Customer</strong> of the user of the program
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h4>so many customers 🫨</h4>
+            <h3 class="fragment">
+              how can you fulfill so many requirements when writing your logs?
+            </h3>
+            <p class="fragment">you do not!</p>
+            <aside class="notes"></aside>
+          </section>
+
+          <section>
+            <h3>
+              logging is <strong>one</strong> tool
+              <span class="fragment">for <strong>one</strong> task</span>
+            </h3>
+          </section>
+
+          <section>
+            <table>
+              <thead>
+                <tr>
+                  <td>tool</td>
+                  <td>method</td>
+                  <td>usecase</td>
+                  <td>audience</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>log</td>
+                  <td>error, warn, info, log, debug, trace, silly</td>
+                  <td>development, debugging</td>
+                  <td>developer</td>
+                </tr>
+
+                <tr>
+                  <td>log</td>
+                  <td>error, warn, info, (log)</td>
+                  <td>post-mortem analysis</td>
+                  <td>developer</td>
+                </tr>
+
+                <tr class="fragment">
+                  <td><strong>not&nbsp;logging</strong></td>
+                  <td>prometheus, open-metrics...</td>
+                  <td>metrics, monitoring</td>
+                  <td>dev-ops</td>
+                </tr>
+
+                <tr class="fragment">
+                  <td><strong>not&nbsp;logging</strong></td>
+                  <td>telemetry events</td>
+                  <td>tool of your choice</td>
+                  <td>product management</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- <section data-markdown>
+            <textarea>
+
+|  code | Severity            | [RFC5424](https://datatracker.ietf.org/doc/html/rfc5424) |
+| ----: | :------------------ | -------------------------------- |
+| **0** | **`Emergency`**     | system is unusable               |
+| **1** | **`Alert`**         | action must be taken immediately |
+| **2** | **`Critical`**      | critical conditions              |
+| **3** | **`Error`**         | error conditions               |
+| **4** | **`Warning`**       | warning conditions               |
+| **5** | **`Notice`**        | normal but significant condition |
+| **6** | **`Informational`** | informational messages           |
+| **7** | **`Debug`**         | debug-level messages             |
+            </textarea>
+          </section> -->
+        </section>
+
+        <!--  -->
+
+        <section>
+          <section>
+            <h4>conclusion</h4>
+            <h3 class="fragment">Logging AntiPatterns</h3>
+            <aside class="notes"></aside>
+          </section>
+        </section>
+        <!--  -->
+
+        <section>
+          <section>
+            <h4></h4>
+            <h3 class="fragment"></h3>
+            <aside class="notes"></aside>
+          </section>
+        </section>
+        <!--  -->
+
+        <section>
+          <section>
+            <h4></h4>
+            <h3 class="fragment"></h3>
+            <aside class="notes"></aside>
+          </section>
+        </section>
+        <!--  -->
+
+        <section>
+          <section>
+            <h4></h4>
+            <h3 class="fragment"></h3>
+            <aside class="notes"></aside>
+          </section>
+        </section>
+        <!--  -->
       </div>
     </div>
 
@@ -65,14 +313,19 @@
     <script src="lib/plugin/notes/notes.js"></script>
     <script src="lib/plugin/markdown/markdown.js"></script>
     <script src="lib/plugin/highlight/highlight.js"></script>
+    <script src="rust-log-highlight.js"></script>
     <script>
       // More info about initialization & config:
       // - https://revealjs.com/initialization/
       // - https://revealjs.com/config/
       Reveal.initialize({
         hash: true,
+        slideNumber: true,
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+        highlight: {
+          beforeHighlight: (hljs) => rust_log(hljs),
+        },
       });
     </script>
   </body>
