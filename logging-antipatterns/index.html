@@ -70,47 +70,104 @@
         </section>
 
         <section id="unstructured-logging">
-          <section>
+          <section
+            class="black-slide"
+            data-background-color="var(--background-color-dark)"
+          >
             <h4>Beginning of the story</h4>
             <h3 class="fragment">we need to structure our logs better!!!</h3>
 
+            <ul>
+              <li class="fragment">
+                Entwickler schreiben so unstrukturierte Logs 😕
+              </li>
+              <li class="fragment">die kann man ja gar nicht parsen 😤</li>
+            </ul>
             <aside class="notes">
               <li>we had a session between different teams</li>
-              <li>"logs are not structured"</li>
-              <li>cannot be parsed correctly</li>
             </aside>
           </section>
 
-          <section>
+          <section
+            data-transition="slide-in fade-out"
+            class="black-slide"
+            data-background-color="var(--background-color-dark)"
+          >
+            <h4>Logging AntiPatterns</h4>
+          </section>
+
+          <!-- copy goes here -->
+          <section data-transition="fade-in none-outjjj">
+            <h4>basic unstructured logs</h4>
             <pre><code class="rust-log small">
-[2023-06-16T12:35:41Z INFO  backend_service::main] listening on 127.0.0.1 with https enabled true
-[2023-06-16T12:35:41Z DEBUG backend_service::service] everything fine
-[2023-06-16T12:35:41Z WARN  backend_service::worker::thread] user "honeybear1998"
-[2023-06-16T12:35:41Z ERROR backend_service::worker::thread] failure occurred
-          </code></pre>
-
-            <aside class="notes">
-              <ol>
-                <li>data is inlined (ip)</li>
-                <li>lines have no context</li>
-                <li></li>
-              </ol>
-            </aside>
+[2023-06-16T15:20:53Z DEBUG backend_service::service] everything fine
+[2023-06-16T15:20:53Z INFO  backend_service::main] listening on 127.0.0.1 with https enabled true
+[2023-06-16T15:20:53Z WARN  backend_service::worker::thread] session disconnected "honeybear1998"
+[2023-06-16T15:20:53Z ERROR backend_service::worker::thread] failure occurred
+</code></pre>
           </section>
 
+          <section data-transition="none">
+            <h4>do not inline variables</h4>
+            <pre><code class="rust-log small">
+[2023-06-16T15:20:53Z DEBUG backend_service::service] everything fine
+[2023-06-16T15:20:53Z INFO  backend_service::main] listening {https: true, ip:127.0.0.1}
+[2023-06-16T15:20:53Z WARN  backend_service::worker::thread] session disconnected "honeybear1998"
+[2023-06-16T15:20:53Z ERROR backend_service::worker::thread] failure occurred
+</code></pre>
+          </section>
+
+          <section data-transition="none">
+            <h4>be specific</h4>
+            <pre><code class="rust-log small">
+[2023-06-16T15:20:53Z DEBUG backend_service::service::init] config loaded
+[2023-06-16T15:20:53Z DEBUG backend_service::service::transport] address available
+[2023-06-16T15:20:53Z INFO  backend_service::main] listening {https: true, ip:127.0.0.1}
+[2023-06-16T15:20:53Z WARN  backend_service::worker::thread] session disconnected "honeybear1998"
+[2023-06-16T15:20:53Z ERROR backend_service::worker::thread] failure occurred
+</code></pre>
+          </section>
+
+          <section data-transition="none">
+            <h4>give context</h4>
+            <pre><code class="rust-log small">
+[2023-06-16T15:20:53Z DEBUG backend_service::service::init] config loaded
+[2023-06-16T15:20:53Z DEBUG backend_service::service::transport] address available
+[2023-06-16T15:20:53Z INFO  backend_service::main] listening {https: true, ip:127.0.0.1}
+[2023-06-16T15:20:53Z WARN  backend_service::worker::thread] session disconnected {user_id:"honeybear1998"}
+[2023-06-16T15:20:53Z ERROR backend_service::worker::thread] failure occurred {msg: "failed to parse input", user_id: "honeybear1998", worker_id: 4}
+</code></pre>
+          </section>
+
+          <section data-transition="none">
+            <h4>do not reveal PII</h4>
+            <pre><code class="rust-log small">
+[2023-06-16T15:20:53Z DEBUG backend_service::service::init] config loaded
+[2023-06-16T15:20:53Z DEBUG backend_service::service::transport] address available
+[2023-06-16T15:20:53Z INFO  backend_service::main] listening {https: true, ip:127.0.0.1}
+[2023-06-16T15:20:53Z WARN  backend_service::worker::thread] session disconnected {session_id:"D321D003-0083-484A-98F4-9153CD7409E0"}
+[2023-06-16T15:20:53Z ERROR backend_service::worker::thread] failure occurred {msg: "failed to parse input", session_id: "D321D003-0083-484A-98F4-9153CD7409E0", worker_id: 4}
+</code></pre>
+          </section>
+
+          <!-- copy goes here -->
+
           <section>
-            <h2>perfect</h2>
-            <p class="fragment">now we have well structured logs!</p>
-            <strong class="fragment">TALK OVER</strong>
+            <h2>Perfekt</h2>
+            <p class="fragment">wir haben super strukturierte logs!</p>
+            <strong class="fragment">TALK VORBEI!</strong>
           </section>
         </section>
 
         <section id="too-much-logging">
           <section>
-            <h4>but wait!</h4>
+            <h4>moment mal!</h4>
             <h3 class="fragment">
-              we can't investigate, we don't have enough logs
+              we can't investigate, we don't have enough logs 🤷‍♂ ️
             </h3>
+            <p class="fragment">
+              lets just add more logs where we expect the error and wait
+            </p>
 
             <aside class="notes">
               <li>
@@ -120,13 +177,15 @@
           </section>
 
           <section>
-            <h4>but wait!!</h4>
-            <h3 class="fragment">please remove your logs from the code</h3>
+            <h4>moment mal!!</h4>
+            <h3 class="fragment">please remove your logs from the code 🫣</h3>
 
             <p class="fragment">
+              <strong> 💵 💶 💸 </strong>
+              <br />
               we are paying way too much for <code>$[LOGGING_PROVIDER]</code>
             </p>
-            <strong> 💵 💶 💸 </strong>
+            <p class="fragment">lets remove some logs again</p>
 
             <aside class="notes">
               <li>
@@ -136,8 +195,8 @@
           </section>
 
           <section>
-            <h4>but wait!!!</h4>
-            <h3 class="fragment">you broke our dashboard</h3>
+            <h4>moment mal!!!</h4>
+            <h3 class="fragment">you broke our dashboard 😡</h3>
             <p class="fragment">
               by removing/rephrasing these logs our monitoring dashboard broke
             </p>
@@ -156,94 +215,109 @@
 
         <!--  -->
 
-        <section id="who-reads the logs">
+        <section id="cui-bono">
           <section>
-            <h4>who</h4>
-            <h3 class="fragment">who will read the logs that your write?</h3>
-            <aside class="notes"></aside>
-          </section>
-
-          <section>
+            <h4>Cui Bono?</h4>
+            <h3 class="fragment">Wer liest die logs die du schreibst?</h3>
+            <p class="fragment">nur du selbst?</p>
             <ul>
-              <li class="fragment">Developers: while developing</li>
-              <li class="fragment">Developers: while debugging</li>
-              <li class="fragment">Developers: post mortem analysis</li>
-              <li class="fragment">DevOps: monitoring (counting)</li>
               <li class="fragment">
-                Product MGMT: "is the feature being used?"
+                <strong>Entwickler:innen</strong>: beim Entwicklen 🤔
               </li>
-              <li class="fragment">Product: "is the feature being used?"</li>
+              <li class="fragment">
+                <strong>Entwickler:innen</strong>: beim debuggen 🙄
+              </li>
+              <li class="fragment">
+                <strong>Entwickler:innen</strong>: bei Post-mortem-Analysen 😵
+              </li>
+              <li class="fragment"><strong>DevOps</strong>: monitoring 🤪</li>
+              <li class="fragment">
+                <strong> Product MGMT</strong>: "wird das feature
+                benutzt?"&nbsp;😭
+              </li>
             </ul>
+            <aside class="notes"></aside>
           </section>
 
           <section>
             <h5>Bonus</h5>
             <ul>
               <li class="fragment">
-                Students: the 5th Machine Learning Thesis
+                <strong>🧑‍🎓Studierende</strong>: 5. Machine-Learning Diplomarbeit
               </li>
               <li class="fragment">
-                The <strong>User</strong> of the program (audit logs)
+                Die <strong>User:in</strong> des Programms (audit logs) 🤯
               </li>
               <li class="fragment">
-                The <strong>Supervisor</strong> of the user of the program
+                Die <strong>Supervisor:in</strong> der
+                <strong>User:in</strong> des Programms🤯
               </li>
               <li class="fragment">
-                The <strong>Customer</strong> of the user of the program
+                Die <strong>Kund:in</strong> der <strong>User:in</strong> des
+                Programms 🤯
               </li>
             </ul>
           </section>
 
           <section>
-            <h4>so many customers 🫨</h4>
+            <h4>So viele Konsumenten 🫨</h4>
             <h3 class="fragment">
-              how can you fulfill so many requirements when writing your logs?
+              Wie können unsere Logs nur die ganzen Erwartungen erfüllen?
             </h3>
-            <p class="fragment">you do not!</p>
+            <strong class="fragment">nicht!</strong>
             <aside class="notes"></aside>
           </section>
 
           <section>
             <h3>
-              logging is <strong>one</strong> tool
-              <span class="fragment">for <strong>one</strong> task</span>
+              logging ist <strong>ein</strong> Werkzeug
+              <br />
+              <span class="fragment">für <strong>eine</strong> Aufgabe</span>
             </h3>
           </section>
 
           <section>
-            <table>
+            <h4>was nimmt man stattdessen?</h4>
+            <table class="fragment">
               <thead>
                 <tr>
-                  <td>tool</td>
-                  <td>method</td>
-                  <td>usecase</td>
-                  <td>audience</td>
+                  <td>Tool</td>
+                  <td>Methode</td>
+                  <td>Use Case</td>
+                  <td>Audience</td>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>log</td>
-                  <td>error, warn, info, log, debug, trace, silly</td>
+                  <td>
+                    <code>error</code>, <code>warn</code>, <code>info</code>,
+                    <code>log</code>, <code>debug</code>, <code>trace</code>,
+                    <code>silly</code>
+                  </td>
                   <td>development, debugging</td>
                   <td>developer</td>
                 </tr>
 
                 <tr>
                   <td>log</td>
-                  <td>error, warn, info, (log)</td>
+                  <td>
+                    <code>error</code>, <code>warn</code>, <code>info</code>,
+                    (vielleicht <code>log</code>),
+                  </td>
                   <td>post-mortem analysis</td>
                   <td>developer</td>
                 </tr>
 
                 <tr class="fragment">
-                  <td><strong>not&nbsp;logging</strong></td>
+                  <td><strong>kein&nbsp;logging</strong></td>
                   <td>prometheus, open-metrics...</td>
                   <td>metrics, monitoring</td>
                   <td>dev-ops</td>
                 </tr>
 
                 <tr class="fragment">
-                  <td><strong>not&nbsp;logging</strong></td>
+                  <td><strong>kein&nbsp;logging</strong></td>
                   <td>telemetry events</td>
                   <td>tool of your choice</td>
                   <td>product management</td>
@@ -273,9 +347,11 @@
 
         <section>
           <section>
-            <h4>conclusion</h4>
-            <h3 class="fragment">Logging AntiPatterns</h3>
-            <aside class="notes"></aside>
+            <h4>Zusammenfassung</h4>
+            <h3 class="fragment">Logging IST das AntiPattern</h3>
+            <aside class="notes">
+              Vergleich mit Kommentaren "Kommentare zur Runtime"
+            </aside>
           </section>
         </section>
         <!--  -->
